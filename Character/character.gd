@@ -3,11 +3,9 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
-
+var last_direction = Vector2.DOWN
 
 func _physics_process(delta: float) -> void:
-	
-
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
@@ -24,4 +22,18 @@ func _physics_process(delta: float) -> void:
 		velocity.y = vertical_direction * SPEED
 	else:
 		velocity.y = move_toward(velocity.y, 0, SPEED)
+		
+	#Calculation of last direction to allow have a direction for the dodge
+	var input_dir := Vector2(horizontal_direction, vertical_direction)
+	
+	if input_dir != Vector2.ZERO:
+		last_direction = input_dir.normalized()
+	if Input.is_action_just_pressed("dodge"):
+		var dodge_dir := input_dir
+		if input_dir != Vector2.ZERO :
+			velocity += dodge_dir * 20 * SPEED
+		else :	
+			velocity += last_direction * 20 * SPEED
 	move_and_slide()
+	
+	

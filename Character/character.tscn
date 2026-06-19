@@ -21,3 +21,5 @@ shape = SubResource("CircleShape2D_bhunq")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=280286166]
 scale = Vector2(50, 50)
 texture = SubResource("GradientTexture1D_bhunq")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=923918863]
