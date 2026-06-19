@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://daod7hdo5jdt"]
+
+[ext_resource type="Script" uid="uid://cjl7yytvq17u1" path="res://JuniperGameDev/Character/character.gd" id="1_foqyv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bhunq"]
+
+[sub_resource type="Gradient" id="Gradient_yb4f4"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bhunq"]
+gradient = SubResource("Gradient_yb4f4")
+width = 1
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=109988034]
+script = ExtResource("1_foqyv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2096676402]
+shape = SubResource("CircleShape2D_bhunq")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=280286166]
+scale = Vector2(50, 50)
+texture = SubResource("GradientTexture1D_bhunq")

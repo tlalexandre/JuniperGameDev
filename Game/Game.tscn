@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bfgnlkfctn1gn"]
+
+[ext_resource type="PackedScene" uid="uid://daod7hdo5jdt" path="res://JuniperGameDev/Character/character.tscn" id="1_o57lh"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_riqys"]
+
+[node name="Node2D" type="Node2D" unique_id=2130537159]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1426921761]
+position = Vector2(963.25, 542.25)
+scale = Vector2(1927.5001, 1085.5)
+texture = SubResource("PlaceholderTexture2D_riqys")
+
+[node name="CharacterBody2D" parent="." unique_id=109988034 instance=ExtResource("1_o57lh")]
+position = Vector2(964, 568)
