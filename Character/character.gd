@@ -36,4 +36,6 @@ func _physics_process(delta: float) -> void:
 			velocity += last_direction * 20 * SPEED
 	move_and_slide()
 	
-	
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("shoot"):
+		get_node("Gun").shoot()

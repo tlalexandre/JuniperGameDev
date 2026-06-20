@@ -7,12 +7,12 @@
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_foqyv"]
 gradient = SubResource("Gradient_o57lh")
 
-[node name="Node2D" type="Node2D" unique_id=2130537159]
+[node name="World" type="Node2D" unique_id=2130537159]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1426921761]
 position = Vector2(2442, 1195)
 scale = Vector2(77.3125, 38.34375)
 texture = SubResource("GradientTexture2D_foqyv")
 
-[node name="CharacterBody2D" parent="." unique_id=109988034 instance=ExtResource("1_o57lh")]
+[node name="Player" parent="." unique_id=109988034 instance=ExtResource("1_o57lh")]
 position = Vector2(964, 568)

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://daod7hdo5jdt"]
 
 [ext_resource type="Script" uid="uid://cjl7yytvq17u1" path="res://JuniperGameDev/Character/character.gd" id="1_foqyv"]
+[ext_resource type="PackedScene" uid="uid://byqy8utofc5pt" path="res://JuniperGameDev/Gun/gun.tscn" id="2_jgbxv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bhunq"]
 
@@ -12,7 +13,7 @@ colors = PackedColorArray(0, 0, 0, 1)
 gradient = SubResource("Gradient_yb4f4")
 width = 1
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=109988034]
+[node name="Player" type="CharacterBody2D" unique_id=109988034]
 script = ExtResource("1_foqyv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2096676402]
@@ -23,3 +24,6 @@ scale = Vector2(50, 50)
 texture = SubResource("GradientTexture1D_bhunq")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=923918863]
+
+[node name="Gun" parent="." unique_id=36834398 instance=ExtResource("2_jgbxv")]
+scale = Vector2(3, 3)

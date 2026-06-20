@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dd4n6m088eqd5"]
+
+[ext_resource type="Texture2D" uid="uid://pnba1btm1ffh" path="res://JuniperGameDev/Assets/Bullet/tile_0023.png" id="1_fdwoi"]
+[ext_resource type="Script" uid="uid://cfukuhs1d7jjl" path="res://JuniperGameDev/Bullet/bullet.gd" id="1_x1l8h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bhunq"]
+radius = 12.0
+
+[node name="Bullet" type="CharacterBody2D" unique_id=1047442074]
+script = ExtResource("1_x1l8h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=359234943]
+shape = SubResource("CircleShape2D_bhunq")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=869328381]
+scale = Vector2(3, 3)
+texture = ExtResource("1_fdwoi")
