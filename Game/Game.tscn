@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://daod7hdo5jdt" path="res://JuniperGameDev/Character/character.tscn" id="1_o57lh"]
 [ext_resource type="PackedScene" uid="uid://doh21id30beig" path="res://JuniperGameDev/Enemy/enemy.tscn" id="2_5of8r"]
+[ext_resource type="PackedScene" uid="uid://b2sudgf2df0cg" path="res://JuniperGameDev/Wall/wall.tscn" id="3_rr4vq"]
 
 [sub_resource type="Gradient" id="Gradient_o57lh"]
 
@@ -16,7 +17,7 @@ scale = Vector2(77.3125, 38.34375)
 texture = SubResource("GradientTexture2D_foqyv")
 
 [node name="Player" parent="." unique_id=109988034 instance=ExtResource("1_o57lh")]
-position = Vector2(964, 568)
+position = Vector2(1250, 502)
 
 [node name="Enemy" parent="." unique_id=1839370902 instance=ExtResource("2_5of8r")]
 position = Vector2(2079, 1014)
@@ -25,7 +26,103 @@ position = Vector2(2079, 1014)
 position = Vector2(2168, 486)
 
 [node name="Enemy3" parent="." unique_id=474655496 instance=ExtResource("2_5of8r")]
-position = Vector2(1718, 314)
+position = Vector2(1727, 521)
 
 [node name="Enemy4" parent="." unique_id=1010399715 instance=ExtResource("2_5of8r")]
 position = Vector2(1685, 1348)
+
+[node name="Wall" parent="." unique_id=760546424 instance=ExtResource("3_rr4vq")]
+position = Vector2(768, 355)
+scale = Vector2(6, 6)
+
+[node name="Wall2" parent="." unique_id=596082403 instance=ExtResource("3_rr4vq")]
+position = Vector2(867, 356)
+scale = Vector2(6, 6)
+
+[node name="Wall3" parent="." unique_id=920089849 instance=ExtResource("3_rr4vq")]
+position = Vector2(966, 357)
+scale = Vector2(6, 6)
+
+[node name="Wall4" parent="." unique_id=1042474478 instance=ExtResource("3_rr4vq")]
+position = Vector2(760, 708)
+scale = Vector2(6, 6)
+
+[node name="Wall5" parent="." unique_id=60772828 instance=ExtResource("3_rr4vq")]
+position = Vector2(859, 709)
+scale = Vector2(6, 6)
+
+[node name="Wall6" parent="." unique_id=767762325 instance=ExtResource("3_rr4vq")]
+position = Vector2(958, 710)
+scale = Vector2(6, 6)
+
+[node name="Wall7" parent="." unique_id=1432567986 instance=ExtResource("3_rr4vq")]
+position = Vector2(1179, 891)
+scale = Vector2(6, 6)
+
+[node name="Wall8" parent="." unique_id=82557824 instance=ExtResource("3_rr4vq")]
+position = Vector2(1278, 892)
+scale = Vector2(6, 6)
+
+[node name="Wall9" parent="." unique_id=818211161 instance=ExtResource("3_rr4vq")]
+position = Vector2(1377, 893)
+scale = Vector2(6, 6)
+
+[node name="Wall10" parent="." unique_id=682633716 instance=ExtResource("3_rr4vq")]
+position = Vector2(757, 1045)
+scale = Vector2(6, 6)
+
+[node name="Wall11" parent="." unique_id=1515066249 instance=ExtResource("3_rr4vq")]
+position = Vector2(856, 1046)
+scale = Vector2(6, 6)
+
+[node name="Wall12" parent="." unique_id=1281939412 instance=ExtResource("3_rr4vq")]
+position = Vector2(955, 1047)
+scale = Vector2(6, 6)
+
+[node name="Wall13" parent="." unique_id=323383213 instance=ExtResource("3_rr4vq")]
+position = Vector2(1173, 1284)
+scale = Vector2(6, 6)
+
+[node name="Wall14" parent="." unique_id=1125936691 instance=ExtResource("3_rr4vq")]
+position = Vector2(1175, 1382)
+scale = Vector2(6, 6)
+
+[node name="Wall15" parent="." unique_id=1887924049 instance=ExtResource("3_rr4vq")]
+position = Vector2(1175, 1473)
+scale = Vector2(6, 6)
+
+[node name="Wall16" parent="." unique_id=712321967 instance=ExtResource("3_rr4vq")]
+position = Vector2(1763, 834)
+scale = Vector2(6, 6)
+
+[node name="Wall17" parent="." unique_id=1927479720 instance=ExtResource("3_rr4vq")]
+position = Vector2(1765, 932)
+scale = Vector2(6, 6)
+
+[node name="Wall18" parent="." unique_id=266891807 instance=ExtResource("3_rr4vq")]
+position = Vector2(1765, 1023)
+scale = Vector2(6, 6)
+
+[node name="Wall19" parent="." unique_id=1702359291 instance=ExtResource("3_rr4vq")]
+position = Vector2(1565, 429)
+scale = Vector2(6, 6)
+
+[node name="Wall20" parent="." unique_id=659922536 instance=ExtResource("3_rr4vq")]
+position = Vector2(1567, 527)
+scale = Vector2(6, 6)
+
+[node name="Wall21" parent="." unique_id=890943953 instance=ExtResource("3_rr4vq")]
+position = Vector2(1567, 618)
+scale = Vector2(6, 6)
+
+[node name="Wall22" parent="." unique_id=1605042379 instance=ExtResource("3_rr4vq")]
+position = Vector2(1920, 435)
+scale = Vector2(6, 6)
+
+[node name="Wall23" parent="." unique_id=551071722 instance=ExtResource("3_rr4vq")]
+position = Vector2(1922, 533)
+scale = Vector2(6, 6)
+
+[node name="Wall24" parent="." unique_id=553604945 instance=ExtResource("3_rr4vq")]
+position = Vector2(1922, 624)
+scale = Vector2(6, 6)

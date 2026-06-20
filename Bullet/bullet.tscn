@@ -10,7 +10,7 @@ radius = 12.0
 radius = 30.0
 
 [node name="Bullet" type="CharacterBody2D" unique_id=1047442074]
-collision_layer = 4
+collision_layer = 14
 collision_mask = 2
 script = ExtResource("1_x1l8h")
 

@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var speed = 30
+var speed = 35 0
 var player_chase = false
 var player
 var current_health := 10
@@ -16,7 +16,11 @@ func _ready() -> void:
 	
 func _physics_process(delta: float) -> void:
 	if player_chase:
-		position += (player.position - position)/speed
+		var direction = (player.position-position).normalized()
+		velocity = direction * speed
+	else :
+		velocity = Vector2.ZERO
+	move_and_slide()
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
 	if body == player:
@@ -50,7 +54,8 @@ func _on_attack_area_body_exited(body: Node2D) -> void:
 func attack() -> void:
 	if not can_attack :
 		return
-	player.take_damage(dmg_enemy)
+	if player:
+		player.take_damage(dmg_enemy)
 	can_attack = false
 	await get_tree().create_timer(attack_cooldown).timeout
 	can_attack = true
