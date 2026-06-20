@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dgxnk41rna603"]
+
+[sub_resource type="TileSet" id="TileSet_cgrvg"]
+
+[node name="Border" type="TileMapLayer" unique_id=1112295327]
+tile_set = SubResource("TileSet_cgrvg")
