@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://doh21id30beig"]
+
+[ext_resource type="Script" uid="uid://iifer8cmsfq5" path="res://JuniperGameDev/Enemy/enemy.gd" id="1_2rrxh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bhunq"]
+radius = 47.24
+
+[sub_resource type="Gradient" id="Gradient_7hftr"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bhunq"]
+gradient = SubResource("Gradient_7hftr")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_riqys"]
+radius = 300.0
+
+[node name="Enemy" type="CharacterBody2D" unique_id=1839370902 groups=["enemies"]]
+collision_layer = 2
+script = ExtResource("1_2rrxh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2006107870]
+shape = SubResource("CircleShape2D_bhunq")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=300805649]
+texture = SubResource("GradientTexture2D_bhunq")
+
+[node name="Detection_Area" type="Area2D" parent="." unique_id=442240972]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection_Area" unique_id=210560214]
+shape = SubResource("CircleShape2D_riqys")
+
+[connection signal="body_entered" from="Detection_Area" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="Detection_Area" to="." method="_on_detection_area_body_exited"]

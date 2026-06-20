@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+
+
 @export var speed : int = 400
 var target_position
 var despawn_time = 1
@@ -15,3 +17,10 @@ func despawn() -> void:
 	await get_tree().create_timer(despawn_time).timeout
 	queue_free()
 	
+
+
+func _on_detection_area_body_entered(body: Node2D) -> void:
+	if body.is_in_group("enemies"):	
+		print("Hitting enemy")
+		body.take_damage()
+		queue_free()

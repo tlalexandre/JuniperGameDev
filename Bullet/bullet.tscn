@@ -6,7 +6,12 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_bhunq"]
 radius = 12.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_x1l8h"]
+radius = 30.0
+
 [node name="Bullet" type="CharacterBody2D" unique_id=1047442074]
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_x1l8h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=359234943]
@@ -15,3 +20,12 @@ shape = SubResource("CircleShape2D_bhunq")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=869328381]
 scale = Vector2(3, 3)
 texture = ExtResource("1_fdwoi")
+
+[node name="Detection_Area" type="Area2D" parent="." unique_id=124234472]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection_Area" unique_id=1649038856]
+shape = SubResource("CircleShape2D_x1l8h")
+
+[connection signal="body_entered" from="Detection_Area" to="." method="_on_detection_area_body_entered"]
