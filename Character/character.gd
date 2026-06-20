@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var health_bar: ProgressBar = $HealthBar
+signal died
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -10,6 +11,7 @@ var current_health := 20
 
 func _ready():
 	health_bar.set_health(current_health, max_health)
+	GlobalData.player = self
 
 func _physics_process(delta: float) -> void:
 
@@ -52,5 +54,7 @@ func take_damage(amount: float):
 
 func die():
 	queue_free()
-	
+	died.emit()
+
+
 	

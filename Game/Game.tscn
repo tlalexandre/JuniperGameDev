@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://bfgnlkfctn1gn"]
 
+[ext_resource type="Script" uid="uid://m38y70ixv5bc" path="res://JuniperGameDev/Game/game.gd" id="1_ei1so"]
 [ext_resource type="PackedScene" uid="uid://daod7hdo5jdt" path="res://JuniperGameDev/Character/character.tscn" id="1_o57lh"]
 [ext_resource type="PackedScene" uid="uid://doh21id30beig" path="res://JuniperGameDev/Enemy/enemy.tscn" id="2_5of8r"]
 [ext_resource type="PackedScene" uid="uid://b2sudgf2df0cg" path="res://JuniperGameDev/Wall/wall.tscn" id="3_rr4vq"]
+[ext_resource type="PackedScene" uid="uid://d3f2e6mi28i8q" path="res://JuniperGameDev/UI/EndScreen/end_screen.tscn" id="4_iqlej"]
 
 [sub_resource type="Gradient" id="Gradient_o57lh"]
 
@@ -10,6 +12,7 @@
 gradient = SubResource("Gradient_o57lh")
 
 [node name="World" type="Node2D" unique_id=2130537159]
+script = ExtResource("1_ei1so")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1426921761]
 position = Vector2(2442, 1195)
@@ -126,3 +129,5 @@ scale = Vector2(6, 6)
 [node name="Wall24" parent="." unique_id=553604945 instance=ExtResource("3_rr4vq")]
 position = Vector2(1922, 624)
 scale = Vector2(6, 6)
+
+[node name="EndScreen" parent="." unique_id=1664554452 instance=ExtResource("4_iqlej")]

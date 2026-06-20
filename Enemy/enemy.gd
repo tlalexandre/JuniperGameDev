@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
-var speed = 35 0
+signal died
+
+var speed = 350
 var player_chase = false
 var player
 var current_health := 10
@@ -31,14 +33,15 @@ func _on_detection_area_body_exited(body: Node2D) -> void:
 		player_chase = false
 
 func take_damage(amount: float):
-	print("Taking Damage ! Aie !")
 	current_health -= amount
 	health_bar.set_health(current_health, max_health)
 	if current_health <= 0:
 		die()
 
 func die():
+	died.emit()
 	queue_free()
+	
 	
 
 
