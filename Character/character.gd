@@ -1,9 +1,15 @@
 extends CharacterBody2D
 
+@onready var health_bar: ProgressBar = $HealthBar
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 var last_direction = Vector2.DOWN
+var max_health := 20
+var current_health := 20
+
+func _ready():
+	health_bar.set_health(current_health, max_health)
 
 func _physics_process(delta: float) -> void:
 	# Handle jump.
@@ -39,3 +45,15 @@ func _physics_process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot"):
 		get_node("Gun").shoot()
+		
+func take_damage(amount: float):
+	print("Player Taking Damage ! Aie !")
+	current_health -= amount
+	health_bar.set_health(current_health,max_health)
+	if current_health <= 0:
+		die()
+
+func die():
+	queue_free()
+	
+	

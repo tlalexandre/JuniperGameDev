@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://doh21id30beig"]
 
 [ext_resource type="Script" uid="uid://iifer8cmsfq5" path="res://JuniperGameDev/Enemy/enemy.gd" id="1_2rrxh"]
+[ext_resource type="PackedScene" uid="uid://cmwqsi0f8ijs4" path="res://JuniperGameDev/HealthBar/healthbar.tscn" id="2_nuwos"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bhunq"]
 radius = 47.24
@@ -13,7 +14,10 @@ colors = PackedColorArray(1, 0, 0, 1)
 gradient = SubResource("Gradient_7hftr")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_riqys"]
-radius = 300.0
+radius = 400.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2rrxh"]
+radius = 70.0
 
 [node name="Enemy" type="CharacterBody2D" unique_id=1839370902 groups=["enemies"]]
 collision_layer = 2
@@ -31,5 +35,21 @@ collision_layer = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detection_Area" unique_id=210560214]
 shape = SubResource("CircleShape2D_riqys")
 
+[node name="Attack_Area" type="Area2D" parent="." unique_id=879144683]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack_Area" unique_id=1040292120]
+shape = SubResource("CircleShape2D_2rrxh")
+
+[node name="HealthBar" parent="." unique_id=1609601232 instance=ExtResource("2_nuwos")]
+offset_left = -103.0
+offset_top = -92.0
+offset_right = 110.0
+offset_bottom = -65.0
+
 [connection signal="body_entered" from="Detection_Area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="Detection_Area" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="Attack_Area" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_entered" from="Attack_Area" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="Attack_Area" to="." method="_on_attack_area_body_exited"]
+[connection signal="body_exited" from="Attack_Area" to="." method="_on_detection_area_body_exited"]

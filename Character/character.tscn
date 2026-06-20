@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cjl7yytvq17u1" path="res://JuniperGameDev/Character/character.gd" id="1_foqyv"]
 [ext_resource type="PackedScene" uid="uid://byqy8utofc5pt" path="res://JuniperGameDev/Gun/gun.tscn" id="2_jgbxv"]
+[ext_resource type="PackedScene" uid="uid://cmwqsi0f8ijs4" path="res://JuniperGameDev/HealthBar/healthbar.tscn" id="3_0gf5e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bhunq"]
 
@@ -13,7 +14,7 @@ colors = PackedColorArray(0, 0, 0, 1)
 gradient = SubResource("Gradient_yb4f4")
 width = 1
 
-[node name="Player" type="CharacterBody2D" unique_id=109988034]
+[node name="Player" type="CharacterBody2D" unique_id=109988034 groups=["player"]]
 script = ExtResource("1_foqyv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2096676402]
@@ -27,3 +28,9 @@ texture = SubResource("GradientTexture1D_bhunq")
 
 [node name="Gun" parent="." unique_id=36834398 instance=ExtResource("2_jgbxv")]
 scale = Vector2(3, 3)
+
+[node name="HealthBar" parent="." unique_id=1609601232 instance=ExtResource("3_0gf5e")]
+offset_left = -47.0
+offset_top = -69.0
+offset_right = 47.66667
+offset_bottom = -57.0

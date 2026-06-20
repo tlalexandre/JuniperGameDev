@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cmwqsi0f8ijs4"]
+
+[ext_resource type="Script" uid="uid://b4ffl74ouopq" path="res://JuniperGameDev/HealthBar/healthbar.gd" id="1_cpba6"]
+
+[node name="HealthBar" type="ProgressBar" unique_id=1609601232]
+offset_right = 213.0
+offset_bottom = 27.0
+step = 1.0
+show_percentage = false
+script = ExtResource("1_cpba6")
