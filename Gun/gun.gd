@@ -2,6 +2,7 @@ extends Sprite2D
 
 @onready var marker_2d: Marker2D = $Marker2D
 const BULLET = preload("uid://dd4n6m088eqd5")
+const BULLET_VARIANT_1 = preload("uid://go2mccs08y7b")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dd4n6m088eqd5"]
 
-[ext_resource type="Texture2D" uid="uid://pnba1btm1ffh" path="res://JuniperGameDev/Assets/Bullet/tile_0023.png" id="1_fdwoi"]
-[ext_resource type="Script" uid="uid://cfukuhs1d7jjl" path="res://JuniperGameDev/Bullet/bullet.gd" id="1_x1l8h"]
+[ext_resource type="Texture2D" uid="uid://pnba1btm1ffh" path="res://Assets/Bullet/tile_0023.png" id="1_fdwoi"]
+[ext_resource type="Script" uid="uid://cfukuhs1d7jjl" path="res://Bullet/bullet.gd" id="1_x1l8h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bhunq"]
 radius = 12.0

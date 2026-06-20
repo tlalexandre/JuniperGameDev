@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://go2mccs08y7b"]
+
+[ext_resource type="PackedScene" uid="uid://dd4n6m088eqd5" path="res://Bullet/bullet.tscn" id="1_bsw4m"]
+[ext_resource type="Script" uid="uid://boe62sypak1qo" path="res://BulletVariant1/bullet_variant_1.gd" id="1_cpat6"]
+
+[node name="Bullet" unique_id=1047442074 instance=ExtResource("1_bsw4m")]
+script = ExtResource("1_cpat6")
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=359234943]
+scale = Vector2(2, 2)
+
+[node name="Sprite2D" parent="." index="1" unique_id=869328381]
+scale = Vector2(6, 6)
+
+[node name="CollisionShape2D" parent="Detection_Area" parent_id_path=PackedInt32Array(124234472) index="0" unique_id=1649038856]
+scale = Vector2(2, 2)

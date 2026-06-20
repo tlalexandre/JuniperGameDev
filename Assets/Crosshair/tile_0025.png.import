@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cnm3mci3h2vdy"
-path="res://.godot/imported/tile_0025.png-62174b7f96b0e49c471f793ce0c08ae1.ctex"
+path="res://.godot/imported/tile_0025.png-8d8b9f24b7900c1c4a96fb95e4d463ce.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://JuniperGameDev/Assets/Crosshair/tile_0025.png"
-dest_files=["res://.godot/imported/tile_0025.png-62174b7f96b0e49c471f793ce0c08ae1.ctex"]
+source_file="res://Assets/Crosshair/tile_0025.png"
+dest_files=["res://.godot/imported/tile_0025.png-8d8b9f24b7900c1c4a96fb95e4d463ce.ctex"]
 
 [params]
 
