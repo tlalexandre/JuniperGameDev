@@ -7,7 +7,9 @@ extends CharacterBody2D
 var target_position
 var despawn_time = 1
 var bullet_dmg = 1
+
 func _ready() -> void:
+	rotation = target_position.angle() + deg_to_rad(90)
 	despawn()
 	
 func _physics_process(delta: float) -> void:

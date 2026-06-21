@@ -2,6 +2,48 @@
 
 [ext_resource type="PackedScene" uid="uid://dd4n6m088eqd5" path="res://Bullet/bullet.tscn" id="1_tmum7"]
 [ext_resource type="Script" uid="uid://bx0m5gjtqfmc1" path="res://Bullet_Poison/bullet_poison.gd" id="2_ky1yl"]
+[ext_resource type="Texture2D" uid="uid://ckpk0v8clsal" path="res://Assets/Bullet/bullet_poison_sprite.png" id="3_ywwse"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_34t6g"]
+atlas = ExtResource("3_ywwse")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tby6u"]
+atlas = ExtResource("3_ywwse")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_df3hj"]
+atlas = ExtResource("3_ywwse")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4t16s"]
+atlas = ExtResource("3_ywwse")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5asna"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_34t6g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tby6u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_df3hj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4t16s")
+}],
+"loop": 1,
+"name": &"new_animation",
+"speed": 12.0
+}]
 
 [node name="Bullet" unique_id=1047442074 instance=ExtResource("1_tmum7")]
 script = ExtResource("2_ky1yl")
+speed = 200
+
+[node name="AnimatedSprite2D" parent="." index="2" unique_id=915785676]
+sprite_frames = SubResource("SpriteFrames_5asna")
+frame_progress = 0.77395594

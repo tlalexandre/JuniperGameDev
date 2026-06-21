@@ -2,15 +2,54 @@
 
 [ext_resource type="PackedScene" uid="uid://dd4n6m088eqd5" path="res://Bullet/bullet.tscn" id="1_s7w7p"]
 [ext_resource type="Script" uid="uid://b30rfr4bli4lj" path="res://Bullet_Ice/bullet_ice.gd" id="2_ei5o1"]
+[ext_resource type="Texture2D" uid="uid://cb5q13cpkbl8g" path="res://Assets/Bullet/bullet_ice_sprite.png" id="3_j8hmw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7f4et"]
+atlas = ExtResource("3_j8hmw")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xc2p"]
+atlas = ExtResource("3_j8hmw")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4hpse"]
+atlas = ExtResource("3_j8hmw")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6o0se"]
+atlas = ExtResource("3_j8hmw")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5asna"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7f4et")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5xc2p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4hpse")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6o0se")
+}],
+"loop": 1,
+"name": &"new_animation",
+"speed": 12.0
+}]
 
 [node name="Bullet_Ice" unique_id=1047442074 instance=ExtResource("1_s7w7p")]
 script = ExtResource("2_ei5o1")
+speed = 200
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=359234943]
 scale = Vector2(2, 2)
 
-[node name="Sprite2D" parent="." index="1" unique_id=869328381]
-scale = Vector2(6, 6)
-
 [node name="CollisionShape2D" parent="Detection_Area" parent_id_path=PackedInt32Array(124234472) index="0" unique_id=1649038856]
 scale = Vector2(2, 2)
+
+[node name="AnimatedSprite2D" parent="." index="2" unique_id=915785676]
+sprite_frames = SubResource("SpriteFrames_5asna")
+frame_progress = 0.7111606

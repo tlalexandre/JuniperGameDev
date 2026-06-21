@@ -2,6 +2,47 @@
 
 [ext_resource type="PackedScene" uid="uid://dd4n6m088eqd5" path="res://Bullet/bullet.tscn" id="1_vltn8"]
 [ext_resource type="Script" uid="uid://cqxah3he8lbvj" path="res://Bullet_Fire/bullet_fire.gd" id="2_vpiyp"]
+[ext_resource type="Texture2D" uid="uid://dgaj283s7c65q" path="res://Assets/Bullet/bullet_fire_sprite.png" id="3_bviui"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xasds"]
+atlas = ExtResource("3_bviui")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ryjtu"]
+atlas = ExtResource("3_bviui")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d7oct"]
+atlas = ExtResource("3_bviui")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c1gu4"]
+atlas = ExtResource("3_bviui")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0imui"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xasds")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ryjtu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d7oct")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c1gu4")
+}],
+"loop": 1,
+"name": &"new_animation",
+"speed": 12.0
+}]
 
 [node name="Bullet_Fire" unique_id=1047442074 instance=ExtResource("1_vltn8")]
 script = ExtResource("2_vpiyp")
+
+[node name="AnimatedSprite2D" parent="." index="2" unique_id=915785676]
+sprite_frames = SubResource("SpriteFrames_0imui")
+frame_progress = 0.5860173

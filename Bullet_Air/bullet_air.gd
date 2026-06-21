@@ -3,8 +3,10 @@ extends Bullet
 var double_dmg = bullet_dmg * 2
 var knockback_force = 500
 func _ready() -> void:
-	speed = 1200
+	rotation = target_position.angle() + deg_to_rad(90)
+	speed = 400
 	bullet_dmg = 5
+	super.despawn()
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemies"):	
