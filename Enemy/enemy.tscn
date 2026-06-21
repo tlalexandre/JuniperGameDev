@@ -52,7 +52,8 @@ animations = [{
 
 [node name="Enemy" type="CharacterBody2D" unique_id=1839370902 groups=["enemies"]]
 scale = Vector2(0.25, 0.25)
-collision_layer = 15
+collision_layer = 2
+collision_mask = 29
 script = ExtResource("1_2rrxh")
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=2006107870]
@@ -83,9 +84,12 @@ shape = SubResource("CircleShape2D_cgrvg")
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=1326403427]
 scale = Vector2(8, 8)
+collision_mask = 29
 
 [node name="attack_area" type="Area2D" parent="." unique_id=1105970298]
 scale = Vector2(8, 8)
+collision_layer = 29
+collision_mask = 29
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attack_area" unique_id=113204782]
 shape = SubResource("CircleShape2D_s8843")

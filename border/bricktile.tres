@@ -1,12 +1,15 @@
 [gd_resource type="TileSet" format=3 uid="uid://bcftn5md3ij7g"]
 
-[ext_resource type="Texture2D" uid="uid://bsrcv4pkbe36n" path="res://Assets/temporaryBrick/brick.png" id="1_kmavu"]
+[ext_resource type="Texture2D" uid="uid://bstk80s0ndfud" path="res://Assets/temporaryBrick/temporaryBlock.png" id="1_kmavu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gfbt5"]
 texture = ExtResource("1_kmavu")
+texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
 [resource]
-physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_gfbt5")
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 8
+physics_layer_0/collision_mask = 8
+sources/1 = SubResource("TileSetAtlasSource_gfbt5")

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://d2y4owx1e1l75"]
+
+[ext_resource type="PackedScene" uid="uid://doh21id30beig" path="res://Enemy/enemy.tscn" id="1_0dkcx"]
+[ext_resource type="Script" uid="uid://dgnubstmh2gi8" path="res://batEnemy/bat_enemy.gd" id="2_yvmio"]
+
+[node name="Enemy" unique_id=1839370902 instance=ExtResource("1_0dkcx")]
+collision_mask = 17
+platform_floor_layers = 4294967055
+script = ExtResource("2_yvmio")
