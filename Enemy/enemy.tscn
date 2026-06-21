@@ -14,13 +14,41 @@ colors = PackedColorArray(1, 0, 0, 1)
 gradient = SubResource("Gradient_7hftr")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_riqys"]
-radius = 400.0
+radius = 1073.6777
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cgrvg"]
-radius = 84.0
+radius = 76.105194
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s8843"]
-radius = 13.536986
+radius = 19.506409
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cgrvg"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"Alert",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"Attack",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"Die",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"Walk",
+"speed": 5.0
+}]
 
 [node name="Enemy" type="CharacterBody2D" unique_id=1839370902 groups=["enemies"]]
 scale = Vector2(0.25, 0.25)
@@ -28,7 +56,6 @@ collision_layer = 15
 script = ExtResource("1_2rrxh")
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=2006107870]
-visible = false
 shape = SubResource("CircleShape2D_bhunq")
 
 [node name="Enemy_Sprite" type="Sprite2D" parent="." unique_id=300805649]
@@ -63,7 +90,14 @@ scale = Vector2(8, 8)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attack_area" unique_id=113204782]
 shape = SubResource("CircleShape2D_s8843")
 
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1409618153]
+sprite_frames = SubResource("SpriteFrames_cgrvg")
+animation = &"Die"
+autoplay = "Idle"
+
 [connection signal="body_entered" from="Detection_Area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="Detection_Area" to="." method="_on_detection_area_body_exited"]
 [connection signal="body_entered" from="ProximityArea" to="." method="_on_proximity_area_body_entered"]
 [connection signal="body_exited" from="ProximityArea" to="." method="_on_proximity_area_body_exited"]
+[connection signal="body_entered" from="attack_area" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="attack_area" to="." method="_on_attack_area_body_exited"]
