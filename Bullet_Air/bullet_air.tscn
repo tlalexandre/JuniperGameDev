@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://go2mccs08y7b"]
 
-[ext_resource type="PackedScene" uid="uid://dd4n6m088eqd5" path="res://Bullet/bullet.tscn" id="1_bsw4m"]
-[ext_resource type="Script" uid="uid://boe62sypak1qo" path="res://BulletVariant1/bullet_variant_1.gd" id="1_cpat6"]
+[ext_resource type="PackedScene" uid="uid://dd4n6m088eqd5" path="res://Bullet/bullet.tscn" id="1_bptdp"]
+[ext_resource type="Script" uid="uid://boe62sypak1qo" path="res://Bullet_Air/bullet_air.gd" id="2_5asna"]
 
-[node name="Bullet" unique_id=1047442074 instance=ExtResource("1_bsw4m")]
-script = ExtResource("1_cpat6")
+[node name="Bullet_Air" unique_id=1047442074 instance=ExtResource("1_bptdp")]
+script = ExtResource("2_5asna")
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=359234943]
 scale = Vector2(2, 2)

@@ -2,7 +2,9 @@ extends Sprite2D
 
 @onready var marker_2d: Marker2D = $Marker2D
 const BULLET = preload("uid://dd4n6m088eqd5")
-const BULLET_VARIANT_1 = preload("uid://go2mccs08y7b")
+const BULLET_AIR = preload("uid://go2mccs08y7b")
+const BULLET_POISON = preload("uid://cmas4n4etfuy2")
+const BULLET_ELECTRICITY = preload("uid://cvsap4gf682m3")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,7 +17,7 @@ func _process(delta: float) -> void:
 
 
 func shoot() -> void:
-	var new_bullet = BULLET.instantiate()
+	var new_bullet = BULLET_ELECTRICITY.instantiate()
 	new_bullet.position = marker_2d.global_position
 	new_bullet.target_position = (get_global_mouse_position()-marker_2d.global_position).normalized()
 	GlobalData.world.add_child(new_bullet)

@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cvsap4gf682m3"]
+
+[ext_resource type="PackedScene" uid="uid://dd4n6m088eqd5" path="res://Bullet/bullet.tscn" id="1_m8a0q"]
+[ext_resource type="Script" uid="uid://bn07l01y47sdc" path="res://Bullet_Electricity/bullet_electricity.gd" id="2_8h5un"]
+
+[node name="Bullet_Electricity" unique_id=1047442074 instance=ExtResource("1_m8a0q")]
+script = ExtResource("2_8h5un")
