@@ -1,13 +1,49 @@
 [gd_scene format=3 uid="uid://dd4n6m088eqd5"]
 
-[ext_resource type="Texture2D" uid="uid://pnba1btm1ffh" path="res://Assets/Bullet/tile_0023.png" id="1_fdwoi"]
 [ext_resource type="Script" uid="uid://cfukuhs1d7jjl" path="res://Bullet/bullet.gd" id="1_x1l8h"]
+[ext_resource type="Texture2D" uid="uid://c8n73wruw4a77" path="res://Assets/Bullet/bullet_sprite.png" id="2_4qwpv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bhunq"]
 radius = 12.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x1l8h"]
 radius = 30.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6rx1x"]
+atlas = ExtResource("2_4qwpv")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lw5a6"]
+atlas = ExtResource("2_4qwpv")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vlmcq"]
+atlas = ExtResource("2_4qwpv")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_co2il"]
+atlas = ExtResource("2_4qwpv")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bhunq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6rx1x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lw5a6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vlmcq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_co2il")
+}],
+"loop": 1,
+"name": &"new_animation",
+"speed": 5.0
+}]
 
 [node name="Bullet" type="CharacterBody2D" unique_id=1047442074]
 collision_layer = 14
@@ -17,15 +53,17 @@ script = ExtResource("1_x1l8h")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=359234943]
 shape = SubResource("CircleShape2D_bhunq")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=869328381]
-scale = Vector2(3, 3)
-texture = ExtResource("1_fdwoi")
-
 [node name="Detection_Area" type="Area2D" parent="." unique_id=124234472]
 collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detection_Area" unique_id=1649038856]
 shape = SubResource("CircleShape2D_x1l8h")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=915785676]
+sprite_frames = SubResource("SpriteFrames_bhunq")
+animation = &"new_animation"
+autoplay = "new_animation"
+frame_progress = 0.29593357
 
 [connection signal="body_entered" from="Detection_Area" to="." method="_on_detection_area_body_entered"]

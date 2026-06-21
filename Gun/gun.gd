@@ -21,12 +21,12 @@ func random_bullet():
 	selected_bullet = BulletTypes.pick_random()
 
 func shoot() -> void:
-	#if not bullet_ready:
-		#random_bullet()
-		#bullet_ready = true
-		#GlobalData.barrel_hud.stop_spin(selected_bullet)
-		#return
-	var new_bullet = POISON.instantiate()
+	if not bullet_ready:
+		random_bullet()
+		bullet_ready = true
+		GlobalData.barrel_hud.stop_spin(selected_bullet)
+		return
+	var new_bullet = selected_bullet.instantiate()
 	new_bullet.position = marker_2d.global_position
 	new_bullet.target_position = (get_global_mouse_position()-marker_2d.global_position).normalized()
 	GlobalData.world.add_child(new_bullet)
