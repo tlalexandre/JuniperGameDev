@@ -1,14 +1,16 @@
 extends CharacterBody2D
+class_name Enemy
 
 signal died
 
-var speed = 350
+var speed = 250
 var player_chase = false
 var player
 var current_health := 10
 var max_health := 10
 @onready var health_bar: ProgressBar = $HealthBar
 @onready var attack_cooldown = 1
+@onready var line_of_sight:RayCast2D = $RayCast2D
 var can_attack = true
 var dmg_enemy = 1
 enum Status { NONE, KNOCKBACK, STUN, SLIDE, DMG_ON_TICK}
@@ -22,15 +24,39 @@ func _ready() -> void:
 	player = GlobalData.player
 	health_bar.set_health(current_health, max_health)
 	
-func _physics_process(delta: float) -> void:
+	
+	
+func _physics_process(delta):
 	if current_status != Status.NONE:
 		_process_status(delta)
 	else:
-		if player_chase:
-			var direction = (player.position-position).normalized()
-			velocity = direction * speed
-		else :
+		# Check if the player is inside the detection area and exists
+		if player_chase and is_instance_valid(player):
+			# 1. Point the RayCast towards the player
+			# target_position is relative to the RayCast's position
+			line_of_sight.target_position = player.global_position - global_position
+			
+			# 2. Force the RayCast to update its collision immediately
+			line_of_sight.force_raycast_update()
+			
+			# 3. Check what the RayCast is colliding with
+			if line_of_sight.is_colliding():
+				var collider = line_of_sight.get_collider()
+				
+				# If the first thing the ray hits is the player, chase them
+				if collider == player:
+					var direction = (player.position - position).normalized()
+					velocity = direction * speed
+				else:
+					# There is a wall or something else blocking the view
+					velocity = Vector2.ZERO
+			else:
+				# If it collides with nothing (but player is in area), move towards them
+				var direction = (player.position - position).normalized()
+				velocity = direction * speed
+		else:
 			velocity = Vector2.ZERO
+			
 	move_and_slide()
 	
 func _process_status(delta: float) -> void:
@@ -53,14 +79,26 @@ func apply_status(status: Status, direction: Vector2, force: float, duration: fl
 	status_velocity = direction * force
 	status_timer = duration
 
+#Normal movement
 func _on_detection_area_body_entered(body: Node2D) -> void:
-	if body == player:
-		player_chase = true
-
+	player=GlobalData.player
+	if player == body:
+		player_chase=true
 func _on_detection_area_body_exited(body: Node2D) -> void:
-	if body == player:
-		player_chase = false
+	player=null
+	if player == body:
+		player_chase=false
+func _on_proximity_area_body_entered(body: Node2D) -> void:
+	player=GlobalData.player
+	if player == body:
+		player_chase=false
+func _on_proximity_area_body_exited(body: Node2D) -> void:
+	player=GlobalData.player
+	if player == body:
+		player_chase=true
 
+
+#Attack code
 func take_damage(amount: float):
 	current_health -= amount
 	health_bar.set_health(current_health, max_health)
@@ -93,6 +131,25 @@ func attack() -> void:
 	is_on_cooldown = false
 	attack()
 	
-	
-	
+func apply_status(status: Status, direction: Vector2, force: float, duration: float) -> void:
+	current_status = status
+	status_velocity = direction * force
+	status_timer = duration
+
+func _process_status(delta: float) -> void:
+	status_timer -= delta
+	match current_status:
+		Status.KNOCKBACK:
+			velocity = status_velocity
+			status_velocity = status_velocity.move_toward(Vector2.ZERO, 800 * delta)
+		Status.STUN:
+			velocity = Vector2.ZERO
+		Status.SLIDE:
+			velocity = -status_velocity
+		Status.DMG_ON_TICK:
+			take_damage(poison_dmg)
+	if status_timer <= 0.0:
+		current_status = Status.NONE
+		
+
 	

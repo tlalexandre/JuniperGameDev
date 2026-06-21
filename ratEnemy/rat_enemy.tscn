@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cee3f73cfq4d1"]
+
+[ext_resource type="PackedScene" uid="uid://doh21id30beig" path="res://Enemy/enemy.tscn" id="1_vsc63"]
+[ext_resource type="Texture2D" uid="uid://n3b5tkdvnp1o" path="res://icon.svg" id="2_wyc1x"]
+
+[sub_resource type="GDScript" id="GDScript_cgrvg"]
+script/source = "extends Enemy
+
+func _ready() -> void:
+	super()
+	
+	print(\"Rat enemy is ready!\")
+
+func _physics_process(delta: float) -> void:
+
+	super(delta)
+	
+"
+
+[node name="Enemy" unique_id=1839370902 instance=ExtResource("1_vsc63")]
+script = SubResource("GDScript_cgrvg")
+
+[node name="Enemy_Sprite" parent="." index="1" unique_id=300805649]
+texture = ExtResource("2_wyc1x")
