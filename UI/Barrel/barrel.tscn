@@ -1,0 +1,125 @@
+[gd_scene format=3 uid="uid://bljmmcb6uieso"]
+
+[ext_resource type="Script" uid="uid://7mxbe8b6mrgk" path="res://UI/Barrel/barrel_ui.gd" id="1_fd2os"]
+[ext_resource type="Texture2D" uid="uid://boyqntkagcuus" path="res://Assets/GunCylinder/guncylinder.png" id="2_6w3jq"]
+[ext_resource type="Texture2D" uid="uid://cgt7f6qfq5sno" path="res://Assets/Bullet_Icons/fire.png" id="3_eviik"]
+[ext_resource type="Texture2D" uid="uid://cm804tocyy075" path="res://Assets/Bullet_Icons/electricity.png" id="4_l6oje"]
+[ext_resource type="Texture2D" uid="uid://dypd847qrjq7j" path="res://Assets/Bullet_Icons/ice.png" id="5_qgnbr"]
+[ext_resource type="Texture2D" uid="uid://pm586g3uou87" path="res://Assets/Bullet_Icons/poison.png" id="6_2iccq"]
+[ext_resource type="Texture2D" uid="uid://b040ymm7ahvqi" path="res://Assets/Bullet_Icons/wind.png" id="7_t0tv8"]
+[ext_resource type="Texture2D" uid="uid://b2cpajj5e4bbn" path="res://Assets/Bullet_Icons/bullet.png" id="8_30k7t"]
+
+[node name="Barrel" type="CanvasLayer" unique_id=1992844454]
+
+[node name="Barrel_UI" type="Control" parent="." unique_id=103254165]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -400.0
+offset_top = -600.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("1_fd2os")
+
+[node name="BarrelRing" type="Control" parent="Barrel_UI" unique_id=1204239742]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -400.0
+offset_right = 200.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(200, 200)
+
+[node name="TextureRect" type="TextureRect" parent="Barrel_UI/BarrelRing" unique_id=1376948240]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -13.0
+offset_top = 2.0
+offset_right = 17.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_6w3jq")
+
+[node name="Icon_0" type="TextureRect" parent="Barrel_UI/BarrelRing" unique_id=1923756899]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 100.0
+offset_right = 220.0
+offset_bottom = 140.0
+texture = ExtResource("3_eviik")
+expand_mode = 1
+
+[node name="Icon_1" type="TextureRect" parent="Barrel_UI/BarrelRing" unique_id=1742439077]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 140.0
+offset_right = 290.0
+offset_bottom = 180.0
+texture = ExtResource("4_l6oje")
+expand_mode = 1
+
+[node name="Icon_2" type="TextureRect" parent="Barrel_UI/BarrelRing" unique_id=1203396273]
+layout_mode = 0
+offset_left = 247.0
+offset_top = 221.0
+offset_right = 287.0
+offset_bottom = 261.0
+texture = ExtResource("5_qgnbr")
+expand_mode = 1
+
+[node name="Icon_3" type="TextureRect" parent="Barrel_UI/BarrelRing" unique_id=1142672107]
+layout_mode = 0
+offset_left = 182.0
+offset_top = 260.0
+offset_right = 222.0
+offset_bottom = 300.0
+texture = ExtResource("6_2iccq")
+expand_mode = 1
+
+[node name="Icon_4" type="TextureRect" parent="Barrel_UI/BarrelRing" unique_id=1447504206]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 218.0
+offset_right = 154.0
+offset_bottom = 258.0
+texture = ExtResource("7_t0tv8")
+expand_mode = 1
+
+[node name="Icon_5" type="TextureRect" parent="Barrel_UI/BarrelRing" unique_id=35241961]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 139.0
+offset_right = 154.0
+offset_bottom = 179.0
+texture = ExtResource("8_30k7t")
+expand_mode = 1
+
+[node name="SelectedBullet" type="Control" parent="Barrel_UI" unique_id=1577539596]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_right = 200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+
+[node name="SelectedIcon" type="TextureRect" parent="Barrel_UI/SelectedBullet" unique_id=1203834029]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 3
