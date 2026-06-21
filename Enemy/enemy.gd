@@ -88,6 +88,10 @@ func _process_status(delta: float) -> void:
 				poison_tick_timer = 0.0
 				take_damage(poison_dmg * poison_stacks)
 	if status_timer <= 0.0:
+		if current_status == Status.DMG_ON_TICK:
+			health_bar.modulate = Color.WHITE
+			poison_stacks = 0
+			poison_tick_timer = 0.0
 		current_status = Status.NONE
 		if current_status == Status.NONE:
 			poison_stacks = 0
@@ -98,7 +102,12 @@ func apply_status(status: Status, direction: Vector2, force: float, duration: fl
 		poison_stacks += 1
 		status_timer = max(status_timer, duration) if current_status == Status.DMG_ON_TICK else duration
 		current_status = Status.DMG_ON_TICK
+		health_bar.modulate = Color(0.4, 1.0, 0.4)  # green tint
 	else:
+		if current_status == Status.DMG_ON_TICK:
+			health_bar.modulate = Color.WHITE
+			poison_stacks = 0
+			poison_tick_timer = 0.0
 		current_status = status
 		status_velocity = direction * force
 		status_timer = duration
