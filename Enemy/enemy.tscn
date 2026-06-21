@@ -16,31 +16,30 @@ gradient = SubResource("Gradient_7hftr")
 [sub_resource type="CircleShape2D" id="CircleShape2D_riqys"]
 radius = 400.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_2rrxh"]
-radius = 70.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_cgrvg"]
+radius = 84.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s8843"]
+radius = 13.536986
 
 [node name="Enemy" type="CharacterBody2D" unique_id=1839370902 groups=["enemies"]]
 scale = Vector2(0.25, 0.25)
 collision_layer = 15
 script = ExtResource("1_2rrxh")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2006107870]
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=2006107870]
+visible = false
 shape = SubResource("CircleShape2D_bhunq")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=300805649]
+[node name="Enemy_Sprite" type="Sprite2D" parent="." unique_id=300805649]
 texture = SubResource("GradientTexture2D_bhunq")
 
 [node name="Detection_Area" type="Area2D" parent="." unique_id=442240972]
 collision_layer = 2
+collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection_Area" unique_id=210560214]
+[node name="Collision_detection_area" type="CollisionShape2D" parent="Detection_Area" unique_id=210560214]
 shape = SubResource("CircleShape2D_riqys")
-
-[node name="Attack_Area" type="Area2D" parent="." unique_id=879144683]
-collision_layer = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack_Area" unique_id=1040292120]
-shape = SubResource("CircleShape2D_2rrxh")
 
 [node name="HealthBar" parent="." unique_id=1609601232 instance=ExtResource("2_nuwos")]
 offset_left = -103.0
@@ -48,9 +47,23 @@ offset_top = -92.0
 offset_right = 110.0
 offset_bottom = -65.0
 
+[node name="ProximityArea" type="Area2D" parent="." unique_id=2098740476]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProximityArea" unique_id=1706491006]
+shape = SubResource("CircleShape2D_cgrvg")
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1326403427]
+scale = Vector2(8, 8)
+
+[node name="attack_area" type="Area2D" parent="." unique_id=1105970298]
+scale = Vector2(8, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_area" unique_id=113204782]
+shape = SubResource("CircleShape2D_s8843")
+
 [connection signal="body_entered" from="Detection_Area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="Detection_Area" to="." method="_on_detection_area_body_exited"]
-[connection signal="body_entered" from="Attack_Area" to="." method="_on_attack_area_body_entered"]
-[connection signal="body_entered" from="Attack_Area" to="." method="_on_detection_area_body_entered"]
-[connection signal="body_exited" from="Attack_Area" to="." method="_on_attack_area_body_exited"]
-[connection signal="body_exited" from="Attack_Area" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="ProximityArea" to="." method="_on_proximity_area_body_entered"]
+[connection signal="body_exited" from="ProximityArea" to="." method="_on_proximity_area_body_exited"]
