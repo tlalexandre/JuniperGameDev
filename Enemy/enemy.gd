@@ -28,6 +28,9 @@ var is_dead = false
 var is_alerting = false 
 var has_spotted_player = false 
 
+# NUEVA VARIABLE: Control local para cuando recibe daño (no interfiere con tu amigo)
+var is_taking_damage = false 
+
 # Poison vars
 var poison_stacks := 0
 var poison_tick_interval := 1.0
@@ -48,8 +51,9 @@ func _physics_process(delta):
 		_process_chase(delta)
 	elif current_status != Status.NONE:
 		_process_status(delta)
-	elif is_attacking or is_alerting:
-		# Stop moving completely during attack or alert phase
+	# MODIFICADO: También se frena por completo si está recibiendo daño (is_taking_damage)
+	elif is_attacking or is_alerting or is_taking_damage:
+		# Stop moving completely during attack, alert phase or damage stun
 		velocity = Vector2.ZERO
 	else:
 		_process_chase(delta)
@@ -84,6 +88,12 @@ func _update_animations() -> void:
 	if is_dead:
 		return
 		
+	# NUEVO: Máxima prioridad para la animación de recibir daño si la flag está activa
+	if is_taking_damage:
+		if sprite.animation != "DamageTaken": # Reemplaza "DamageTaken" por el nombre exacto de tu animación
+			sprite.play("DamageTaken")
+		return
+		
 	# 1. Highest Priority: Attack animation
 	if is_attacking:
 		if sprite.animation != "Attack":
@@ -98,7 +108,10 @@ func _update_animations() -> void:
 		
 	# 3. If the enemy is on cooldown right after an attack, freeze it on the first frame of Attack
 	if is_on_cooldown and can_attack:
-		sprite.animation = "Attack"
+		if sprite.animation != "Attack":
+			sprite.animation = "Attack"
+		sprite.frame = 0
+		sprite.stop()
 		return
 		
 	# 4. Movement and Idle priority
@@ -184,6 +197,16 @@ func take_damage(amount: float):
 	health_bar.set_health(current_health, max_health)
 	if current_health <= 0:
 		die()
+	else:
+		# NUEVO: Al recibir daño, se activa la flag y cancelamos ataques colgados
+		is_taking_damage = true
+		is_attacking = false 
+		
+		# Espera los 0.3 segundos que querías para el efecto de herida
+		await get_tree().create_timer(0.3).timeout
+		
+		# Apagamos la flag para que pueda volver a perseguir o atacar
+		is_taking_damage = false
 
 func die():
 	if is_dead: return
@@ -206,7 +229,7 @@ func _on_attack_area_body_exited(body: Node2D) -> void:
 		can_attack = false
 		
 func attack() -> void:
-	if not can_attack or is_on_cooldown or is_attacking or is_dead:
+	if not can_attack or is_on_cooldown or is_attacking or is_dead or is_taking_damage:
 		return
 		
 	# Start attack state immediately

@@ -36,6 +36,11 @@ animations = [{
 }, {
 "frames": [],
 "loop": 1,
+"name": &"DamageTaken",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
 "name": &"Die",
 "speed": 5.0
 }, {
@@ -64,7 +69,6 @@ texture = SubResource("GradientTexture2D_bhunq")
 
 [node name="Detection_Area" type="Area2D" parent="." unique_id=442240972]
 collision_layer = 2
-collision_mask = 2
 
 [node name="Collision_detection_area" type="CollisionShape2D" parent="Detection_Area" unique_id=210560214]
 shape = SubResource("CircleShape2D_riqys")
@@ -77,7 +81,6 @@ offset_bottom = -65.0
 
 [node name="ProximityArea" type="Area2D" parent="." unique_id=2098740476]
 collision_layer = 2
-collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ProximityArea" unique_id=1706491006]
 shape = SubResource("CircleShape2D_cgrvg")
@@ -88,15 +91,14 @@ collision_mask = 29
 
 [node name="attack_area" type="Area2D" parent="." unique_id=1105970298]
 scale = Vector2(8, 8)
-collision_layer = 29
-collision_mask = 29
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attack_area" unique_id=113204782]
 shape = SubResource("CircleShape2D_s8843")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1409618153]
 sprite_frames = SubResource("SpriteFrames_cgrvg")
-animation = &"Die"
+animation = &"DamageTaken"
 autoplay = "Idle"
 
 [connection signal="body_entered" from="Detection_Area" to="." method="_on_detection_area_body_entered"]
