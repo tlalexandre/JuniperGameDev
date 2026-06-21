@@ -58,6 +58,26 @@ func _physics_process(delta):
 			velocity = Vector2.ZERO
 			
 	move_and_slide()
+	
+func _process_status(delta: float) -> void:
+	status_timer -= delta
+	match current_status:
+		Status.KNOCKBACK:
+			velocity = status_velocity
+			status_velocity = status_velocity.move_toward(Vector2.ZERO, 800 * delta)
+		Status.STUN:
+			velocity = Vector2.ZERO
+		Status.SLIDE:
+			velocity = -status_velocity
+		Status.DMG_ON_TICK:
+			take_damage(poison_dmg)
+	if status_timer <= 0.0:
+		current_status = Status.NONE
+		
+func apply_status(status: Status, direction: Vector2, force: float, duration: float) -> void:
+	current_status = status
+	status_velocity = direction * force
+	status_timer = duration
 
 #Normal movement
 func _on_detection_area_body_entered(body: Node2D) -> void:
