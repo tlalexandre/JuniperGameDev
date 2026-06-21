@@ -28,8 +28,12 @@ var is_dead = false
 var is_alerting = false 
 var has_spotted_player = false 
 
-# NUEVA VARIABLE: Control local para cuando recibe daño (no interfiere con tu amigo)
+# Control local para cuando recibe daño
 var is_taking_damage = false 
+
+# NUEVAS VARIABLES: Para la memoria residual y búsqueda del enemigo
+var is_searching = false
+var last_seen_direction := Vector2.ZERO
 
 # Poison vars
 var poison_stacks := 0
@@ -51,7 +55,6 @@ func _physics_process(delta):
 		_process_chase(delta)
 	elif current_status != Status.NONE:
 		_process_status(delta)
-	# MODIFICADO: También se frena por completo si está recibiendo daño (is_taking_damage)
 	elif is_attacking or is_alerting or is_taking_damage:
 		# Stop moving completely during attack, alert phase or damage stun
 		velocity = Vector2.ZERO
@@ -67,30 +70,60 @@ func _process_chase(delta: float) -> void:
 		line_of_sight.force_raycast_update()
 		
 		if line_of_sight.is_colliding() and line_of_sight.get_collider() == player:
+			# Si te ve, cancelamos cualquier búsqueda anterior porque ya sabe dónde estás
+			is_searching = false
+			
 			# If the raycast hits the player for the first time, trigger alert
 			if not has_spotted_player:
 				_trigger_alert()
 				return
 			
 			if not is_alerting:
-				var direction = (player.position - position).normalized()
-				velocity = direction * speed
+				# Guardamos la última dirección en la que te vio
+				last_seen_direction = (player.position - position).normalized()
+				velocity = last_seen_direction * speed
 				
 				if velocity.x != 0:
 					sprite.flip_h = velocity.x < 0
 		else:
-			velocity = Vector2.ZERO
+			# MODIFICADO: Si te pierde de vista (por ejemplo, tras una pared), inicia la búsqueda
+			if has_spotted_player and not is_searching:
+				_start_searching_phase()
+			
+			# Si está en modo búsqueda, sigue caminando en la última dirección registrada
+			if is_searching:
+				velocity = last_seen_direction * speed
+				if velocity.x != 0:
+					sprite.flip_h = velocity.x < 0
+			else:
+				velocity = Vector2.ZERO
 	else:
+		# Si sales del área de detección por completo, también limpiamos variables
+		if is_searching:
+			velocity = last_seen_direction * speed
+		else:
+			velocity = Vector2.ZERO
+			has_spotted_player = false 
+
+func _start_searching_phase() -> void:
+	is_searching = true
+	
+	# Camina en esa dirección durante 1.5 segundos (puedes cambiar este tiempo a tu gusto)
+	await get_tree().create_timer(1.5).timeout
+	
+	# Si tras ese tiempo sigue sin verte, se rinde y vuelve a Idle
+	if is_searching:
+		is_searching = false
+		has_spotted_player = false
 		velocity = Vector2.ZERO
-		has_spotted_player = false 
 
 func _update_animations() -> void:
 	if is_dead:
 		return
 		
-	# NUEVO: Máxima prioridad para la animación de recibir daño si la flag está activa
+	# Máxima prioridad para la animación de recibir daño si la flag está activa
 	if is_taking_damage:
-		if sprite.animation != "DamageTaken": # Reemplaza "DamageTaken" por el nombre exacto de tu animación
+		if sprite.animation != "DamageTaken":
 			sprite.play("DamageTaken")
 		return
 		
@@ -114,7 +147,7 @@ func _update_animations() -> void:
 		sprite.stop()
 		return
 		
-	# 4. Movement and Idle priority
+	# 4. Movement and Idle priority (Aquí entra automáticamente la búsqueda porque velocity > 0)
 	if velocity.length() > 0:
 		sprite.play("Walk")
 	else:
@@ -178,8 +211,10 @@ func _on_detection_area_body_entered(body: Node2D) -> void:
 
 func _on_detection_area_body_exited(body: Node2D) -> void:
 	if body == player:
-		player = null
-		player_chase = false
+		# Si sale del área pero está buscando, dejamos que termine de buscar antes de vaciar al player
+		if not is_searching:
+			player = null
+			player_chase = false
 
 func _on_proximity_area_body_entered(body: Node2D) -> void:
 	if body == GlobalData.player:
@@ -198,14 +233,10 @@ func take_damage(amount: float):
 	if current_health <= 0:
 		die()
 	else:
-		# NUEVO: Al recibir daño, se activa la flag y cancelamos ataques colgados
 		is_taking_damage = true
 		is_attacking = false 
 		
-		# Espera los 0.3 segundos que querías para el efecto de herida
 		await get_tree().create_timer(0.3).timeout
-		
-		# Apagamos la flag para que pueda volver a perseguir o atacar
 		is_taking_damage = false
 
 func die():
@@ -232,21 +263,16 @@ func attack() -> void:
 	if not can_attack or is_on_cooldown or is_attacking or is_dead or is_taking_damage:
 		return
 		
-	# Start attack state immediately
 	is_attacking = true
 	
-	# CHANGED: Apply damage INSTANTLY when entering range instead of waiting
 	if player and is_instance_valid(player):
 		player.take_damage(dmg_enemy)
 		
-	# Wait for the 2 frames of your attack animation to display (e.g., 0.3 seconds)
 	await get_tree().create_timer(0.3).timeout
 	
-	# End attack lock
 	is_attacking = false
 	is_on_cooldown = true
 	
-	# Wait for the cooldown period before next strike
 	await get_tree().create_timer(attack_cooldown).timeout
 	is_on_cooldown = false
 	
