@@ -1,24 +1,96 @@
 [gd_scene format=3 uid="uid://cee3f73cfq4d1"]
 
-[ext_resource type="PackedScene" uid="uid://doh21id30beig" path="res://Enemy/enemy.tscn" id="1_vsc63"]
-[ext_resource type="Texture2D" uid="uid://n3b5tkdvnp1o" path="res://icon.svg" id="2_wyc1x"]
+[ext_resource type="Script" uid="uid://iifer8cmsfq5" path="res://Enemy/enemy.gd" id="1_wyc1x"]
+[ext_resource type="PackedScene" uid="uid://cmwqsi0f8ijs4" path="res://HealthBar/healthbar.tscn" id="2_oy2t3"]
 
-[sub_resource type="GDScript" id="GDScript_cgrvg"]
-script/source = "extends Enemy
+[sub_resource type="CircleShape2D" id="CircleShape2D_bhunq"]
+radius = 94.16
 
-func _ready() -> void:
-	super()
-	
-	print(\"Rat enemy is ready!\")
+[sub_resource type="CircleShape2D" id="CircleShape2D_riqys"]
+radius = 1576.0812
 
-func _physics_process(delta: float) -> void:
+[sub_resource type="CircleShape2D" id="CircleShape2D_cgrvg"]
+radius = 120.06665
 
-	super(delta)
-	
-"
+[sub_resource type="CircleShape2D" id="CircleShape2D_s8843"]
+radius = 15.508062
 
-[node name="Enemy" unique_id=1839370902 instance=ExtResource("1_vsc63")]
-script = SubResource("GDScript_cgrvg")
+[sub_resource type="SpriteFrames" id="SpriteFrames_s8843"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"Alert",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"Attack",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"Die",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"Walk",
+"speed": 5.0
+}]
 
-[node name="Enemy_Sprite" parent="." index="1" unique_id=300805649]
-texture = ExtResource("2_wyc1x")
+[node name="Enemy" type="CharacterBody2D" unique_id=1839370902 groups=["enemies"]]
+scale = Vector2(0.25, 0.25)
+collision_layer = 15
+script = ExtResource("1_wyc1x")
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=2006107870]
+shape = SubResource("CircleShape2D_bhunq")
+
+[node name="Detection_Area" type="Area2D" parent="." unique_id=442240972]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Collision_detection_area" type="CollisionShape2D" parent="Detection_Area" unique_id=210560214]
+shape = SubResource("CircleShape2D_riqys")
+
+[node name="HealthBar" parent="." unique_id=1609601232 instance=ExtResource("2_oy2t3")]
+offset_left = -103.0
+offset_top = -92.0
+offset_right = 110.0
+offset_bottom = -65.0
+
+[node name="ProximityArea" type="Area2D" parent="." unique_id=2098740476]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProximityArea" unique_id=1706491006]
+shape = SubResource("CircleShape2D_cgrvg")
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1326403427]
+scale = Vector2(8, 8)
+
+[node name="attack_area" type="Area2D" parent="." unique_id=1105970298]
+scale = Vector2(8, 8)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_area" unique_id=113204782]
+shape = SubResource("CircleShape2D_s8843")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=910243511]
+scale = Vector2(0.375, 0.34375)
+sprite_frames = SubResource("SpriteFrames_s8843")
+animation = &"Attack"
+autoplay = "Idle"
+
+[connection signal="body_entered" from="Detection_Area" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="Detection_Area" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="ProximityArea" to="." method="_on_proximity_area_body_entered"]
+[connection signal="body_exited" from="ProximityArea" to="." method="_on_proximity_area_body_exited"]
+[connection signal="body_entered" from="attack_area" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="attack_area" to="." method="_on_attack_area_body_exited"]
