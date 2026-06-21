@@ -17,7 +17,8 @@ func _physics_process(delta: float) -> void:
 func despawn() -> void:
 	await get_tree().create_timer(despawn_time).timeout
 	queue_free()
-	
+
+
 
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
