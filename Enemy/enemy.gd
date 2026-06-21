@@ -17,7 +17,13 @@ enum Status { NONE, KNOCKBACK, STUN, SLIDE, DMG_ON_TICK}
 var current_status = Status.NONE
 var status_timer = 0.0
 var status_velocity = Vector2.ZERO
-var poison_dmg = .05
+
+#Poison vars
+var poison_stacks :=0
+var poison_tick_interval := 1.0
+var poison_tick_timer :=0.0
+var poison_dmg = 1
+
 var is_on_cooldown = false
 
 func _ready() -> void:
@@ -27,9 +33,16 @@ func _ready() -> void:
 	
 	
 func _physics_process(delta):
-	if current_status != Status.NONE:
+	if current_status == Status.DMG_ON_TICK:
+		_process_status(delta)
+		_process_chase(delta)
+	elif current_status !=Status.NONE:
 		_process_status(delta)
 	else:
+		_process_chase(delta)
+	move_and_slide()
+		
+func _process_chase(delta:float) -> void:
 		# Check if the player is inside the detection area and exists
 		if player_chase and is_instance_valid(player):
 			# 1. Point the RayCast towards the player
@@ -57,7 +70,7 @@ func _physics_process(delta):
 		else:
 			velocity = Vector2.ZERO
 			
-	move_and_slide()
+
 	
 func _process_status(delta: float) -> void:
 	status_timer -= delta
@@ -70,14 +83,25 @@ func _process_status(delta: float) -> void:
 		Status.SLIDE:
 			velocity = -status_velocity
 		Status.DMG_ON_TICK:
-			take_damage(poison_dmg)
+			poison_tick_timer += delta
+			if poison_tick_timer >= poison_tick_interval:
+				poison_tick_timer = 0.0
+				take_damage(poison_dmg * poison_stacks)
 	if status_timer <= 0.0:
 		current_status = Status.NONE
+		if current_status == Status.NONE:
+			poison_stacks = 0
+			poison_tick_timer = 0.0
 		
 func apply_status(status: Status, direction: Vector2, force: float, duration: float) -> void:
-	current_status = status
-	status_velocity = direction * force
-	status_timer = duration
+	if status == Status.DMG_ON_TICK:
+		poison_stacks += 1
+		status_timer = max(status_timer, duration) if current_status == Status.DMG_ON_TICK else duration
+		current_status = Status.DMG_ON_TICK
+	else:
+		current_status = status
+		status_velocity = direction * force
+		status_timer = duration
 
 #Normal movement
 func _on_detection_area_body_entered(body: Node2D) -> void:

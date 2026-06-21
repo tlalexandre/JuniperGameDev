@@ -17,7 +17,7 @@ func _physics_process(delta: float) -> void:
 	
 "
 
-[node name="Enemy" unique_id=1839370902 instance=ExtResource("1_vsc63")]
+[node name="Enemy" unique_id=1839370902 groups=["rat"] instance=ExtResource("1_vsc63")]
 script = SubResource("GDScript_cgrvg")
 
 [node name="Enemy_Sprite" parent="." index="1" unique_id=300805649]
