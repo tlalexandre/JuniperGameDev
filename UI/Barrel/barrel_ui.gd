@@ -5,15 +5,16 @@ var state: State = State.IDLE
 @onready var barrel_ring: Control = $BarrelRing
 @onready var selected_icon: TextureRect = $SelectedBullet/SelectedIcon
 @onready var swap_menu: Panel = $SwapMenu
+@onready var audio: AudioStreamPlayer2D = $"../AudioStreamPlayer2D"
 
 var pointer_angle: float = -PI / 2
 const ANGLE_STEP = TAU / 6.0
 
 var icon_nodes := []   # index → TextureRect node
 var icon_angles := {}  # node → angle
-
+var spin_tween: Tween
 signal spin_complete(bullet_type)
-
+signal reload_complete
 # Bullet type → icon texture
 var bullet_icon_map := {}
 
@@ -55,6 +56,11 @@ func _ready() -> void:
 	
 	update_icons(GlobalData.bullet_loadout)
 	
+
+
+func _process(delta: float) -> void:
+	pass
+
 func update_icons(loadout: Array) -> void:
 	for i in 6:
 		var tex = bullet_icon_map.get(loadout[i])
@@ -69,12 +75,12 @@ func update_icons_from_chamber(chamber: Array) -> void:
 				icon_nodes[i].texture = tex
 		else:
 			icon_nodes[i].texture = null  # empty slot
-
-
-func _process(delta: float) -> void:
-	pass
-
-var spin_tween: Tween
+			
+func play_reload() -> void:
+	audio.stream = preload("uid://b748kn0weghqb")
+	audio.play()
+	await audio.finished
+	reload_complete.emit()
 
 func spin_to(slot_index: int, bullet_type) -> void:
 	if state != State.IDLE:

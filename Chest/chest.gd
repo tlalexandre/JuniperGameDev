@@ -3,6 +3,7 @@ extends StaticBody2D
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var area: Area2D = $Area2D
+@onready var audio: AudioStreamPlayer2D = $AudioStreamPlayer2D
 const CHEST = preload("uid://dw06pllyddjp6")
 const BULLET_PICKUP = preload("uid://63m54ntd0dxo")
 
@@ -43,6 +44,8 @@ func _on_body_entered(body: Node) -> void:
 		opened = true
 		collision.set_deferred("disabled", true)
 		anim.play("open")
+		audio.play()
+		
 
 func _on_animation_finished() -> void:
 	if anim.animation == "open":
