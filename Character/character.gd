@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var health_bar: ProgressBar = $HealthBar
 signal died
 
@@ -19,6 +20,9 @@ func _physics_process(delta: float) -> void:
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var horizontal_direction := Input.get_axis("left", "right")
 	var vertical_direction := Input.get_axis("up","down")
+	if horizontal_direction != 0:
+		animated_sprite_2d.flip_h = horizontal_direction < 0
+	
 	if horizontal_direction:
 		velocity.x = horizontal_direction * SPEED
 	else:

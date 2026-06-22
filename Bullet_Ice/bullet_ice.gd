@@ -5,5 +5,5 @@ var knockback_force = 500
 
 func _ready() -> void:
 	rotation = target_position.angle() + deg_to_rad(90)
-	
+	super.despawn()
 	bullet_dmg = 5
