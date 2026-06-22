@@ -1,18 +1,17 @@
 extends Control
 
+enum State { IDLE, SPINNING, LOADED }
+var state: State = State.IDLE
+
 @onready var barrel_ring: Control = $BarrelRing
 @onready var selected_icon: TextureRect = $SelectedBullet/SelectedIcon
 
+var pointer_angle: float = -PI / 2
+const ANGLE_STEP = TAU / 6.0
+var icon_slots := {}
+var icon_angles := {}
 
-
-var spin_speed: float = 6.0
-var spinning: bool = true
-var pointer_angle : float = -PI /2
-
-var icon_slots := { } 
-const ANGLE_STEP = TAU / 6.0  # 60° in radians
-
-var icon_angles := {}  # icon node -> angle (radians, 0 = top, clockwise)
+signal spin_complete(bullet_type)
 
 func _ready() -> void:
 	selected_icon.hide()
@@ -35,29 +34,36 @@ func _ready() -> void:
 	}
 	
 func _process(delta: float) -> void:
-	if spinning:
-		barrel_ring.rotation += spin_speed * delta
+	pass
 
-var stop_tween: Tween
+var spin_tween: Tween
 
-func stop_spin(chosen_bullet) -> void:
-	spinning = false
+func spin_to(chosen_bullet) -> void:
+	if state != State.IDLE:
+		return
+	state = State.SPINNING
+	selected_icon.hide()
+
 	var icon_node = icon_slots.get(chosen_bullet)
-	selected_icon.texture = icon_node.texture
-	selected_icon.show()
-
 	var base_angle = icon_angles.get(icon_node)
-	var current_rot = barrel_ring.rotation 
-	var target_rot = current_rot + fposmod(pointer_angle - base_angle - current_rot, TAU) + TAU * 2
+	var current_rot = barrel_ring.rotation
+	var landing_offset = fposmod(pointer_angle - base_angle - current_rot, TAU)
+	var target_rot = current_rot + TAU * 2.0 + landing_offset  # 2 full spins then land
 
-	if stop_tween:
-		stop_tween.kill()
-	stop_tween = create_tween()
-	stop_tween.tween_property(barrel_ring, "rotation", target_rot, 1.0)\
+	if spin_tween:
+		spin_tween.kill()
+	spin_tween = create_tween()
+	spin_tween.tween_property(barrel_ring, "rotation", target_rot, 1.2)\
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-
-func resume_spin() -> void:
-	if stop_tween:
-		stop_tween.kill()
-	spinning = true
+	spin_tween.tween_callback(func():
+		state = State.LOADED
+		selected_icon.texture = icon_node.texture
+		selected_icon.show()
+		spin_complete.emit(chosen_bullet)
+	)
+	
+func reset() -> void:
+	if spin_tween:
+		spin_tween.kill()
+	state = State.IDLE
 	selected_icon.hide()
