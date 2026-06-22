@@ -13,7 +13,6 @@ func _ready() -> void:
 	print(\"Rat enemy is ready!\")
 
 func _physics_process(delta: float) -> void:
-
 	super(delta)
 	
 "
@@ -29,6 +28,10 @@ region = Rect2(0, 128, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_pxpdl"]
 atlas = ExtResource("3_oy2t3")
 region = Rect2(32, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oy2t3"]
+atlas = ExtResource("3_oy2t3")
+region = Rect2(0, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ind0k"]
 atlas = ExtResource("3_oy2t3")
@@ -73,6 +76,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_oy2t3")
+}],
+"loop": 1,
+"name": &"DamageTaken",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_ind0k")
 }],
 "loop": 1,
@@ -103,6 +114,7 @@ animations = [{
 }]
 
 [node name="Enemy" unique_id=1839370902 groups=["rat"] instance=ExtResource("1_vsc63")]
+collision_mask = 31
 script = SubResource("GDScript_cgrvg")
 
 [node name="Enemy_Sprite" parent="." index="1" unique_id=300805649]
@@ -113,4 +125,3 @@ texture = ExtResource("2_wyc1x")
 position = Vector2(3.8146973e-06, 2.000002)
 scale = Vector2(3.9999998, 3.875)
 sprite_frames = SubResource("SpriteFrames_f0tgm")
-animation = &"Attack"
