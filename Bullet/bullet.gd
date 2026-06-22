@@ -24,6 +24,6 @@ func despawn() -> void:
 
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
-	if body.is_in_group("enemies"):	
+	if body.is_in_group("enemies"):
 		body.take_damage(bullet_dmg)
-		queue_free()
+	queue_free()

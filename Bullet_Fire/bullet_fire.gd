@@ -25,7 +25,9 @@ func _explode() -> void:
 	var results = space.intersect_shape(params)
 	for result in results:
 		var hit = result["collider"]
-		if hit.is_in_group("enemies"):
+		if hit.is_in_group("enemies") and hit.is_in_group("book"):
+			hit.take_damage(explosion_damage*2)
+		elif(hit.is_in_group("enemies")):
 			hit.take_damage(explosion_damage)
 	_show_debug_circle = true
 	queue_redraw()  # triggers _draw() this frame
