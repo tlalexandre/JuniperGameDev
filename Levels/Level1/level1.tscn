@@ -42,7 +42,7 @@ position = Vector2(828, 1396)
 position = Vector2(660, 1409)
 
 [node name="Chest6" parent="Chests" unique_id=171914794 instance=ExtResource("5_bpcbn")]
-position = Vector2(510, 1407)
+position = Vector2(112, 154)
 
 [node name="Chest8" parent="Chests" unique_id=739379239 instance=ExtResource("5_bpcbn")]
 position = Vector2(1153, 277)
@@ -53,7 +53,7 @@ position = Vector2(1840, 768)
 [node name="Enemies" type="Node" parent="." unique_id=680312754]
 
 [node name="Enemy" parent="Enemies" unique_id=1839370902 instance=ExtResource("6_4t2ji")]
-position = Vector2(760, 714)
+position = Vector2(89, 352)
 
 [node name="Enemy2" parent="Enemies" unique_id=782582709 instance=ExtResource("6_4t2ji")]
 position = Vector2(1639, 457)

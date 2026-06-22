@@ -116,6 +116,7 @@ animations = [{
 [node name="Enemy" unique_id=1839370902 groups=["rat"] instance=ExtResource("1_vsc63")]
 collision_mask = 31
 script = SubResource("GDScript_cgrvg")
+speed = 300
 
 [node name="Enemy_Sprite" parent="." index="1" unique_id=300805649]
 visible = false
@@ -123,5 +124,5 @@ texture = ExtResource("2_wyc1x")
 
 [node name="Sprite" parent="." index="7" unique_id=1409618153]
 position = Vector2(3.8146973e-06, 2.000002)
-scale = Vector2(3.9999998, 3.875)
+scale = Vector2(4.01, 4.01)
 sprite_frames = SubResource("SpriteFrames_f0tgm")

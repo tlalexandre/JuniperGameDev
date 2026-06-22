@@ -31,11 +31,22 @@ func show_for_bullet(bullet_type) -> void:
 
 func _on_slot_chosen(index: int) -> void:
 	GlobalData.bullet_loadout[index] = pending_bullet
-	var gun = get_tree().root.get_node("World/Player/Gun")
-	gun.loadout = GlobalData.bullet_loadout.duplicate()
-	gun.BulletTypes = gun.loadout.duplicate()
-	GlobalData.barrel_hud.update_icons(GlobalData.bullet_loadout)
-	GlobalData.barrel_hud.update_icons_from_chamber(gun.BulletTypes)
+	
+	# Instead of using a hardcoded path, we find the "Gun" node inside our active player instance
+	var gun = null
+	if is_instance_valid(GlobalData.player):
+		gun = GlobalData.player.get_node_or_null("Gun")
+	
+	# Check if the gun was successfully found before modifying its properties
+	if gun != null:
+		gun.loadout = GlobalData.bullet_loadout.duplicate()
+		gun.BulletTypes = gun.loadout.duplicate()
+		GlobalData.barrel_hud.update_icons(GlobalData.bullet_loadout)
+		GlobalData.barrel_hud.update_icons_from_chamber(gun.BulletTypes)
+	else:
+		print("Warning: Could not find 'Gun' node inside GlobalData.player!")
+	# ----------------
+	
 	_close()
 
 func _on_discard() -> void:

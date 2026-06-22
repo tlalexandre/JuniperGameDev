@@ -6,7 +6,7 @@ extends CharacterBody2D
 @export var speed : int = 400
 var target_position
 @export var despawn_time = 1
-@export var bullet_dmg = 10
+@export var bullet_dmg = 1
 
 func _ready() -> void:
 	rotation = target_position.angle() + deg_to_rad(90)
@@ -25,5 +25,6 @@ func despawn() -> void:
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemies"):
+		print("yep")
 		body.take_damage(bullet_dmg)
 	queue_free()

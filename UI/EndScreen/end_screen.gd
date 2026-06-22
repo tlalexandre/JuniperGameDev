@@ -34,12 +34,9 @@ func _on_resume_button_pressed() -> void:
 			get_tree().paused = false
 			control.visible = false
 		OverlayState.WON, OverlayState.LOST:
-			# Unpause the engine so scenes can be freed and reloaded properly
 			get_tree().paused = false
 			control.visible = false
-			
-			# Reload the entire current scene tree cleanly
-			get_tree().reload_current_scene()
+
 
 func _on_quit_button_pressed() -> void:
 	get_tree().quit()

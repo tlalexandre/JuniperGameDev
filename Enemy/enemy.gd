@@ -3,11 +3,12 @@ class_name Enemy
 
 signal died
 
-var speed = 250
+@export var speed = 250
 var player_chase = false
 var player
-var current_health := 10
-var max_health := 10
+
+@export var max_health := 5
+var current_health := max_health
 
 @onready var health_bar: ProgressBar = $HealthBar
 @onready var attack_cooldown = 1.5
@@ -17,7 +18,7 @@ var max_health := 10
 
 
 var can_attack = true
-var dmg_enemy = 20
+var dmg_enemy = 1
 enum Status { NONE, KNOCKBACK, STUN, SLIDE, DMG_ON_TICK}
 var current_status = Status.NONE
 var status_timer = 0.0

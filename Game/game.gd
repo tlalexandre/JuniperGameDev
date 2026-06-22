@@ -6,19 +6,11 @@ var current_level_index : int = 0
 var current_level_instance : Node = null
 
 func _enter_tree() -> void:
-	# Assign the world reference as before
+	# 1. Assign the world reference immediately
 	GlobalData.world = self
 
 func _ready() -> void:
-	# FORCE GlobalData to find the new player instance after reloading
-	# This fixes the camera and reference break without touching GlobalData's script
-	if has_node("Player"):
-		GlobalData.player = get_node("Player")
-	
-	# Connect the GameManager to the fresh player instance
-	GameManager.setup_level()
-	
-	# Load the first level
+	# Load the first level right away
 	if levels.size() > 0:
 		load_level(0)
 	else:
@@ -38,6 +30,22 @@ func load_level(index : int) -> void:
 	
 	add_child(current_level_instance)
 	print("Level loaded successfully: ", index)
+	
+	# --- THE INSTANT REGISTER FIX ---
+	# We wait a single frame to allow the newly instantiated level 
+	# and its nodes (including the Player) to completely enter the tree.
+	await get_tree().process_frame
+	
+	var found_player = get_tree().get_first_node_in_group("player")
+	if found_player:
+		GlobalData.player = found_player
+		print("Player found via group and registered in GlobalData!")
+	else:
+		print("Warning: No node found in group 'player'!")
+		
+	# Setup the GameManager now that the player is 100% guaranteed to be found
+	GameManager.setup_level()
+	# ---------------------------------
 
 func advance_level() -> void:
 	load_level(current_level_index + 1)

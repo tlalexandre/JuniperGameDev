@@ -2,6 +2,86 @@
 
 [ext_resource type="PackedScene" uid="uid://doh21id30beig" path="res://Enemy/enemy.tscn" id="1_8yqiw"]
 [ext_resource type="Script" uid="uid://08ysknid4w2u" path="res://bookEnemy/book_enemy.gd" id="2_e8yg8"]
+[ext_resource type="Texture2D" uid="uid://h6a7gh5knsex" path="res://Assets/temporarySprites/Book.png" id="3_6jugu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y7g7k"]
+atlas = ExtResource("3_6jugu")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ljpss"]
+atlas = ExtResource("3_6jugu")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axhmy"]
+atlas = ExtResource("3_6jugu")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tqkhy"]
+atlas = ExtResource("3_6jugu")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g7mgb"]
+atlas = ExtResource("3_6jugu")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kc6p3"]
+atlas = ExtResource("3_6jugu")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e8yg8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y7g7k")
+}],
+"loop": 1,
+"name": &"Alert",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ljpss")
+}],
+"loop": 1,
+"name": &"Attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axhmy")
+}],
+"loop": 1,
+"name": &"DamageTaken",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tqkhy")
+}],
+"loop": 1,
+"name": &"Die",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g7mgb")
+}],
+"loop": 1,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kc6p3")
+}],
+"loop": 1,
+"name": &"Walk",
+"speed": 5.0
+}]
 
 [node name="Enemy" unique_id=1839370902 groups=["book"] instance=ExtResource("1_8yqiw")]
 script = ExtResource("2_e8yg8")
+
+[node name="Sprite" parent="." index="7" unique_id=1409618153]
+sprite_frames = SubResource("SpriteFrames_e8yg8")
+animation = &"Walk"
