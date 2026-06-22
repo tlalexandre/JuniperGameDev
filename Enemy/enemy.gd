@@ -241,6 +241,7 @@ func take_damage(amount: float):
 		await get_tree().create_timer(0.3).timeout
 		is_taking_damage = false
 
+
 func die():
 	if is_dead: return
 	is_dead = true

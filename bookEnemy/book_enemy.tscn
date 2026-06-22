@@ -3,5 +3,5 @@
 [ext_resource type="PackedScene" uid="uid://doh21id30beig" path="res://Enemy/enemy.tscn" id="1_8yqiw"]
 [ext_resource type="Script" uid="uid://08ysknid4w2u" path="res://bookEnemy/book_enemy.gd" id="2_e8yg8"]
 
-[node name="Enemy" unique_id=1839370902 instance=ExtResource("1_8yqiw")]
+[node name="Enemy" unique_id=1839370902 groups=["book"] instance=ExtResource("1_8yqiw")]
 script = ExtResource("2_e8yg8")

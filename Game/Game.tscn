@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://d2y4owx1e1l75" path="res://batEnemy/batEnemy.tscn" id="9_eqev2"]
 [ext_resource type="PackedScene" uid="uid://dvrhqwvon5b7m" path="res://Chest/chest.tscn" id="10_q6w4l"]
 [ext_resource type="PackedScene" uid="uid://djok2etes861s" path="res://Bullet_Fire/Explosion/explosion.tscn" id="11_gp3ee"]
+[ext_resource type="PackedScene" uid="uid://cr8ylbre3y4fe" path="res://FishEnemy/fish_enemy.tscn" id="12_r0byk"]
 
 [node name="World" type="Node2D" unique_id=2130537159]
 script = ExtResource("1_ei1so")
@@ -36,7 +37,7 @@ position = Vector2(240, 417)
 [node name="Enemy" parent="." unique_id=1839370902 instance=ExtResource("2_5of8r")]
 position = Vector2(1076, 515)
 
-[node name="bat" parent="." unique_id=1397653874 instance=ExtResource("9_eqev2")]
+[node name="ghost" parent="." unique_id=1397653874 instance=ExtResource("9_eqev2")]
 position = Vector2(254.29996, 1284.1001)
 collision_layer = 15
 
@@ -53,3 +54,6 @@ position = Vector2(360, 865)
 position = Vector2(445, 860)
 autoplay = "new_animation"
 frame_progress = 0.17680788
+
+[node name="Enemy2" parent="." unique_id=457359217 instance=ExtResource("12_r0byk")]
+position = Vector2(783, 970)

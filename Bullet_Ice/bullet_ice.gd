@@ -7,7 +7,10 @@ var bounces_remaining: int = 3
 func _physics_process(delta: float) -> void:
 	var collision = move_and_collide(target_position * speed * delta)
 	if collision:
-		if collision.get_collider().is_in_group("enemies"):
+		if collision.get_collider().is_in_group("enemies") and collision.get_collider().is_in_group("candle"):
+			collision.get_collider().take_damage(bullet_dmg*2)
+			queue_free()
+		elif collision.get_collider().is_in_group("enemies"):
 			collision.get_collider().take_damage(bullet_dmg)
 			queue_free()
 		else:
