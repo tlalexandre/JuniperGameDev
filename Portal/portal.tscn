@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cycttnu1t0rrj"]
+
+[ext_resource type="Script" uid="uid://ceiclv52gwqts" path="res://Portal/portal.gd" id="1_hgvv3"]
+[ext_resource type="Texture2D" uid="uid://n3b5tkdvnp1o" path="res://icon.svg" id="1_oixwc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cgrvg"]
+size = Vector2(93, 85)
+
+[node name="portal" type="Area2D" unique_id=1335019111]
+script = ExtResource("1_hgvv3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=529733199]
+position = Vector2(36.5, 32.5)
+shape = SubResource("RectangleShape2D_cgrvg")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1845657790]
+position = Vector2(35, 32)
+scale = Vector2(0.61328125, 0.5859375)
+texture = ExtResource("1_oixwc")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
