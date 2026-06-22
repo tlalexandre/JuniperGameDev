@@ -8,9 +8,10 @@ const ELECTRICITY = preload("uid://cvsap4gf682m3")
 var selected_bullet
 var BulletTypes : Array = [GlobalData.BULLET, GlobalData.AIR, GlobalData.POISON, GlobalData.ELECTRICITY, GlobalData.FIRE, GlobalData.ICE]
 var bullet_ready = false
+var _spin_connected := false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -30,12 +31,18 @@ func get_animation_for_bullet(bullet) -> String:
 func random_bullet():
 	selected_bullet = BulletTypes.pick_random()
 
+func _on_spin_complete(bullet_type) -> void:
+	play(get_animation_for_bullet(selected_bullet))
+
 func shoot() -> void:
 	var hud = GlobalData.barrel_hud
+	if not _spin_connected:
+		hud.spin_complete.connect(_on_spin_complete)
+		_spin_connected = true
 	if hud.state == hud.State.IDLE:
 		random_bullet()
 		hud.spin_to(selected_bullet)
-		play(get_animation_for_bullet(selected_bullet))  # ADD THIS
+		#play(get_animation_for_bullet(selected_bullet))  # ADD THIS
 		return
 	if hud.state == hud.State.LOADED:
 		var new_bullet = selected_bullet.instantiate()
