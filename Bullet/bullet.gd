@@ -5,8 +5,8 @@ extends CharacterBody2D
 
 @export var speed : int = 400
 var target_position
-var despawn_time = 1
-var bullet_dmg = 1
+@export var despawn_time = 1
+@export var bullet_dmg = 1
 
 func _ready() -> void:
 	rotation = target_position.angle() + deg_to_rad(90)
