@@ -74,7 +74,6 @@ zoom = Vector2(2.5, 2.5)
 
 [node name="Gun" parent="." unique_id=36834398 instance=ExtResource("2_jgbxv")]
 position = Vector2(4, -0.9999962)
-rotation = -1.288053
 scale = Vector2(1.1666667, 1.2083333)
 
 [node name="HealthBar" parent="." unique_id=1609601232 instance=ExtResource("3_0gf5e")]

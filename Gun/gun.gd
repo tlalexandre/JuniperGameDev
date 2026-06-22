@@ -1,4 +1,4 @@
-extends Sprite2D
+extends AnimatedSprite2D
 
 @onready var marker_2d: Marker2D = $Marker2D
 const BULLET = preload("uid://dd4n6m088eqd5")
@@ -16,23 +16,31 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	look_at(get_global_mouse_position())
+	flip_v = get_global_mouse_position().x < global_position.x
+
+func get_animation_for_bullet(bullet) -> String:
+	if bullet == GlobalData.AIR: return "air"
+	if bullet == GlobalData.POISON: return "poison"
+	if bullet == GlobalData.ELECTRICITY: return "electricity"
+	if bullet == GlobalData.FIRE: return "fire"
+	if bullet == GlobalData.ICE: return "ice"
+	return "basic"
+
 
 func random_bullet():
 	selected_bullet = BulletTypes.pick_random()
 
 func shoot() -> void:
 	var hud = GlobalData.barrel_hud
-
 	if hud.state == hud.State.IDLE:
 		random_bullet()
 		hud.spin_to(selected_bullet)
+		play(get_animation_for_bullet(selected_bullet))  # ADD THIS
 		return
-
 	if hud.state == hud.State.LOADED:
 		var new_bullet = selected_bullet.instantiate()
 		new_bullet.position = marker_2d.global_position
 		new_bullet.target_position = (get_global_mouse_position() - marker_2d.global_position).normalized()
 		GlobalData.world.add_child(new_bullet)
 		hud.reset()
-
-	# State.SPINNING: input ignored, nothing happens
+		play("basic")  # ADD THIS — reset after firing
