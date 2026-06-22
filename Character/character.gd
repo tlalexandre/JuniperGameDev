@@ -64,6 +64,7 @@ func take_damage(amount: float):
 
 func die():
 	queue_free()
+	await get_tree().create_timer(0.5).timeout
 	died.emit()
 
 

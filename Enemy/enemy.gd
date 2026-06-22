@@ -17,7 +17,7 @@ var max_health := 10
 
 
 var can_attack = true
-var dmg_enemy = 1
+var dmg_enemy = 20
 enum Status { NONE, KNOCKBACK, STUN, SLIDE, DMG_ON_TICK}
 var current_status = Status.NONE
 var status_timer = 0.0

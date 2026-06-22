@@ -1,0 +1,92 @@
+[gd_scene format=4 uid="uid://blwpicwarduoq"]
+
+[ext_resource type="TileSet" uid="uid://cgpjx2jh73tyv" path="res://border/border_tileset.tres" id="1_afh44"]
+[ext_resource type="PackedScene" uid="uid://df7jhb6tr0cjy" path="res://backgroundMap/background1.tscn" id="1_mey31"]
+[ext_resource type="PackedScene" uid="uid://dgxnk41rna603" path="res://border/border.tscn" id="2_cd2u1"]
+[ext_resource type="PackedScene" uid="uid://daod7hdo5jdt" path="res://Character/character.tscn" id="3_mey31"]
+[ext_resource type="PackedScene" uid="uid://dvrhqwvon5b7m" path="res://Chest/chest.tscn" id="5_bpcbn"]
+[ext_resource type="PackedScene" uid="uid://d2y4owx1e1l75" path="res://batEnemy/batEnemy.tscn" id="6_4t2ji"]
+[ext_resource type="PackedScene" uid="uid://cnrsf67dlksxa" path="res://bookEnemy/book_enemy.tscn" id="7_mys2f"]
+[ext_resource type="PackedScene" uid="uid://0ekmc8ljxrc3" path="res://CandleEnemy/candle_enemy.tscn" id="8_txw61"]
+[ext_resource type="PackedScene" uid="uid://cee3f73cfq4d1" path="res://ratEnemy/rat_enemy.tscn" id="9_4t2ji"]
+[ext_resource type="PackedScene" uid="uid://cycttnu1t0rrj" path="res://Portal/portal.tscn" id="10_mys2f"]
+
+[node name="World" type="Node2D" unique_id=1973156659]
+
+[node name="Background" parent="." unique_id=1371166760 instance=ExtResource("1_mey31")]
+
+[node name="Level" type="TileMapLayer" parent="." unique_id=1580625411]
+tile_map_data = PackedByteArray("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")
+tile_set = ExtResource("1_afh44")
+
+[node name="Border" parent="." unique_id=1112295327 instance=ExtResource("2_cd2u1")]
+
+[node name="Player" parent="." unique_id=109988034 instance=ExtResource("3_mey31")]
+position = Vector2(218, 138)
+
+[node name="Chests" type="Node" parent="." unique_id=884228331]
+
+[node name="Chest" parent="Chests" unique_id=223102950 instance=ExtResource("5_bpcbn")]
+position = Vector2(129, 504)
+
+[node name="Chest2" parent="Chests" unique_id=504941114 instance=ExtResource("5_bpcbn")]
+position = Vector2(1777, 130)
+
+[node name="Chest3" parent="Chests" unique_id=1643330977 instance=ExtResource("5_bpcbn")]
+position = Vector2(962, 768)
+
+[node name="Chest4" parent="Chests" unique_id=703505591 instance=ExtResource("5_bpcbn")]
+position = Vector2(828, 1396)
+
+[node name="Chest5" parent="Chests" unique_id=583962504 instance=ExtResource("5_bpcbn")]
+position = Vector2(660, 1409)
+
+[node name="Chest6" parent="Chests" unique_id=171914794 instance=ExtResource("5_bpcbn")]
+position = Vector2(510, 1407)
+
+[node name="Chest8" parent="Chests" unique_id=739379239 instance=ExtResource("5_bpcbn")]
+position = Vector2(1153, 277)
+
+[node name="Chest7" parent="Chests" unique_id=929310883 instance=ExtResource("5_bpcbn")]
+position = Vector2(1840, 768)
+
+[node name="Enemies" type="Node" parent="." unique_id=680312754]
+
+[node name="Enemy" parent="Enemies" unique_id=1839370902 instance=ExtResource("6_4t2ji")]
+position = Vector2(760, 714)
+
+[node name="Enemy2" parent="Enemies" unique_id=782582709 instance=ExtResource("6_4t2ji")]
+position = Vector2(1639, 457)
+
+[node name="Enemy3" parent="Enemies" unique_id=1540205140 instance=ExtResource("7_mys2f")]
+position = Vector2(1153, 1144)
+
+[node name="Enemy4" parent="Enemies" unique_id=892367641 instance=ExtResource("7_mys2f")]
+position = Vector2(1670, 921)
+
+[node name="Enemy5" parent="Enemies" unique_id=883354039 instance=ExtResource("8_txw61")]
+position = Vector2(726, 1181)
+
+[node name="Enemy6" parent="Enemies" unique_id=23674932 instance=ExtResource("8_txw61")]
+position = Vector2(139, 912)
+
+[node name="Enemy7" parent="Enemies" unique_id=178774183 instance=ExtResource("9_4t2ji")]
+position = Vector2(1386, 1550)
+
+[node name="Enemy8" parent="Enemies" unique_id=1628359081 instance=ExtResource("9_4t2ji")]
+position = Vector2(1806, 1452)
+
+[node name="Enemy9" parent="Enemies" unique_id=839148090 instance=ExtResource("9_4t2ji")]
+position = Vector2(1656, 1812)
+
+[node name="Enemy10" parent="Enemies" unique_id=459528263 instance=ExtResource("9_4t2ji")]
+position = Vector2(828, 1778)
+
+[node name="Enemy11" parent="Enemies" unique_id=1263063978 instance=ExtResource("9_4t2ji")]
+position = Vector2(284, 1760)
+
+[node name="Enemy12" parent="Enemies" unique_id=1428287580 instance=ExtResource("9_4t2ji")]
+position = Vector2(621, 178)
+
+[node name="portal" parent="." unique_id=1335019111 instance=ExtResource("10_mys2f")]
+position = Vector2(83, 1385)
