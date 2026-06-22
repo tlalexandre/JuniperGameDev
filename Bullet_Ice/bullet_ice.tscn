@@ -41,8 +41,11 @@ animations = [{
 }]
 
 [node name="Bullet_Ice" unique_id=1047442074 instance=ExtResource("1_s7w7p")]
+motion_mode = 1
 script = ExtResource("2_ei5o1")
-speed = 200
+speed = 500
+despawn_time = 5
+bullet_dmg = 5
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=359234943]
 scale = Vector2(2, 2)

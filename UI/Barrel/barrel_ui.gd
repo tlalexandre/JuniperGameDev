@@ -1,63 +1,116 @@
 extends Control
+enum State { IDLE, SPINNING, LOADED }
+var state: State = State.IDLE
 
 @onready var barrel_ring: Control = $BarrelRing
 @onready var selected_icon: TextureRect = $SelectedBullet/SelectedIcon
+@onready var swap_menu: Panel = $SwapMenu
+@onready var audio: AudioStreamPlayer2D = $"../AudioStreamPlayer2D"
 
+var pointer_angle: float = -PI / 2
+const ANGLE_STEP = TAU / 6.0
 
-
-var spin_speed: float = 6.0
-var spinning: bool = true
-var pointer_angle : float = -PI /2
-
-var icon_slots := { } 
-const ANGLE_STEP = TAU / 6.0  # 60° in radians
-
-var icon_angles := {}  # icon node -> angle (radians, 0 = top, clockwise)
+var icon_nodes := []   # index → TextureRect node
+var icon_angles := {}  # node → angle
+var spin_tween: Tween
+signal spin_complete(bullet_type)
+signal reload_complete
+# Bullet type → icon texture
+var bullet_icon_map := {}
 
 func _ready() -> void:
 	selected_icon.hide()
 	GlobalData.barrel_hud = self
-	icon_slots = {
-		GlobalData.FIRE : $BarrelRing/Icon_0,
-		GlobalData.ELECTRICITY: $BarrelRing/Icon_1,
-		GlobalData.ICE : $BarrelRing/Icon_2,
-		GlobalData.POISON: $BarrelRing/Icon_3,
-		GlobalData.AIR: $BarrelRing/Icon_4,
-		GlobalData.BULLET: $BarrelRing/Icon_5,
+	
+
+	bullet_icon_map = {
+		GlobalData.BULLET:      preload("res://Assets/Bullet_Icons/bullet.png"),
+		GlobalData.AIR:         preload("res://Assets/Bullet_Icons/wind.png"),
+		GlobalData.POISON:      preload("res://Assets/Bullet_Icons/poison.png"),
+		GlobalData.ELECTRICITY: preload("res://Assets/Bullet_Icons/electricity.png"),
+		GlobalData.FIRE:        preload("res://Assets/Bullet_Icons/fire.png"),
+		GlobalData.ICE:         preload("res://Assets/Bullet_Icons/ice.png"),
 	}
+
+	icon_nodes = [
+		$BarrelRing/Icon_0,
+		$BarrelRing/Icon_1,
+		$BarrelRing/Icon_2,
+		$BarrelRing/Icon_3,
+		$BarrelRing/Icon_4,
+		$BarrelRing/Icon_5,
+	]
+
 	icon_angles = {
-		$BarrelRing/Icon_0: -PI/2 + 0 * ANGLE_STEP,
-		$BarrelRing/Icon_1: -PI/2 + 1 * ANGLE_STEP,
-		$BarrelRing/Icon_2: -PI/2 + 2 * ANGLE_STEP,
-		$BarrelRing/Icon_3: -PI/2 + 3 * ANGLE_STEP,
-		$BarrelRing/Icon_4: -PI/2 + 4 * ANGLE_STEP,
-		$BarrelRing/Icon_5: -PI/2 + 5 * ANGLE_STEP,
+		icon_nodes[0]: -PI/2 + 0 * ANGLE_STEP,
+		icon_nodes[1]: -PI/2 + 1 * ANGLE_STEP,
+		icon_nodes[2]: -PI/2 + 2 * ANGLE_STEP,
+		icon_nodes[3]: -PI/2 + 3 * ANGLE_STEP,
+		icon_nodes[4]: -PI/2 + 4 * ANGLE_STEP,
+		icon_nodes[5]: -PI/2 + 5 * ANGLE_STEP,
 	}
 	
+	print("bullet_loadout size: ", GlobalData.bullet_loadout.size())
+	print("first entry: ", GlobalData.bullet_loadout[0])
+	print("icon_map has bullet: ", bullet_icon_map.has(GlobalData.BULLET))
+	
+	update_icons(GlobalData.bullet_loadout)
+	
+
+
 func _process(delta: float) -> void:
-	if spinning:
-		barrel_ring.rotation += spin_speed * delta
+	pass
 
-var stop_tween: Tween
+func update_icons(loadout: Array) -> void:
+	for i in 6:
+		var tex = bullet_icon_map.get(loadout[i])
+		if tex:
+			icon_nodes[i].texture = tex
 
-func stop_spin(chosen_bullet) -> void:
-	spinning = false
-	var icon_node = icon_slots.get(chosen_bullet)
-	selected_icon.texture = icon_node.texture
-	selected_icon.show()
+func update_icons_from_chamber(chamber: Array) -> void:
+	for i in 6:
+		if i < chamber.size():
+			var tex = bullet_icon_map.get(chamber[i])
+			if tex:
+				icon_nodes[i].texture = tex
+		else:
+			icon_nodes[i].texture = null  # empty slot
+			
+func play_reload() -> void:
+	audio.stream = preload("uid://b748kn0weghqb")
+	audio.play()
+	await audio.finished
+	reload_complete.emit()
 
-	var base_angle = icon_angles.get(icon_node)
-	var current_rot = barrel_ring.rotation 
-	var target_rot = current_rot + fposmod(pointer_angle - base_angle - current_rot, TAU) + TAU * 2
-
-	if stop_tween:
-		stop_tween.kill()
-	stop_tween = create_tween()
-	stop_tween.tween_property(barrel_ring, "rotation", target_rot, 1.0)\
-		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-
-func resume_spin() -> void:
-	if stop_tween:
-		stop_tween.kill()
-	spinning = true
+func spin_to(slot_index: int, bullet_type) -> void:
+	if state != State.IDLE:
+		return
+	state = State.SPINNING
 	selected_icon.hide()
+
+	var icon_node = icon_nodes[slot_index]
+	var base_angle = icon_angles.get(icon_node)
+	var current_rot = barrel_ring.rotation
+	var landing_offset = fposmod(pointer_angle - base_angle - current_rot, TAU)
+	var target_rot = current_rot + TAU * 2.0 + landing_offset
+
+	if spin_tween:
+		spin_tween.kill()
+	spin_tween = create_tween()
+	spin_tween.tween_property(barrel_ring, "rotation", target_rot, 1.2)\
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	spin_tween.tween_callback(func():
+		state = State.LOADED
+		selected_icon.texture = icon_node.texture
+		selected_icon.show()
+		spin_complete.emit(bullet_type)
+	)
+
+func reset() -> void:
+	if spin_tween:
+		spin_tween.kill()
+	state = State.IDLE
+	selected_icon.hide()
+
+func show_swap_menu(bullet_type) -> void:
+	swap_menu.show_for_bullet(bullet_type)

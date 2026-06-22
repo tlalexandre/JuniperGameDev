@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var health_bar: ProgressBar = $HealthBar
+@onready var audio: AudioStreamPlayer2D = $AudioStreamPlayer2D
 signal died
 
 const SPEED = 300.0
@@ -19,6 +21,9 @@ func _physics_process(delta: float) -> void:
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var horizontal_direction := Input.get_axis("left", "right")
 	var vertical_direction := Input.get_axis("up","down")
+	if horizontal_direction != 0:
+		animated_sprite_2d.flip_h = horizontal_direction < 0
+	
 	if horizontal_direction:
 		velocity.x = horizontal_direction * SPEED
 	else:
@@ -28,6 +33,11 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.y = move_toward(velocity.y, 0, SPEED)
 		
+	if velocity != Vector2.ZERO:
+		if not audio.playing:
+			audio.play()
+	else:
+		audio.stop()
 	#Calculation of last direction to allow have a direction for the dodge
 	var input_dir := Vector2(horizontal_direction, vertical_direction)
 	

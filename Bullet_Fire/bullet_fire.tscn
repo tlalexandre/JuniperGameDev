@@ -42,6 +42,8 @@ animations = [{
 
 [node name="Bullet_Fire" unique_id=1047442074 instance=ExtResource("1_vltn8")]
 script = ExtResource("2_vpiyp")
+explosion_radius = 80.0
+explosion_damage = 2
 
 [node name="AnimatedSprite2D" parent="." index="2" unique_id=915785676]
 sprite_frames = SubResource("SpriteFrames_0imui")

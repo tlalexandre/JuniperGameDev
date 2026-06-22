@@ -1,12 +1,220 @@
 [gd_scene format=3 uid="uid://byqy8utofc5pt"]
 
-[ext_resource type="Texture2D" uid="uid://d2d2hahfahlyf" path="res://JuniperGameDev/Assets/Gun/tile_0011.png" id="1_fycgt"]
-[ext_resource type="Script" uid="uid://dg16oyvspqptl" path="res://JuniperGameDev/Gun/gun.gd" id="2_tfgxv"]
+[ext_resource type="Texture2D" uid="uid://b4l62ravs8vn8" path="res://Assets/Gun/TheGunWand-Sheet.png" id="1_yf33g"]
+[ext_resource type="Script" uid="uid://dg16oyvspqptl" path="res://Gun/gun.gd" id="2_tfgxv"]
+[ext_resource type="AudioStream" uid="uid://c2sx8yu45j3lp" path="res://Assets/sounds/shooting.wav" id="3_ux4uc"]
 
-[node name="Gun" type="Sprite2D" unique_id=36834398]
-texture = ExtResource("1_fycgt")
-offset = Vector2(7, 4)
+[sub_resource type="AtlasTexture" id="AtlasTexture_yf33g"]
+atlas = ExtResource("1_yf33g")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ig5iw"]
+atlas = ExtResource("1_yf33g")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ux4uc"]
+atlas = ExtResource("1_yf33g")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmcaf"]
+atlas = ExtResource("1_yf33g")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_as483"]
+atlas = ExtResource("1_yf33g")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rducm"]
+atlas = ExtResource("1_yf33g")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5pvrx"]
+atlas = ExtResource("1_yf33g")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_swpof"]
+atlas = ExtResource("1_yf33g")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8d8ub"]
+atlas = ExtResource("1_yf33g")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t7bl1"]
+atlas = ExtResource("1_yf33g")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85qvb"]
+atlas = ExtResource("1_yf33g")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o37ji"]
+atlas = ExtResource("1_yf33g")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yjwo2"]
+atlas = ExtResource("1_yf33g")
+region = Rect2(64, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ht40"]
+atlas = ExtResource("1_yf33g")
+region = Rect2(96, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cf4me"]
+atlas = ExtResource("1_yf33g")
+region = Rect2(0, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tdl66"]
+atlas = ExtResource("1_yf33g")
+region = Rect2(32, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whw0e"]
+atlas = ExtResource("1_yf33g")
+region = Rect2(64, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tichh"]
+atlas = ExtResource("1_yf33g")
+region = Rect2(96, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c1cej"]
+atlas = ExtResource("1_yf33g")
+region = Rect2(0, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kthql"]
+atlas = ExtResource("1_yf33g")
+region = Rect2(32, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jmxnt"]
+atlas = ExtResource("1_yf33g")
+region = Rect2(64, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ibfuj"]
+atlas = ExtResource("1_yf33g")
+region = Rect2(96, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4oleb"]
+atlas = ExtResource("1_yf33g")
+region = Rect2(128, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uyy37"]
+atlas = ExtResource("1_yf33g")
+region = Rect2(160, 160, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bhunq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yf33g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ig5iw")
+}],
+"loop": 1,
+"name": &"air",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ux4uc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gmcaf")
+}],
+"loop": 1,
+"name": &"basic",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_as483")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rducm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5pvrx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_swpof")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8d8ub")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t7bl1")
+}],
+"loop": 1,
+"name": &"electricity",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_85qvb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o37ji")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yjwo2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ht40")
+}],
+"loop": 1,
+"name": &"fire",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cf4me")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tdl66")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_whw0e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tichh")
+}],
+"loop": 1,
+"name": &"ice",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c1cej")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kthql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jmxnt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ibfuj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4oleb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uyy37")
+}],
+"loop": 1,
+"name": &"poison",
+"speed": 12.0
+}]
+
+[node name="Gun" type="AnimatedSprite2D" unique_id=555533619]
+sprite_frames = SubResource("SpriteFrames_bhunq")
+animation = &"poison"
+autoplay = "basic"
+frame_progress = 0.21570283
+offset = Vector2(16, 1)
 script = ExtResource("2_tfgxv")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=540405904]
-position = Vector2(13, 4)
+position = Vector2(23, 3)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1990425159]
+stream = ExtResource("3_ux4uc")

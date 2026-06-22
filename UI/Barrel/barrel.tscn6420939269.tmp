@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://pm586g3uou87" path="res://Assets/Bullet_Icons/poison.png" id="6_2iccq"]
 [ext_resource type="Texture2D" uid="uid://b040ymm7ahvqi" path="res://Assets/Bullet_Icons/wind.png" id="7_t0tv8"]
 [ext_resource type="Texture2D" uid="uid://b2cpajj5e4bbn" path="res://Assets/Bullet_Icons/bullet.png" id="8_30k7t"]
-[ext_resource type="Script" uid="uid://1djbsghl7oa7" path="res://UI/Barrel/swap_menu.gd" id="9_6w3jq"]
 
 [node name="Barrel" type="CanvasLayer" unique_id=1992844454]
 
@@ -20,22 +19,22 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -400.0
-offset_top = -1077.0
-offset_bottom = 3.0
+offset_top = -600.0
 grow_horizontal = 0
 grow_vertical = 0
 script = ExtResource("1_fd2os")
 
 [node name="BarrelRing" type="Control" parent="Barrel_UI" unique_id=1204239742]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -400.0
+offset_left = -200.0
 offset_top = -400.0
-grow_horizontal = 0
+offset_right = 200.0
+grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(200, 200)
 
@@ -108,16 +107,13 @@ expand_mode = 1
 
 [node name="SelectedBullet" type="Control" parent="Barrel_UI" unique_id=1577539596]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
 offset_left = -200.0
-offset_top = -100.0
 offset_right = 200.0
+offset_bottom = 200.0
 grow_horizontal = 2
-grow_vertical = 2
 
 [node name="SelectedIcon" type="TextureRect" parent="Barrel_UI/SelectedBullet" unique_id=1203834029]
 layout_mode = 1
@@ -127,85 +123,3 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 3
-
-[node name="SwapMenu" type="Panel" parent="Barrel_UI" unique_id=1966804981]
-process_mode = 3
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -400.0
-offset_bottom = 220.0
-grow_horizontal = 0
-script = ExtResource("9_6w3jq")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Barrel_UI/SwapMenu" unique_id=1708867318]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 6
-
-[node name="Label" type="Label" parent="Barrel_UI/SwapMenu/VBoxContainer" unique_id=1378818776]
-layout_mode = 2
-text = "You found: "
-
-[node name="FoundIcon" type="TextureRect" parent="Barrel_UI/SwapMenu/VBoxContainer" unique_id=1219249110]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-expand_mode = 2
-stretch_mode = 5
-
-[node name="Label2" type="Label" parent="Barrel_UI/SwapMenu/VBoxContainer" unique_id=1045548782]
-layout_mode = 2
-text = "Replace which bullet ?"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Barrel_UI/SwapMenu/VBoxContainer" unique_id=14711672]
-custom_minimum_size = Vector2(0, 32)
-layout_mode = 2
-
-[node name="SlotButton_0" type="TextureButton" parent="Barrel_UI/SwapMenu/VBoxContainer/HBoxContainer" unique_id=869969670]
-custom_minimum_size = Vector2(28, 28)
-layout_mode = 2
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="SlotButton_1" type="TextureButton" parent="Barrel_UI/SwapMenu/VBoxContainer/HBoxContainer" unique_id=1932516029]
-custom_minimum_size = Vector2(28, 28)
-layout_mode = 2
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="SlotButton_2" type="TextureButton" parent="Barrel_UI/SwapMenu/VBoxContainer/HBoxContainer" unique_id=2094493009]
-custom_minimum_size = Vector2(28, 28)
-layout_mode = 2
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="SlotButton_3" type="TextureButton" parent="Barrel_UI/SwapMenu/VBoxContainer/HBoxContainer" unique_id=75057828]
-custom_minimum_size = Vector2(28, 28)
-layout_mode = 2
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="SlotButton_4" type="TextureButton" parent="Barrel_UI/SwapMenu/VBoxContainer/HBoxContainer" unique_id=53717556]
-custom_minimum_size = Vector2(28, 28)
-layout_mode = 2
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="SlotButton_5" type="TextureButton" parent="Barrel_UI/SwapMenu/VBoxContainer/HBoxContainer" unique_id=1439942588]
-custom_minimum_size = Vector2(28, 28)
-layout_mode = 2
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="DiscardButton" type="Button" parent="Barrel_UI/SwapMenu/VBoxContainer" unique_id=443421202]
-custom_minimum_size = Vector2(0, 24)
-layout_mode = 2
-text = "Discard
-"
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1960526984]

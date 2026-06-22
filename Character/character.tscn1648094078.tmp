@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://byqy8utofc5pt" path="res://Gun/gun.tscn" id="2_jgbxv"]
 [ext_resource type="PackedScene" uid="uid://cmwqsi0f8ijs4" path="res://HealthBar/healthbar.tscn" id="3_0gf5e"]
 [ext_resource type="Texture2D" uid="uid://bxp7qltlaeyud" path="res://Assets/Character/TheWickedWizard-Sheet.png" id="4_twwou"]
-[ext_resource type="AudioStream" uid="uid://jsoq2ve0ynip" path="res://Assets/sounds/walking.wav" id="5_a23tb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a23tb"]
 atlas = ExtResource("4_twwou")
@@ -75,7 +74,6 @@ zoom = Vector2(2.5, 2.5)
 
 [node name="Gun" parent="." unique_id=36834398 instance=ExtResource("2_jgbxv")]
 position = Vector2(4, -0.9999962)
-rotation = -1.288053
 scale = Vector2(1.1666667, 1.2083333)
 
 [node name="HealthBar" parent="." unique_id=1609601232 instance=ExtResource("3_0gf5e")]
@@ -83,6 +81,3 @@ offset_left = -47.0
 offset_top = -69.0
 offset_right = 47.66667
 offset_bottom = -57.0
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1804441463]
-stream = ExtResource("5_a23tb")
