@@ -20,7 +20,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	look_at(get_global_mouse_position())
 	flip_v = get_global_mouse_position().x < global_position.x
-
+	if Input.is_action_just_pressed("discard"):
+		discard_bullet()
+	
 func get_animation_for_bullet(bullet) -> String:
 	if bullet == GlobalData.AIR: return "air"
 	if bullet == GlobalData.POISON: return "poison"
@@ -68,3 +70,22 @@ func shoot() -> void:
 		GlobalData.world.add_child(new_bullet)
 		hud.reset()
 		play("basic")  # ADD THIS — reset after firing
+
+
+func discard_bullet() -> void:
+	var hud = GlobalData.barrel_hud
+	if _reloading:
+		return
+	if hud.state != hud.State.LOADED:
+		return
+	
+	# No removal here — bullet was already removed on draw
+	
+	hud.reset()
+	await get_tree().process_frame
+	
+	random_bullet()
+	hud.spin_to(selected_index, selected_bullet)
+	audio.stream = preload("uid://dv1kkfqyjey5r")
+	audio.play()
+	play(get_animation_for_bullet(selected_bullet))
