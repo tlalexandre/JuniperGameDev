@@ -2,8 +2,97 @@
 
 [ext_resource type="PackedScene" uid="uid://doh21id30beig" path="res://Enemy/enemy.tscn" id="1_0dkcx"]
 [ext_resource type="Script" uid="uid://dgnubstmh2gi8" path="res://batEnemy/bat_enemy.gd" id="2_yvmio"]
+[ext_resource type="Texture2D" uid="uid://co1nwvyhrud1n" path="res://Assets/temporarySprites/ghost.png" id="3_jib36"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kd6gp"]
+atlas = ExtResource("3_jib36")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gg65f"]
+atlas = ExtResource("3_jib36")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vj7r"]
+atlas = ExtResource("3_jib36")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3r7ey"]
+atlas = ExtResource("3_jib36")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qshb4"]
+atlas = ExtResource("3_jib36")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eayxa"]
+atlas = ExtResource("3_jib36")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nn0wh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kd6gp")
+}],
+"loop": 1,
+"name": &"Alert",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gg65f")
+}],
+"loop": 1,
+"name": &"Attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3vj7r")
+}],
+"loop": 1,
+"name": &"DamageTaken",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3r7ey")
+}],
+"loop": 1,
+"name": &"Die",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qshb4")
+}],
+"loop": 1,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eayxa")
+}],
+"loop": 1,
+"name": &"Walk",
+"speed": 5.0
+}]
 
 [node name="Enemy" unique_id=1839370902 instance=ExtResource("1_0dkcx")]
 collision_mask = 17
 platform_floor_layers = 4294967055
 script = ExtResource("2_yvmio")
+speed = 50
+
+[node name="Detection_Area" parent="." index="2" unique_id=442240972]
+scale = Vector2(3.03, 3.03)
+
+[node name="RayCast2D" parent="." index="5" unique_id=1326403427]
+collision_mask = 21
+
+[node name="Sprite" parent="." index="7" unique_id=1409618153]
+position = Vector2(-2, 9.536743e-07)
+scale = Vector2(4.02, 4.02)
+sprite_frames = SubResource("SpriteFrames_nn0wh")
+animation = &"Walk"
