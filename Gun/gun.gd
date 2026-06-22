@@ -4,7 +4,7 @@ extends AnimatedSprite2D
 @onready var audio: AudioStreamPlayer2D = $AudioStreamPlayer2D
 var selected_bullet
 var selected_index: int = 0  
-var BulletTypes : Array = [GlobalData.BULLET, GlobalData.BULLET, GlobalData.BULLET,GlobalData.BULLET, GlobalData.BULLET, GlobalData.BULLET]
+var BulletTypes : Array = [GlobalData.FIRE, GlobalData.FIRE, GlobalData.FIRE,GlobalData.BULLET, GlobalData.BULLET, GlobalData.BULLET]
 var bullet_ready = false
 var _spin_connected := false
 # Called when the node enters the scene tree for the first time.
@@ -62,7 +62,7 @@ func shoot() -> void:
 	if hud.state == hud.State.LOADED:
 		audio.stream = preload("uid://c2sx8yu45j3lp")
 		audio.play()
-		var new_bullet = selected_bullet.instantiate()
+		var new_bullet = GlobalData.FIRE.instantiate()
 		new_bullet.position = marker_2d.global_position
 		new_bullet.target_position = (get_global_mouse_position() - marker_2d.global_position).normalized()
 		GlobalData.world.add_child(new_bullet)
