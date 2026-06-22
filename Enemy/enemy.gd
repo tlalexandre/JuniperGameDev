@@ -15,6 +15,7 @@ var max_health := 10
 # Reference to your AnimatedSprite2D node
 @onready var sprite: AnimatedSprite2D = $Sprite 
 
+
 var can_attack = true
 var dmg_enemy = 1
 enum Status { NONE, KNOCKBACK, STUN, SLIDE, DMG_ON_TICK}
@@ -101,6 +102,7 @@ func _process_chase(delta: float) -> void:
 		# Si sales del área de detección por completo, también limpiamos variables
 		if is_searching:
 			velocity = last_seen_direction * speed
+
 		else:
 			velocity = Vector2.ZERO
 			has_spotted_player = false 
