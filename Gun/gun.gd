@@ -21,14 +21,18 @@ func random_bullet():
 	selected_bullet = BulletTypes.pick_random()
 
 func shoot() -> void:
-	if not bullet_ready:
+	var hud = GlobalData.barrel_hud
+
+	if hud.state == hud.State.IDLE:
 		random_bullet()
-		bullet_ready = true
-		GlobalData.barrel_hud.stop_spin(selected_bullet)
+		hud.spin_to(selected_bullet)
 		return
-	var new_bullet = selected_bullet.instantiate()
-	new_bullet.position = marker_2d.global_position
-	new_bullet.target_position = (get_global_mouse_position()-marker_2d.global_position).normalized()
-	GlobalData.world.add_child(new_bullet)
-	bullet_ready = false
-	GlobalData.barrel_hud.resume_spin()
+
+	if hud.state == hud.State.LOADED:
+		var new_bullet = selected_bullet.instantiate()
+		new_bullet.position = marker_2d.global_position
+		new_bullet.target_position = (get_global_mouse_position() - marker_2d.global_position).normalized()
+		GlobalData.world.add_child(new_bullet)
+		hud.reset()
+
+	# State.SPINNING: input ignored, nothing happens
