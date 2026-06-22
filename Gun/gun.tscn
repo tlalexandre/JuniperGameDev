@@ -208,7 +208,7 @@ animations = [{
 sprite_frames = SubResource("SpriteFrames_bhunq")
 animation = &"poison"
 autoplay = "basic"
-frame_progress = 0.7954703
+frame_progress = 0.472178
 offset = Vector2(16, 1)
 script = ExtResource("2_tfgxv")
 
