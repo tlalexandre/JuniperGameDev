@@ -6,6 +6,8 @@ extends StaticBody2D
 @onready var audio: AudioStreamPlayer2D = $AudioStreamPlayer2D
 const CHEST = preload("uid://dw06pllyddjp6")
 const BULLET_PICKUP = preload("uid://63m54ntd0dxo")
+enum BulletOverride { RANDOM, BASIC, AIR, POISON, ELECTRICITY, FIRE, ICE }
+@export var bullet_override: BulletOverride = BulletOverride.RANDOM
 
 var opened := false
 
@@ -53,15 +55,21 @@ func _on_animation_finished() -> void:
 		queue_free()
 
 func _drop_bullet() -> void:
-	var pool = [
-		GlobalData.BULLET,
-		GlobalData.AIR,
-		GlobalData.POISON,
-		GlobalData.ELECTRICITY,
-		GlobalData.FIRE,
-		GlobalData.ICE,
-	]
-	var bullet_type = pool.pick_random()
+	var type_map := {
+		BulletOverride.BASIC:       GlobalData.BULLET,
+		BulletOverride.AIR:         GlobalData.AIR,
+		BulletOverride.POISON:      GlobalData.POISON,
+		BulletOverride.ELECTRICITY: GlobalData.ELECTRICITY,
+		BulletOverride.FIRE:        GlobalData.FIRE,
+		BulletOverride.ICE:         GlobalData.ICE,
+	}
+
+	var bullet_type
+	if bullet_override == BulletOverride.RANDOM:
+		bullet_type = type_map.values().pick_random()
+	else:
+		bullet_type = type_map[bullet_override]
+
 	var pickup = BULLET_PICKUP.instantiate()
 	pickup.position = global_position
 	GlobalData.world.add_child(pickup)

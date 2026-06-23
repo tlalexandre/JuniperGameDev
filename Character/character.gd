@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-@onready var health_bar: ProgressBar = $HealthBar
 @onready var audio: AudioStreamPlayer2D = $AudioStreamPlayer2D
 signal died
 
@@ -12,7 +11,7 @@ var max_health := 20
 var current_health := 20
 
 func _ready():
-	health_bar.set_health(current_health, max_health)
+	GlobalData.barrel_hud.update_health(current_health,max_health)
 	GlobalData.player = self
 
 func _physics_process(delta: float) -> void:
@@ -58,7 +57,8 @@ func _input(event: InputEvent) -> void:
 func take_damage(amount: float):
 	print("Player Taking Damage ! Aie !")
 	current_health -= amount
-	health_bar.set_health(current_health,max_health)
+	#health_bar.set_health(current_health,max_health)
+	GlobalData.barrel_hud.update_health(current_health, max_health)
 	if current_health <= 0:
 		die()
 

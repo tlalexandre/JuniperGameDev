@@ -18,11 +18,12 @@ var current_health := max_health
 
 
 var can_attack = true
-var dmg_enemy = 1
+@export var dmg_enemy = 1
 enum Status { NONE, KNOCKBACK, STUN, SLIDE, DMG_ON_TICK}
 var current_status = Status.NONE
 var status_timer = 0.0
 var status_velocity = Vector2.ZERO
+@export var points:int = 100
 
 var is_attacking = false
 var is_dead = false
@@ -248,7 +249,8 @@ func die():
 	is_dead = true
 	velocity = Vector2.ZERO
 	died.emit()
-	
+	GlobalData.score += points
+	GlobalData.barrel_hud.update_score(GlobalData.score)
 	sprite.play("Die")
 	await get_tree().create_timer(1.0).timeout 
 	queue_free()

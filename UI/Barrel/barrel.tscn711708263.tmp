@@ -13,7 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://b2cpajj5e4bbn" path="res://Assets/Bullet_Icons/bullet.png" id="8_30k7t"]
 [ext_resource type="Script" uid="uid://1djbsghl7oa7" path="res://UI/Barrel/swap_menu.gd" id="9_6w3jq"]
 [ext_resource type="Texture2D" uid="uid://dxi38lk2qotpp" path="res://Assets/Bullet_Icons/bullet_basic.png" id="11_qgnbr"]
-[ext_resource type="LabelSettings" uid="uid://c0tcb3e6n2xis" path="res://UI/Barrel/new_label_settings.tres" id="13_m8fev"]
 [ext_resource type="AudioStream" uid="uid://q2ism1fxjgfe" path="res://Assets/sounds/click.wav" id="14_kvtww"]
 [ext_resource type="AudioStream" uid="uid://b16xfceflm63t" path="res://Assets/sounds/validate.wav" id="15_m8fev"]
 [ext_resource type="AudioStream" uid="uid://cuf2tfe03ft0n" path="res://Assets/sounds/discard_bullet.wav" id="16_7hl25"]
@@ -265,6 +264,14 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Normal"
 
+[node name="Spacer2" type="Control" parent="Barrel_UI/HUDPanel/HUDContent" unique_id=1233442405]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HSeparator3" type="HSeparator" parent="Barrel_UI/HUDPanel/HUDContent" unique_id=262132448]
+layout_mode = 2
+size_flags_vertical = 3
+
 [node name="ControlsHint" type="HBoxContainer" parent="Barrel_UI/HUDPanel/HUDContent" unique_id=43746754]
 layout_mode = 2
 
@@ -273,18 +280,12 @@ layout_mode = 2
 size_flags_horizontal = 6
 theme_override_font_sizes/font_size = 13
 text = "LMB -> Spin -> Shoot"
-label_settings = ExtResource("13_m8fev")
 
 [node name="HintDiscard" type="Label" parent="Barrel_UI/HUDPanel/HUDContent/ControlsHint" unique_id=1736402104]
 layout_mode = 2
 size_flags_horizontal = 6
 theme_override_font_sizes/font_size = 13
 text = "RMB -> Discard"
-label_settings = ExtResource("13_m8fev")
-
-[node name="HSeparator3" type="HSeparator" parent="Barrel_UI/HUDPanel/HUDContent" unique_id=262132448]
-layout_mode = 2
-size_flags_vertical = 3
 
 [node name="SwapContent" type="VBoxContainer" parent="Barrel_UI/HUDPanel" unique_id=1708867318 node_paths=PackedStringArray("click_sound", "validate_sound", "discard_sound")]
 visible = false
