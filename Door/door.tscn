@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://cpb0yk42rv3l0"]
+
+[ext_resource type="Texture2D" uid="uid://bobr7rntojtev" path="res://Assets/temporarySprites/door.png" id="1_ovg2x"]
+[ext_resource type="Script" uid="uid://bfy28knshdxo3" path="res://Door/door.gd" id="1_psv2o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_psv2o"]
+atlas = ExtResource("1_ovg2x")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cai5j"]
+atlas = ExtResource("1_ovg2x")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cgrvg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_psv2o")
+}],
+"loop": 1,
+"name": &"close",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cai5j")
+}],
+"loop": 1,
+"name": &"open",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cgrvg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s8843"]
+
+[node name="door" type="Area2D" unique_id=1855408374 groups=["door"]]
+scale = Vector2(0.8, 0.8)
+collision_layer = 0
+script = ExtResource("1_psv2o")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1521486694]
+position = Vector2(-7.748604e-07, 3.0994415e-06)
+scale = Vector2(1.2500001, 1.2500001)
+sprite_frames = SubResource("SpriteFrames_cgrvg")
+animation = &"close"
+autoplay = "close"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=540506042]
+scale = Vector2(3.85, 3.85)
+shape = SubResource("RectangleShape2D_cgrvg")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=86824974]
+scale = Vector2(2, 2)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=717620630]
+shape = SubResource("RectangleShape2D_s8843")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

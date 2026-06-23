@@ -81,6 +81,8 @@ animations = [{
 
 [node name="Enemy" unique_id=1839370902 groups=["candle"] instance=ExtResource("1_nv12n")]
 script = ExtResource("2_wfwsq")
+speed = 30
+max_health = 3
 
 [node name="Sprite" parent="." index="7" unique_id=1409618153]
 scale = Vector2(4.01, 4.01)
