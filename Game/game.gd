@@ -46,6 +46,9 @@ func load_level(index : int) -> void:
 	# Setup the GameManager now that the player is 100% guaranteed to be found
 	GameManager.setup_level()
 	# ---------------------------------
-
+	
+	
 func advance_level() -> void:
 	load_level(current_level_index + 1)
+	GlobalData.floor_number = current_level_index + 1 
+	GlobalData.barrel_hud.update_floor(GlobalData.floor_number)

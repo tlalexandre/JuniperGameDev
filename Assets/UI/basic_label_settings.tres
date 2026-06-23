@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://cw1046e5qw6ep"]
+
+[ext_resource type="FontFile" uid="uid://bnjowuychsd81" path="res://Assets/Fonts/Jacquard24-Regular.ttf" id="1_5p0e7"]
+
+[resource]
+font = ExtResource("1_5p0e7")
+font_size = 40

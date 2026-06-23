@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://0ekmc8ljxrc3" path="res://CandleEnemy/candle_enemy.tscn" id="8_txw61"]
 [ext_resource type="PackedScene" uid="uid://cee3f73cfq4d1" path="res://ratEnemy/rat_enemy.tscn" id="9_4t2ji"]
 [ext_resource type="PackedScene" uid="uid://cycttnu1t0rrj" path="res://Portal/portal.tscn" id="10_mys2f"]
+[ext_resource type="AudioStream" uid="uid://bd7rjcf17ah1k" path="res://Assets/sounds/music.wav" id="11_txw61"]
 
 [node name="World" type="Node2D" unique_id=1973156659]
 
@@ -90,3 +91,9 @@ position = Vector2(621, 178)
 
 [node name="portal" parent="." unique_id=1335019111 instance=ExtResource("10_mys2f")]
 position = Vector2(83, 1385)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1610019906]
+process_mode = 3
+stream = ExtResource("11_txw61")
+volume_db = -5.0
+autoplay = true
