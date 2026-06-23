@@ -12,7 +12,7 @@ func _on_detection_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemies"):	
 		var dir = (body.global_position - global_position).normalized()
 		body.apply_status(body.Status.KNOCKBACK, dir, 800, 0.3)
-		if body.is_in_group("bat"):
+		if body.is_in_group("ghost"):
 			body.take_damage(double_dmg)
 		else:
 			body.take_damage(bullet_dmg)

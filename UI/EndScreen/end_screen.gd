@@ -5,9 +5,8 @@ extends CanvasLayer
 @onready var control: Control = $Control
 @onready var resume_button: Button = $Control/ResumeButton
 
-
 var on_pause = false
-enum OverlayState {PAUSED,WON,LOST}
+enum OverlayState {PAUSED, WON, LOST}
 var current_state: OverlayState
 
 func _ready() -> void:
@@ -17,7 +16,7 @@ func show_overlay(state: OverlayState) -> void:
 	current_state = state
 	control.visible = true
 	get_tree().paused = true
-	#state = OverlayState
+	
 	match state:
 		OverlayState.PAUSED:
 			label.text = "Pause"
@@ -28,11 +27,6 @@ func show_overlay(state: OverlayState) -> void:
 		OverlayState.LOST:
 			label.text = "You lost, hahaha"
 			resume_button.text = "Restart"
-	
-
-
-			
-
 
 func _on_resume_button_pressed() -> void:
 	match current_state:
@@ -41,7 +35,6 @@ func _on_resume_button_pressed() -> void:
 			control.visible = false
 		OverlayState.WON, OverlayState.LOST:
 			get_tree().paused = false
-			get_tree().reload_current_scene()
 			control.visible = false
 
 

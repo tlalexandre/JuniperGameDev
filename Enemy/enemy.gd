@@ -3,11 +3,12 @@ class_name Enemy
 
 signal died
 
-var speed = 250
+@export var speed = 250
 var player_chase = false
 var player
-var current_health := 10
-var max_health := 10
+
+@export var max_health := 5
+var current_health := max_health
 
 @onready var health_bar: ProgressBar = $HealthBar
 @onready var attack_cooldown = 1.5
@@ -240,6 +241,7 @@ func take_damage(amount: float):
 		
 		await get_tree().create_timer(0.3).timeout
 		is_taking_damage = false
+
 
 func die():
 	if is_dead: return

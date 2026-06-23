@@ -31,6 +31,9 @@ enemies=""
 player=""
 bat=""
 rat=""
+book=""
+candle=""
+fish=""
 
 [input]
 
