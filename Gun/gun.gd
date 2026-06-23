@@ -39,14 +39,9 @@ func random_bullet():
 func _on_spin_complete(bullet_type) -> void:
 	play(get_animation_for_bullet(selected_bullet))
 	BulletTypes.remove_at(selected_index)
-	if BulletTypes.is_empty():
-		_reloading = true
-		GlobalData.barrel_hud.play_reload()
-		await get_tree().create_timer(2.0).timeout
-		BulletTypes = loadout.duplicate()
-		_reloading = false
 	GlobalData.barrel_hud.update_icons_from_chamber(BulletTypes)
-	
+
+
 func shoot() -> void:
 	if _reloading:
 		return
@@ -59,7 +54,7 @@ func shoot() -> void:
 		hud.spin_to(selected_index, selected_bullet)
 		audio.stream = preload("uid://dv1kkfqyjey5r")
 		audio.play()
-		play(get_animation_for_bullet(selected_bullet))  # ADD THIS
+		play(get_animation_for_bullet(selected_bullet))
 		return
 	if hud.state == hud.State.LOADED:
 		audio.stream = preload("uid://c2sx8yu45j3lp")
@@ -68,8 +63,17 @@ func shoot() -> void:
 		new_bullet.position = marker_2d.global_position
 		new_bullet.target_position = (get_global_mouse_position() - marker_2d.global_position).normalized()
 		GlobalData.world.add_child(new_bullet)
+		GlobalData.barrel_hud.update_ammo(BulletTypes.size(), loadout.size())
 		hud.reset()
-		play("basic")  # ADD THIS — reset after firing
+		play("basic")
+		# ← reload check moves here, after the shot is fired
+		if BulletTypes.is_empty():
+			_reloading = true
+			GlobalData.barrel_hud.play_reload()
+			await get_tree().create_timer(2.0).timeout
+			BulletTypes = loadout.duplicate()
+			GlobalData.barrel_hud.update_icons_from_chamber(BulletTypes)
+			_reloading = false
 
 
 func discard_bullet() -> void:
