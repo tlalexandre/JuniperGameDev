@@ -1,0 +1,435 @@
+[gd_scene format=3 uid="uid://bljmmcb6uieso"]
+
+[ext_resource type="Script" uid="uid://7mxbe8b6mrgk" path="res://UI/Barrel/barrel_ui.gd" id="1_fd2os"]
+[ext_resource type="Theme" uid="uid://bvl2oh3bc6g4u" path="res://Assets/UI/theme.tres" id="2_l6oje"]
+[ext_resource type="Texture2D" uid="uid://cgt7f6qfq5sno" path="res://Assets/Bullet_Icons/fire.png" id="3_eviik"]
+[ext_resource type="Texture2D" uid="uid://c7314io150afg" path="res://Assets/Bullet_Icons/HeartIcon.png" id="3_qgnbr"]
+[ext_resource type="LabelSettings" uid="uid://cw1046e5qw6ep" path="res://Assets/UI/basic_label_settings.tres" id="4_2iccq"]
+[ext_resource type="Texture2D" uid="uid://cm804tocyy075" path="res://Assets/Bullet_Icons/electricity.png" id="4_l6oje"]
+[ext_resource type="Texture2D" uid="uid://d1uxv20nmh2c1" path="res://Assets/GunCylinder/ChamberUI-Sheet.png" id="4_qgnbr"]
+[ext_resource type="Texture2D" uid="uid://dypd847qrjq7j" path="res://Assets/Bullet_Icons/ice.png" id="5_qgnbr"]
+[ext_resource type="Texture2D" uid="uid://pm586g3uou87" path="res://Assets/Bullet_Icons/poison.png" id="6_2iccq"]
+[ext_resource type="Texture2D" uid="uid://b040ymm7ahvqi" path="res://Assets/Bullet_Icons/wind.png" id="7_t0tv8"]
+[ext_resource type="Texture2D" uid="uid://b2cpajj5e4bbn" path="res://Assets/Bullet_Icons/bullet.png" id="8_30k7t"]
+[ext_resource type="Script" uid="uid://1djbsghl7oa7" path="res://UI/Barrel/swap_menu.gd" id="9_6w3jq"]
+[ext_resource type="Texture2D" uid="uid://dxi38lk2qotpp" path="res://Assets/Bullet_Icons/bullet_basic.png" id="11_qgnbr"]
+[ext_resource type="AudioStream" uid="uid://q2ism1fxjgfe" path="res://Assets/sounds/click.wav" id="14_kvtww"]
+[ext_resource type="AudioStream" uid="uid://b16xfceflm63t" path="res://Assets/sounds/validate.wav" id="15_m8fev"]
+[ext_resource type="AudioStream" uid="uid://cuf2tfe03ft0n" path="res://Assets/sounds/discard_bullet.wav" id="16_7hl25"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q4amw"]
+bg_color = Color(0, 0, 0, 0.65000004)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+shadow_size = 5
+shadow_offset = Vector2(-5, 0)
+
+[node name="Barrel" type="CanvasLayer" unique_id=1992844454]
+
+[node name="Barrel_UI" type="Control" parent="." unique_id=1028585326]
+layout_mode = 3
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -400.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("1_fd2os")
+
+[node name="HUDPanel" type="PanelContainer" parent="Barrel_UI" unique_id=749883222]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_l6oje")
+theme_type_variation = &"variation_1"
+theme_override_styles/panel = SubResource("StyleBoxFlat_q4amw")
+
+[node name="HUDContent" type="VBoxContainer" parent="Barrel_UI/HUDPanel" unique_id=578759654]
+layout_mode = 2
+
+[node name="HealthRow" type="VBoxContainer" parent="Barrel_UI/HUDPanel/HUDContent" unique_id=2033716673]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_constants/separation = 6
+
+[node name="HealthIcon" type="TextureRect" parent="Barrel_UI/HUDPanel/HUDContent/HealthRow" unique_id=1529601446]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_qgnbr")
+expand_mode = 2
+stretch_mode = 3
+
+[node name="HPLabel" type="Label" parent="Barrel_UI/HUDPanel/HUDContent/HealthRow" unique_id=1449871977]
+custom_maximum_size = Vector2(-1, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "100/100
+"
+label_settings = ExtResource("4_2iccq")
+
+[node name="HealthBar" type="ProgressBar" parent="Barrel_UI/HUDPanel/HUDContent/HealthRow" unique_id=911878656]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+show_percentage = false
+
+[node name="HSeparator4" type="HSeparator" parent="Barrel_UI/HUDPanel/HUDContent/HealthRow" unique_id=1205618939]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StatsRow" type="HBoxContainer" parent="Barrel_UI/HUDPanel/HUDContent" unique_id=2082231696]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_constants/separation = 5
+
+[node name="ScoreCard" type="VBoxContainer" parent="Barrel_UI/HUDPanel/HUDContent/StatsRow" unique_id=1475038295]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("2_l6oje")
+theme_override_constants/separation = 2
+
+[node name="ScoreLbl" type="Label" parent="Barrel_UI/HUDPanel/HUDContent/StatsRow/ScoreCard" unique_id=72709851]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 40
+text = "Score"
+
+[node name="ScoreValue" type="Label" parent="Barrel_UI/HUDPanel/HUDContent/StatsRow/ScoreCard" unique_id=753463818]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme = ExtResource("2_l6oje")
+text = "0"
+label_settings = ExtResource("4_2iccq")
+horizontal_alignment = 1
+
+[node name="FloorCard" type="VBoxContainer" parent="Barrel_UI/HUDPanel/HUDContent/StatsRow" unique_id=625334653]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+
+[node name="FloorLbl" type="Label" parent="Barrel_UI/HUDPanel/HUDContent/StatsRow/FloorCard" unique_id=2120758881]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 40
+text = "Floor"
+
+[node name="FloorValue" type="Label" parent="Barrel_UI/HUDPanel/HUDContent/StatsRow/FloorCard" unique_id=327515652]
+layout_mode = 2
+text = "1"
+label_settings = ExtResource("4_2iccq")
+horizontal_alignment = 1
+
+[node name="AmmoCard" type="VBoxContainer" parent="Barrel_UI/HUDPanel/HUDContent/StatsRow" unique_id=850616470]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+
+[node name="AmmoLbl" type="Label" parent="Barrel_UI/HUDPanel/HUDContent/StatsRow/AmmoCard" unique_id=268281294]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 40
+text = "Ammo"
+
+[node name="AmmoValue" type="Label" parent="Barrel_UI/HUDPanel/HUDContent/StatsRow/AmmoCard" unique_id=2135043516]
+layout_mode = 2
+text = "6/6"
+label_settings = ExtResource("4_2iccq")
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Barrel_UI/HUDPanel/HUDContent" unique_id=1499667119]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Spacer1" type="Control" parent="Barrel_UI/HUDPanel/HUDContent" unique_id=1513465555]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BarrelRing" type="Control" parent="Barrel_UI/HUDPanel/HUDContent" unique_id=1204239742]
+custom_minimum_size = Vector2(350, 350)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+offset_transform_enabled = true
+
+[node name="TextureRect" type="TextureRect" parent="Barrel_UI/HUDPanel/HUDContent/BarrelRing" unique_id=1376948240]
+custom_minimum_size = Vector2(350, 350)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -175.0
+offset_right = 175.0
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+texture = ExtResource("4_qgnbr")
+expand_mode = 4
+
+[node name="Icon_0" type="TextureRect" parent="Barrel_UI/HUDPanel/HUDContent/BarrelRing" unique_id=1923756899]
+layout_mode = 0
+offset_left = 140.0
+offset_top = 29.0
+offset_right = 180.0
+offset_bottom = 69.0
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("3_eviik")
+expand_mode = 1
+
+[node name="Icon_1" type="TextureRect" parent="Barrel_UI/HUDPanel/HUDContent/BarrelRing" unique_id=1742439077]
+layout_mode = 0
+offset_left = 232.0
+offset_top = 90.0
+offset_right = 272.0
+offset_bottom = 130.0
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("4_l6oje")
+expand_mode = 1
+
+[node name="Icon_2" type="TextureRect" parent="Barrel_UI/HUDPanel/HUDContent/BarrelRing" unique_id=1203396273]
+layout_mode = 0
+offset_left = 234.0
+offset_top = 196.0
+offset_right = 274.0
+offset_bottom = 236.0
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("5_qgnbr")
+expand_mode = 1
+
+[node name="Icon_3" type="TextureRect" parent="Barrel_UI/HUDPanel/HUDContent/BarrelRing" unique_id=1142672107]
+layout_mode = 0
+offset_left = 140.0
+offset_top = 249.0
+offset_right = 180.0
+offset_bottom = 289.0
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("6_2iccq")
+expand_mode = 1
+
+[node name="Icon_4" type="TextureRect" parent="Barrel_UI/HUDPanel/HUDContent/BarrelRing" unique_id=1447504206]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 192.0
+offset_right = 85.0
+offset_bottom = 232.0
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("7_t0tv8")
+expand_mode = 1
+
+[node name="Icon_5" type="TextureRect" parent="Barrel_UI/HUDPanel/HUDContent/BarrelRing" unique_id=35241961]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 90.0
+offset_right = 90.0
+offset_bottom = 130.0
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("8_30k7t")
+expand_mode = 1
+
+[node name="HSeparator2" type="HSeparator" parent="Barrel_UI/HUDPanel/HUDContent" unique_id=1848921360]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BulletRow" type="HBoxContainer" parent="Barrel_UI/HUDPanel/HUDContent" unique_id=2079161903]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_constants/separation = 8
+
+[node name="BulletIcon" type="TextureRect" parent="Barrel_UI/HUDPanel/HUDContent/BulletRow" unique_id=1477458254]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("11_qgnbr")
+
+[node name="BulletName" type="Label" parent="Barrel_UI/HUDPanel/HUDContent/BulletRow" unique_id=1248587181]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Normal"
+
+[node name="Spacer2" type="Control" parent="Barrel_UI/HUDPanel/HUDContent" unique_id=1233442405]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HSeparator3" type="HSeparator" parent="Barrel_UI/HUDPanel/HUDContent" unique_id=262132448]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ControlsHint" type="HBoxContainer" parent="Barrel_UI/HUDPanel/HUDContent" unique_id=43746754]
+layout_mode = 2
+
+[node name="HintSpin" type="Label" parent="Barrel_UI/HUDPanel/HUDContent/ControlsHint" unique_id=1152122755]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 13
+text = "LMB -> Spin -> Shoot"
+
+[node name="HintDiscard" type="Label" parent="Barrel_UI/HUDPanel/HUDContent/ControlsHint" unique_id=1736402104]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 13
+text = "RMB -> Discard"
+
+[node name="SwapContent" type="VBoxContainer" parent="Barrel_UI/HUDPanel" unique_id=1708867318 node_paths=PackedStringArray("click_sound", "validate_sound", "discard_sound")]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 6
+script = ExtResource("9_6w3jq")
+click_sound = NodePath("../../../ClickSound")
+validate_sound = NodePath("../../../ValidateSound")
+discard_sound = NodePath("../../../DiscardSound")
+
+[node name="You Found" type="Label" parent="Barrel_UI/HUDPanel/SwapContent" unique_id=1378818776]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 50
+text = "You found: "
+vertical_alignment = 1
+
+[node name="FoundRow" type="VBoxContainer" parent="Barrel_UI/HUDPanel/SwapContent" unique_id=1873522328]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="FoundIcon" type="TextureRect" parent="Barrel_UI/HUDPanel/SwapContent/FoundRow" unique_id=1219249110]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("11_qgnbr")
+
+[node name="FoundName" type="Label" parent="Barrel_UI/HUDPanel/SwapContent/FoundRow" unique_id=1182747714]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 40
+text = "Basic"
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Barrel_UI/HUDPanel/SwapContent" unique_id=2086738978]
+layout_mode = 2
+
+[node name="ReplaceLabel" type="Label" parent="Barrel_UI/HUDPanel/SwapContent" unique_id=1045548782]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Replace which bullet ?"
+
+[node name="SwapBarrel" type="Control" parent="Barrel_UI/HUDPanel/SwapContent" unique_id=1877639021]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="Barrel_UI/HUDPanel/SwapContent/SwapBarrel" unique_id=713205796]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -125.0
+offset_right = 125.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+texture = ExtResource("4_qgnbr")
+expand_mode = 4
+
+[node name="SlotButton_0" type="TextureButton" parent="Barrel_UI/HUDPanel/SwapContent/SwapBarrel" unique_id=869969670]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 0
+offset_left = 173.99997
+offset_top = 44.0
+offset_right = 223.99997
+offset_bottom = 95.0
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="SlotButton_1" type="TextureButton" parent="Barrel_UI/HUDPanel/SwapContent/SwapBarrel" unique_id=1932516029]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_left = 239.0
+offset_top = 86.0
+offset_right = 293.0
+offset_bottom = 140.0
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="SlotButton_2" type="TextureButton" parent="Barrel_UI/HUDPanel/SwapContent/SwapBarrel" unique_id=2094493009]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_left = 239.0
+offset_top = 161.0
+offset_right = 289.0
+offset_bottom = 215.0
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="SlotButton_3" type="TextureButton" parent="Barrel_UI/HUDPanel/SwapContent/SwapBarrel" unique_id=75057828]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_left = 173.0
+offset_top = 200.0
+offset_right = 227.0
+offset_bottom = 254.0
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="SlotButton_4" type="TextureButton" parent="Barrel_UI/HUDPanel/SwapContent/SwapBarrel" unique_id=53717556]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_left = 108.0
+offset_top = 161.0
+offset_right = 158.0
+offset_bottom = 215.0
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="SlotButton_5" type="TextureButton" parent="Barrel_UI/HUDPanel/SwapContent/SwapBarrel" unique_id=1439942588]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_left = 104.0
+offset_top = 87.0
+offset_right = 159.0
+offset_bottom = 144.0
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="DiscardButton" type="Button" parent="Barrel_UI/HUDPanel/SwapContent" unique_id=443421202]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 32
+text = "Discard
+"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1960526984]
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=1452695511]
+stream = ExtResource("14_kvtww")
+
+[node name="ValidateSound" type="AudioStreamPlayer" parent="." unique_id=2130110178]
+stream = ExtResource("15_m8fev")
+
+[node name="DiscardSound" type="AudioStreamPlayer" parent="." unique_id=349590593]
+stream = ExtResource("16_7hl25")

@@ -1,21 +1,113 @@
-extends Sprite2D
+extends AnimatedSprite2D
 
 @onready var marker_2d: Marker2D = $Marker2D
-const BULLET = preload("uid://dd4n6m088eqd5")
-const BULLET_VARIANT_1 = preload("uid://go2mccs08y7b")
+@onready var audio: AudioStreamPlayer2D = $AudioStreamPlayer2D
+var selected_bullet
+var selected_index: int = 0  
+var BulletTypes : Array = [GlobalData.BULLET, GlobalData.BULLET, GlobalData.BULLET,GlobalData.BULLET, GlobalData.BULLET, GlobalData.BULLET]
+var bullet_ready = false
+var _spin_connected := false
+var loadout : Array = []
+var _reloading = false
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	loadout = GlobalData.bullet_loadout.duplicate()
+	BulletTypes = loadout.duplicate()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	look_at(get_global_mouse_position())
+	flip_v = get_global_mouse_position().x < global_position.x
+	if Input.is_action_just_pressed("discard"):
+		discard_bullet()
+
+	
+func get_animation_for_bullet(bullet) -> String:
+	if bullet == GlobalData.AIR: return "air"
+	if bullet == GlobalData.POISON: return "poison"
+	if bullet == GlobalData.ELECTRICITY: return "electricity"
+	if bullet == GlobalData.FIRE: return "fire"
+	if bullet == GlobalData.ICE: return "ice"
+	return "basic"
+
+
+func random_bullet():
+	selected_index = randi() % BulletTypes.size()
+	selected_bullet = BulletTypes[selected_index]
+
+
+func _on_spin_complete(bullet_type) -> void:
+	play(get_animation_for_bullet(selected_bullet))
+	BulletTypes.remove_at(selected_index)
+	GlobalData.barrel_hud.update_icons_from_chamber(BulletTypes)
 
 
 func shoot() -> void:
-	var new_bullet = BULLET.instantiate()
-	new_bullet.position = marker_2d.global_position
-	new_bullet.target_position = (get_global_mouse_position()-marker_2d.global_position).normalized()
-	GlobalData.world.add_child(new_bullet)
+	if _reloading:
+		return
+	var hud = GlobalData.barrel_hud
+	if not _spin_connected:
+		hud.spin_complete.connect(_on_spin_complete)
+		_spin_connected = true
+	if hud.state == hud.State.IDLE:
+		random_bullet()
+		hud.spin_to(selected_index, selected_bullet)
+		audio.stream = preload("uid://dv1kkfqyjey5r")
+		audio.play()
+		play(get_animation_for_bullet(selected_bullet))
+		return
+	if hud.state == hud.State.LOADED:
+		audio.stream = preload("uid://c2sx8yu45j3lp")
+		audio.play()
+		var new_bullet = selected_bullet.instantiate()
+		new_bullet.position = marker_2d.global_position
+		new_bullet.target_position = (get_global_mouse_position() - marker_2d.global_position).normalized()
+		GlobalData.world.add_child(new_bullet)
+		GlobalData.barrel_hud.update_ammo(BulletTypes.size(), loadout.size())
+		hud.reset()
+		play("basic")
+		_reload() # Fixed: Removed the argument passing
+
+
+
+func _reload():
+	if BulletTypes.is_empty():
+		_reloading = true
+		GlobalData.barrel_hud.play_reload()
+		await get_tree().create_timer(2.0).timeout
+		BulletTypes = loadout.duplicate()
+		GlobalData.barrel_hud.update_icons_from_chamber(BulletTypes)
+		_reloading = false
+
+
+func discard_bullet() -> void:
+	var hud = GlobalData.barrel_hud
+	if _reloading:
+		return
+	if hud.state != hud.State.LOADED:
+		return
+	
+	hud.reset()
+	play("basic")
+	
+	# 1. Create a temporary audio player for the discard sound
+	var discard_audio = AudioStreamPlayer2D.new()
+	discard_audio.stream = preload("uid://cuf2tfe03ft0n")# ← Replace with your discard sound UID or path
+	add_child(discard_audio)
+	discard_audio.play()
+	
+	# 2. Automatically delete the player from memory when the sound finishes
+	discard_audio.finished.connect(discard_audio.queue_free)
+	
+	await get_tree().process_frame
+	
+	if BulletTypes.is_empty():
+		_reload()
+		return
+	
+	# The main audio player can now safely play the spin sound without interrupting the discard sound
+	random_bullet()
+	hud.spin_to(selected_index, selected_bullet)
+	audio.stream = preload("uid://dv1kkfqyjey5r")
+	audio.play()
+	play(get_animation_for_bullet(selected_bullet))

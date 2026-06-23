@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d3f2e6mi28i8q"]
 
-[ext_resource type="Script" uid="uid://djagdkapd3lwa" path="res://JuniperGameDev/UI/EndScreen/end_screen.gd" id="1_bcsgm"]
+[ext_resource type="Script" uid="uid://djagdkapd3lwa" path="res://UI/EndScreen/end_screen.gd" id="1_bcsgm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_x3rvl"]
 font_size = 48
@@ -11,6 +11,7 @@ script = ExtResource("1_bcsgm")
 
 [node name="Control" type="Control" parent="." unique_id=919764556]
 process_mode = 3
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

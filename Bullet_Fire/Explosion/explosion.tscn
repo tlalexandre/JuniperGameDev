@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://djok2etes861s"]
+
+[ext_resource type="Texture2D" uid="uid://bapug6wydikbc" path="res://Assets/Explosion/Explosion.png" id="1_nuyl1"]
+[ext_resource type="Script" uid="uid://c277ypqfbgdrd" path="res://Bullet_Fire/Explosion/explosion.gd" id="2_43b5w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_43b5w"]
+atlas = ExtResource("1_nuyl1")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_saa8k"]
+atlas = ExtResource("1_nuyl1")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s4k6c"]
+atlas = ExtResource("1_nuyl1")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6hl8t"]
+atlas = ExtResource("1_nuyl1")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gavyr"]
+atlas = ExtResource("1_nuyl1")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uxwhi"]
+atlas = ExtResource("1_nuyl1")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ahget"]
+atlas = ExtResource("1_nuyl1")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yse1y"]
+atlas = ExtResource("1_nuyl1")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_riqys"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_43b5w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_saa8k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s4k6c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6hl8t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gavyr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uxwhi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ahget")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yse1y")
+}],
+"loop": 0,
+"name": &"explode",
+"speed": 12.0
+}]
+
+[node name="Explosion" type="AnimatedSprite2D" unique_id=32602565]
+z_index = 10
+z_as_relative = false
+sprite_frames = SubResource("SpriteFrames_riqys")
+animation = &"explode"
+autoplay = "explode"
+frame = 4
+frame_progress = 0.25496778
+script = ExtResource("2_43b5w")

@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://cvsap4gf682m3"]
+
+[ext_resource type="PackedScene" uid="uid://dd4n6m088eqd5" path="res://Bullet/bullet.tscn" id="1_m8a0q"]
+[ext_resource type="Script" uid="uid://bn07l01y47sdc" path="res://Bullet_Electricity/bullet_electricity.gd" id="2_8h5un"]
+[ext_resource type="Texture2D" uid="uid://cxxpfav6iu0gs" path="res://Assets/Bullet/bullet_electricity_sprite.png" id="3_8h5un"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5nlx"]
+atlas = ExtResource("3_8h5un")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0ey8"]
+atlas = ExtResource("3_8h5un")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mmgvf"]
+atlas = ExtResource("3_8h5un")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_adyw8"]
+atlas = ExtResource("3_8h5un")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bviui"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5nlx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q0ey8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mmgvf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_adyw8")
+}],
+"loop": 1,
+"name": &"new_animation",
+"speed": 12.0
+}]
+
+[node name="Bullet_Electricity" unique_id=1047442074 instance=ExtResource("1_m8a0q")]
+script = ExtResource("2_8h5un")
+
+[node name="AnimatedSprite2D" parent="." index="2" unique_id=915785676]
+sprite_frames = SubResource("SpriteFrames_bviui")
+frame_progress = 0.25592464

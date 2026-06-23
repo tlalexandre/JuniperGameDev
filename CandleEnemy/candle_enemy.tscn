@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://0ekmc8ljxrc3"]
+
+[ext_resource type="PackedScene" uid="uid://doh21id30beig" path="res://Enemy/enemy.tscn" id="1_nv12n"]
+[ext_resource type="Script" uid="uid://rylylbg4q1oa" path="res://CandleEnemy/candle_enemy.gd" id="2_wfwsq"]
+[ext_resource type="Texture2D" uid="uid://c4mphlboysnk1" path="res://Assets/temporarySprites/candle.png" id="3_wxh7u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sx8ar"]
+atlas = ExtResource("3_wxh7u")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ri08t"]
+atlas = ExtResource("3_wxh7u")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fdl4t"]
+atlas = ExtResource("3_wxh7u")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ixiet"]
+atlas = ExtResource("3_wxh7u")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c304c"]
+atlas = ExtResource("3_wxh7u")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q51gh"]
+atlas = ExtResource("3_wxh7u")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g6fqf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sx8ar")
+}],
+"loop": 1,
+"name": &"Alert",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ri08t")
+}],
+"loop": 1,
+"name": &"Attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fdl4t")
+}],
+"loop": 1,
+"name": &"DamageTaken",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ixiet")
+}],
+"loop": 1,
+"name": &"Die",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c304c")
+}],
+"loop": 1,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q51gh")
+}],
+"loop": 1,
+"name": &"Walk",
+"speed": 5.0
+}]
+
+[node name="Enemy" unique_id=1839370902 groups=["candle"] instance=ExtResource("1_nv12n")]
+script = ExtResource("2_wfwsq")
+
+[node name="Sprite" parent="." index="7" unique_id=1409618153]
+scale = Vector2(4.01, 4.01)
+sprite_frames = SubResource("SpriteFrames_g6fqf")
+animation = &"Walk"
