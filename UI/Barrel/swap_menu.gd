@@ -4,6 +4,9 @@ extends VBoxContainer
 @onready var found_name: Label = $FoundRow/FoundName
 @onready var discard_button: Button = $DiscardButton
 @onready var hud_content: VBoxContainer = $"../HUDContent"
+@export var click_sound: AudioStreamPlayer
+@export var validate_sound: AudioStreamPlayer
+@export var discard_sound: AudioStreamPlayer
 
 var pending_bullet = null
 var slot_buttons: Array = []
@@ -11,7 +14,7 @@ var slot_buttons: Array = []
 func _ready() -> void:
 	hide()
 	slot_buttons = [
-		$SwapBarrel/SlotButton_0,
+		$SwapBarrel/SlotButton_0, 
 		$SwapBarrel/SlotButton_1,
 		$SwapBarrel/SlotButton_2,
 		$SwapBarrel/SlotButton_3,
@@ -20,7 +23,10 @@ func _ready() -> void:
 	]
 	for i in 6:
 		var idx = i
-		slot_buttons[i].pressed.connect(func(): _on_slot_chosen(idx))
+		slot_buttons[i].pressed.connect(func(): 
+			click_sound.play()
+			_on_slot_chosen(idx)
+		)
 		slot_buttons[i].process_mode = Node.PROCESS_MODE_ALWAYS  # ← add this
 	
 	discard_button.process_mode = Node.PROCESS_MODE_ALWAYS  # ← and this
@@ -58,6 +64,7 @@ func _on_slot_chosen(index: int) -> void:
 	_close()
 
 func _on_discard() -> void:
+	discard_sound.play()
 	_close()
 
 func _close() -> void:

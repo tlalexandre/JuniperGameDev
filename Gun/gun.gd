@@ -7,7 +7,6 @@ var selected_index: int = 0
 var BulletTypes : Array = [GlobalData.BULLET, GlobalData.BULLET, GlobalData.BULLET,GlobalData.BULLET, GlobalData.BULLET, GlobalData.BULLET]
 var bullet_ready = false
 var _spin_connected := false
-# Called when the node enters the scene tree for the first time.
 var loadout : Array = []
 var _reloading = false
 
@@ -16,12 +15,12 @@ func _ready() -> void:
 	BulletTypes = loadout.duplicate()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	look_at(get_global_mouse_position())
 	flip_v = get_global_mouse_position().x < global_position.x
 	if Input.is_action_just_pressed("discard"):
 		discard_bullet()
+
 	
 func get_animation_for_bullet(bullet) -> String:
 	if bullet == GlobalData.AIR: return "air"
@@ -35,6 +34,7 @@ func get_animation_for_bullet(bullet) -> String:
 func random_bullet():
 	selected_index = randi() % BulletTypes.size()
 	selected_bullet = BulletTypes[selected_index]
+
 
 func _on_spin_complete(bullet_type) -> void:
 	play(get_animation_for_bullet(selected_bullet))
@@ -66,14 +66,18 @@ func shoot() -> void:
 		GlobalData.barrel_hud.update_ammo(BulletTypes.size(), loadout.size())
 		hud.reset()
 		play("basic")
-		# ← reload check moves here, after the shot is fired
-		if BulletTypes.is_empty():
-			_reloading = true
-			GlobalData.barrel_hud.play_reload()
-			await get_tree().create_timer(2.0).timeout
-			BulletTypes = loadout.duplicate()
-			GlobalData.barrel_hud.update_icons_from_chamber(BulletTypes)
-			_reloading = false
+		_reload() # Fixed: Removed the argument passing
+
+
+
+func _reload():
+	if BulletTypes.is_empty():
+		_reloading = true
+		GlobalData.barrel_hud.play_reload()
+		await get_tree().create_timer(2.0).timeout
+		BulletTypes = loadout.duplicate()
+		GlobalData.barrel_hud.update_icons_from_chamber(BulletTypes)
+		_reloading = false
 
 
 func discard_bullet() -> void:
@@ -83,11 +87,25 @@ func discard_bullet() -> void:
 	if hud.state != hud.State.LOADED:
 		return
 	
-	# No removal here — bullet was already removed on draw
-	
 	hud.reset()
+	play("basic")
+	
+	# 1. Create a temporary audio player for the discard sound
+	var discard_audio = AudioStreamPlayer2D.new()
+	discard_audio.stream = preload("uid://cuf2tfe03ft0n")# ← Replace with your discard sound UID or path
+	add_child(discard_audio)
+	discard_audio.play()
+	
+	# 2. Automatically delete the player from memory when the sound finishes
+	discard_audio.finished.connect(discard_audio.queue_free)
+	
 	await get_tree().process_frame
 	
+	if BulletTypes.is_empty():
+		_reload()
+		return
+	
+	# The main audio player can now safely play the spin sound without interrupting the discard sound
 	random_bullet()
 	hud.spin_to(selected_index, selected_bullet)
 	audio.stream = preload("uid://dv1kkfqyjey5r")
