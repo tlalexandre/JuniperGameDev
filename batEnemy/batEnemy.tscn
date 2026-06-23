@@ -83,7 +83,9 @@ animations = [{
 collision_mask = 17
 platform_floor_layers = 4294967055
 script = ExtResource("2_yvmio")
-speed = 50
+speed = 100
+max_health = 4
+dmg_enemy = 3
 
 [node name="Detection_Area" parent="." index="2" unique_id=442240972]
 scale = Vector2(3.03, 3.03)
