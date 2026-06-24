@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bwoqapqeury16"]
 
 [ext_resource type="Script" uid="uid://bu3ps1x0xhcf8" path="res://EnergyBall/energy_ball_small.gd" id="1_8s0nb"]
-[ext_resource type="Texture2D" uid="uid://b0lmbjglye3xn" path="res://Assets/temporarySprites/EnergyBall.png" id="2_y8rae"]
+[ext_resource type="Texture2D" uid="uid://3u0b430bhl5h" path="res://Assets/Book/TheBookProjectile-Sheet.png" id="2_y8rae"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cgrvg"]
 radius = 4.0
@@ -10,18 +10,11 @@ radius = 4.0
 atlas = ExtResource("2_y8rae")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hc82l"]
-atlas = ExtResource("2_y8rae")
-region = Rect2(32, 0, 32, 32)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_cgrvg"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_siqsp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hc82l")
 }],
 "loop": 1,
 "name": &"default",
@@ -40,3 +33,4 @@ shape = SubResource("CircleShape2D_cgrvg")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=160540091]
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_cgrvg")
+autoplay = "default"

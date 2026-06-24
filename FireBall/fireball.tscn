@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dnmm8wqvv7n44"]
 
 [ext_resource type="Script" uid="uid://bviyoek52ffec" path="res://FireBall/fireball.gd" id="1_le0s6"]
-[ext_resource type="Texture2D" uid="uid://drh36bn88jqr5" path="res://Assets/temporarySprites/fireball.png" id="2_le0s6"]
+[ext_resource type="Texture2D" uid="uid://bk7u8hdgdyu3i" path="res://Assets/Candle/TheCandleProjectile-Sheet.png" id="2_le0s6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cgrvg"]
 radius = 20.0
