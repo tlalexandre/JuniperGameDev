@@ -109,7 +109,7 @@ animations = [{
 }]
 
 [node name="Enemy" unique_id=1839370902 groups=["candle"] instance=ExtResource("1_nv12n")]
-scale = Vector2(0.16, 0.16)
+scale = Vector2(0.2, 0.2)
 script = ExtResource("2_wfwsq")
 fireball_scene = ExtResource("3_sx8ar")
 ideal_distance = 300.0

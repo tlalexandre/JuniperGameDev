@@ -2,24 +2,17 @@
 
 [ext_resource type="Script" uid="uid://jcr5lnrhdf80" path="res://EnergyBall/energy_ball_large.gd" id="1_3aqco"]
 [ext_resource type="PackedScene" uid="uid://bwoqapqeury16" path="res://EnergyBall/energy_ball_small.tscn" id="2_323ey"]
-[ext_resource type="Texture2D" uid="uid://b0lmbjglye3xn" path="res://Assets/temporarySprites/EnergyBall.png" id="3_csk0e"]
+[ext_resource type="Texture2D" uid="uid://3u0b430bhl5h" path="res://Assets/Book/TheBookProjectile-Sheet.png" id="3_csk0e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bakys"]
 atlas = ExtResource("3_csk0e")
 region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_m1k78"]
-atlas = ExtResource("3_csk0e")
-region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_cgrvg"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bakys")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_m1k78")
 }],
 "loop": 1,
 "name": &"default",
