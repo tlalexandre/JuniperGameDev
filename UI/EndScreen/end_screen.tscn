@@ -1,68 +1,129 @@
 [gd_scene format=3 uid="uid://d3f2e6mi28i8q"]
 
 [ext_resource type="Script" uid="uid://djagdkapd3lwa" path="res://UI/EndScreen/end_screen.gd" id="1_bcsgm"]
+[ext_resource type="Theme" uid="uid://bvl2oh3bc6g4u" path="res://Assets/UI/theme.tres" id="2_fjlnp"]
+[ext_resource type="LabelSettings" uid="uid://cw1046e5qw6ep" path="res://Assets/UI/basic_label_settings.tres" id="3_678vv"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_x3rvl"]
 font_size = 48
-font_color = Color(0, 1, 0, 1)
 
 [node name="EndScreen" type="CanvasLayer" unique_id=1664554452]
 script = ExtResource("1_bcsgm")
 
 [node name="Control" type="Control" parent="." unique_id=919764556]
 process_mode = 3
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_fjlnp")
 
-[node name="Label" type="Label" parent="Control" unique_id=593248050]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -38.0
-offset_top = 300.0
-offset_right = 38.0
-offset_bottom = 323.0
-grow_horizontal = 2
-text = "You won !"
-label_settings = SubResource("LabelSettings_x3rvl")
-
-[node name="ResumeButton" type="Button" parent="Control" unique_id=1585436865]
+[node name="PanelContainer" type="PanelContainer" parent="Control" unique_id=923372243]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -99.5
-offset_top = -36.0
-offset_right = 100.5
-offset_bottom = 34.0
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer" unique_id=448338201]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/PanelContainer/VBoxContainer" unique_id=593248050]
+layout_mode = 2
+size_flags_vertical = 1
+text = "You won !"
+label_settings = SubResource("LabelSettings_x3rvl")
+horizontal_alignment = 1
+
+[node name="StatsRow" type="HBoxContainer" parent="Control/PanelContainer/VBoxContainer" unique_id=1095641252]
+layout_mode = 2
+
+[node name="ScoreCard" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer/StatsRow" unique_id=1165623589]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("2_fjlnp")
+theme_override_constants/separation = 2
+
+[node name="ScoreLbl" type="Label" parent="Control/PanelContainer/VBoxContainer/StatsRow/ScoreCard" unique_id=153087101]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 40
+text = "Score"
+
+[node name="ScoreValue" type="Label" parent="Control/PanelContainer/VBoxContainer/StatsRow/ScoreCard" unique_id=977645577]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme = ExtResource("2_fjlnp")
+text = "0"
+label_settings = ExtResource("3_678vv")
+horizontal_alignment = 1
+
+[node name="FloorCard" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer/StatsRow" unique_id=928909643]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+
+[node name="FloorLbl" type="Label" parent="Control/PanelContainer/VBoxContainer/StatsRow/FloorCard" unique_id=890575708]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 40
+text = "Floor"
+
+[node name="FloorValue" type="Label" parent="Control/PanelContainer/VBoxContainer/StatsRow/FloorCard" unique_id=693306798]
+layout_mode = 2
+text = "1"
+label_settings = ExtResource("3_678vv")
+horizontal_alignment = 1
+
+[node name="Spacer1" type="Control" parent="Control/PanelContainer/VBoxContainer" unique_id=158750047]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="ResumeButton" type="Button" parent="Control/PanelContainer/VBoxContainer" unique_id=1585436865]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_fjlnp")
+theme_override_font_sizes/font_size = 40
 text = "Resume"
 
-[node name="QuitButton" type="Button" parent="Control" unique_id=1433838958]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -100.0
-offset_top = -480.0
-offset_right = 100.0
-offset_bottom = -410.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_font_sizes/font_size = 32
+[node name="Spacer2" type="Control" parent="Control/PanelContainer/VBoxContainer" unique_id=674923756]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="MusicButton" type="Button" parent="Control/PanelContainer/VBoxContainer" unique_id=1444177493]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_fjlnp")
+theme_override_font_sizes/font_size = 40
+text = "Music: OFF"
+
+[node name="Spacer3" type="Control" parent="Control/PanelContainer/VBoxContainer" unique_id=1122050669]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="QuitButton" type="Button" parent="Control/PanelContainer/VBoxContainer" unique_id=1433838958]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 40
 text = "Quit"
 
-[connection signal="pressed" from="Control/ResumeButton" to="." method="_on_resume_button_pressed"]
-[connection signal="pressed" from="Control/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Control/PanelContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="Control/PanelContainer/VBoxContainer/MusicButton" to="." method="_on_music_button_pressed"]
+[connection signal="pressed" from="Control/PanelContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

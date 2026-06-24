@@ -1,0 +1,207 @@
+[gd_scene format=3 uid="uid://bikhyxkqtbjy3"]
+
+[ext_resource type="Texture2D" uid="uid://cnm3mci3h2vdy" path="res://Assets/Crosshair/tile_0025.png" id="1_x5yf0"]
+[ext_resource type="Script" uid="uid://dnrms3p5wymij" path="res://UI/StartMenu/start_menu.gd" id="1_y035q"]
+[ext_resource type="Script" uid="uid://idvka0geg11j" path="res://UI/StartMenu/barrel_ring.gd" id="2_6ty8v"]
+[ext_resource type="Texture2D" uid="uid://d1uxv20nmh2c1" path="res://Assets/GunCylinder/ChamberUI-Sheet.png" id="2_rdjw6"]
+[ext_resource type="Texture2D" uid="uid://bi6hppefpstc8" path="res://Assets/Bullet_Icons/bullet_fire.png" id="3_6ty8v"]
+[ext_resource type="Texture2D" uid="uid://hituocfik6r2" path="res://Assets/Bullet_Icons/bullet_electric.png" id="4_y035q"]
+[ext_resource type="Texture2D" uid="uid://plu5rc3iyxji" path="res://Assets/Bullet_Icons/bullet_ice.png" id="5_3j427"]
+[ext_resource type="Texture2D" uid="uid://dy06j721w36cc" path="res://Assets/Bullet_Icons/bullet_poison.png" id="6_cmvhe"]
+[ext_resource type="Texture2D" uid="uid://dk4ijlokb5at8" path="res://Assets/Bullet_Icons/bullet_air.png" id="7_sg0ht"]
+[ext_resource type="Texture2D" uid="uid://dxi38lk2qotpp" path="res://Assets/Bullet_Icons/bullet_basic.png" id="8_ny0pd"]
+[ext_resource type="Theme" uid="uid://bvl2oh3bc6g4u" path="res://Assets/UI/theme.tres" id="11_cmvhe"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_riqys"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(960, 10, 0)
+direction = Vector3(0, -1, 0)
+spread = 15.0
+initial_velocity_min = 30.0
+initial_velocity_max = 80.0
+orbit_velocity_min = -0.19999991
+orbit_velocity_max = 0.2110001
+radial_velocity_min = -132.45001
+radial_velocity_max = 125.82997
+color = Color(0.6305762, 0.5717322, 0.92911255, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ny0pd"]
+font_size = 96
+
+[node name="StartMenu" type="Control" unique_id=1925006485]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_y035q")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1863599293]
+layout_mode = 0
+offset_right = 1914.0
+offset_bottom = 1079.0
+color = Color(0.12225223, 0.12225223, 0.12225223, 1)
+
+[node name="MagicParticles" type="GPUParticles2D" parent="." unique_id=1795803840]
+position = Vector2(958, 587)
+amount = 100
+texture = ExtResource("1_x5yf0")
+lifetime = 4.0
+randomness = 0.53
+trail_enabled = true
+trail_lifetime = 1.86
+process_material = SubResource("ParticleProcessMaterial_riqys")
+
+[node name="BarrelRing" type="Control" parent="." unique_id=1971661485]
+modulate = Color(1, 1, 1, 0.5803922)
+custom_minimum_size = Vector2(350, 350)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -350.0
+offset_right = 350.0
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(350, 350)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+offset_transform_enabled = true
+script = ExtResource("2_6ty8v")
+
+[node name="TextureRect" type="TextureRect" parent="BarrelRing" unique_id=514146435]
+custom_minimum_size = Vector2(350, 350)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+texture = ExtResource("2_rdjw6")
+expand_mode = 4
+
+[node name="Icon_0" type="TextureRect" parent="BarrelRing" unique_id=1020616970]
+layout_mode = 0
+offset_left = 270.0
+offset_top = 53.0
+offset_right = 310.0
+offset_bottom = 93.0
+scale = Vector2(4, 4)
+texture = ExtResource("3_6ty8v")
+expand_mode = 1
+
+[node name="Icon_1" type="TextureRect" parent="BarrelRing" unique_id=37057140]
+layout_mode = 0
+offset_left = 455.0
+offset_top = 164.0
+offset_right = 495.0
+offset_bottom = 204.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_y035q")
+expand_mode = 1
+
+[node name="Icon_2" type="TextureRect" parent="BarrelRing" unique_id=165698377]
+layout_mode = 0
+offset_left = 455.0
+offset_top = 375.0
+offset_right = 495.0
+offset_bottom = 415.0
+scale = Vector2(4, 4)
+texture = ExtResource("5_3j427")
+expand_mode = 1
+
+[node name="Icon_3" type="TextureRect" parent="BarrelRing" unique_id=647041403]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 380.0
+offset_right = 129.0
+offset_bottom = 420.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_cmvhe")
+expand_mode = 1
+
+[node name="Icon_4" type="TextureRect" parent="BarrelRing" unique_id=1063261334]
+layout_mode = 0
+offset_left = 271.0
+offset_top = 490.0
+offset_right = 311.0
+offset_bottom = 530.0
+scale = Vector2(4, 4)
+texture = ExtResource("7_sg0ht")
+expand_mode = 1
+
+[node name="Icon_5" type="TextureRect" parent="BarrelRing" unique_id=118405576]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 170.0
+offset_right = 125.0
+offset_bottom = 210.0
+scale = Vector2(4, 4)
+texture = ExtResource("8_ny0pd")
+expand_mode = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1998498278]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 225.0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=486428913]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=87642295]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("11_cmvhe")
+text = "Wicked Wizard"
+label_settings = SubResource("LabelSettings_ny0pd")
+horizontal_alignment = 1
+
+[node name="Spacer1" type="Control" parent="PanelContainer/VBoxContainer" unique_id=1960342638]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=456600851]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("11_cmvhe")
+theme_override_font_sizes/font_size = 56
+text = "Start"
+
+[node name="Spacer2" type="Control" parent="PanelContainer/VBoxContainer" unique_id=1976107668]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="MusicButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=382811137]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("11_cmvhe")
+theme_override_font_sizes/font_size = 56
+text = "Music On/Off"
+
+[node name="Spacer3" type="Control" parent="PanelContainer/VBoxContainer" unique_id=953750227]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="QuitButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1044090660]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("11_cmvhe")
+theme_override_font_sizes/font_size = 56
+text = "Quit"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/MusicButton" to="." method="_on_music_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

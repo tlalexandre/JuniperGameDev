@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://d2y4owx1e1l75" path="res://batEnemy/batEnemy.tscn" id="6_4t2ji"]
 [ext_resource type="PackedScene" uid="uid://0ekmc8ljxrc3" path="res://CandleEnemy/candle_enemy.tscn" id="8_txw61"]
 [ext_resource type="PackedScene" uid="uid://cycttnu1t0rrj" path="res://Portal/portal.tscn" id="10_mys2f"]
-[ext_resource type="AudioStream" uid="uid://bd7rjcf17ah1k" path="res://Assets/sounds/music.wav" id="11_txw61"]
 [ext_resource type="PackedScene" uid="uid://dew5s5ifotbo7" path="res://EnemyArea/enemy_area.tscn" id="12_1oh2x"]
 [ext_resource type="PackedScene" uid="uid://cpb0yk42rv3l0" path="res://Door/door.tscn" id="13_m4mlb"]
 
@@ -27,12 +26,6 @@ position = Vector2(193, 361)
 
 [node name="portal" parent="." unique_id=1335019111 instance=ExtResource("10_mys2f")]
 position = Vector2(83, 1385)
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1610019906]
-process_mode = 3
-stream = ExtResource("11_txw61")
-volume_db = -5.0
-autoplay = true
 
 [node name="EnemyAreas" type="Node" parent="." unique_id=1145004146]
 
