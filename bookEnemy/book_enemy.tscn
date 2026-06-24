@@ -82,6 +82,7 @@ animations = [{
 [node name="Enemy" unique_id=1839370902 groups=["book"] instance=ExtResource("1_8yqiw")]
 script = ExtResource("2_e8yg8")
 
-[node name="Sprite" parent="." index="7" unique_id=1409618153]
+[node name="Sprite" parent="." index="6" unique_id=1409618153]
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_e8yg8")
 animation = &"Walk"

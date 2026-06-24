@@ -9,16 +9,19 @@ var player
 
 @export var max_health := 5
 var current_health := max_health
+@onready var health_bar: ProgressBar = $Control/HBoxContainer/HealthBar
 
-@onready var health_bar: ProgressBar = $HealthBar
+@onready var weakness_icon: TextureRect = $Control/HBoxContainer/TextureRect/WeaknessIcon
+
+
 @onready var attack_cooldown = 1.5
 @onready var line_of_sight: RayCast2D = $RayCast2D
 # Reference to your AnimatedSprite2D node
 @onready var sprite: AnimatedSprite2D = $Sprite 
 
-
+@export var attack_anim_duration := 0.5 
 var can_attack = true
-@export var dmg_enemy = 1
+@export var dmg_enemy: float = 1
 enum Status { NONE, KNOCKBACK, STUN, SLIDE, DMG_ON_TICK}
 var current_status = Status.NONE
 var status_timer = 0.0
@@ -45,9 +48,24 @@ var poison_tick_timer := 0.0
 var poison_dmg = 1
 var is_on_cooldown = false
 
+const WEAKNESS_ICONS = {
+	"rat":    preload("res://Assets/Bullet_Icons/bullet_poison.png"),
+	"fish":   preload("res://Assets/Bullet_Icons/bullet_electric.png"),
+	"ghost":  preload("res://Assets/Bullet_Icons/bullet_air.png"),
+	"candle": preload("res://Assets/Bullet_Icons/bullet_ice.png"),
+	"book":   preload("res://Assets/Bullet_Icons/bullet_fire.png"),
+}
+
 func _ready() -> void:
 	player = GlobalData.player
 	health_bar.set_health(current_health, max_health)
+	_set_weakness_icon()
+
+func _set_weakness_icon() -> void:
+	for group in WEAKNESS_ICONS:
+		if is_in_group(group):
+			weakness_icon.texture = WEAKNESS_ICONS[group]
+			return
 
 func _physics_process(delta):
 	if is_dead:
@@ -144,12 +162,12 @@ func _update_animations() -> void:
 		return
 		
 	# 3. If the enemy is on cooldown right after an attack, freeze it on the first frame of Attack
-	if is_on_cooldown and can_attack:
-		if sprite.animation != "Attack":
-			sprite.animation = "Attack"
-		sprite.frame = 0
-		sprite.stop()
-		return
+	#if is_on_cooldown and can_attack:
+		#if sprite.animation != "Attack":
+			#sprite.animation = "Attack"
+		#sprite.frame = 0
+		#sprite.stop()
+		#return
 		
 	# 4. Movement and Idle priority (Aquí entra automáticamente la búsqueda porque velocity > 0)
 	if velocity.length() > 0:
@@ -238,7 +256,12 @@ func take_damage(amount: float):
 		die()
 	else:
 		is_taking_damage = true
-		is_attacking = false 
+		is_attacking = false
+		
+		# Flash white then back to normal
+		var tween = create_tween()
+		tween.tween_property(sprite, "modulate", Color.WHITE * 3.0, 0.05)
+		tween.tween_property(sprite, "modulate", Color.WHITE, 0.1)
 		
 		await get_tree().create_timer(0.3).timeout
 		is_taking_damage = false
@@ -268,19 +291,19 @@ func _on_attack_area_body_exited(body: Node2D) -> void:
 func attack() -> void:
 	if not can_attack or is_on_cooldown or is_attacking or is_dead or is_taking_damage:
 		return
-		
+
 	is_attacking = true
-	
+
 	if player and is_instance_valid(player):
 		player.take_damage(dmg_enemy)
-		
-	await get_tree().create_timer(0.3).timeout
-	
+
+	await get_tree().create_timer(attack_anim_duration, false, false, true).timeout
+
 	is_attacking = false
 	is_on_cooldown = true
-	
-	await get_tree().create_timer(attack_cooldown).timeout
+
+	await get_tree().create_timer(attack_cooldown, false, false, true).timeout
 	is_on_cooldown = false
-	
+
 	if can_attack:
 		attack()

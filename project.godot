@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GameJam"
-run/main_scene="uid://bfgnlkfctn1gn"
+run/main_scene="uid://bikhyxkqtbjy3"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -34,6 +34,8 @@ rat=""
 book=""
 candle=""
 fish=""
+door=""
+ghost=""
 
 [input]
 
@@ -99,5 +101,4 @@ discard={
 
 textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
-renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"

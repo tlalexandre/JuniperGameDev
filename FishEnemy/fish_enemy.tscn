@@ -81,8 +81,11 @@ animations = [{
 
 [node name="Enemy" unique_id=1839370902 groups=["fish"] instance=ExtResource("1_xahv1")]
 script = ExtResource("2_nf1ls")
+speed = 450
+max_health = 2
+dmg_enemy = 2
 
-[node name="Sprite" parent="." index="7" unique_id=1409618153]
+[node name="Sprite" parent="." index="6" unique_id=1409618153]
 scale = Vector2(4.085, 4.085)
 sprite_frames = SubResource("SpriteFrames_q7e8k")
 animation = &"Walk"
