@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var audio: AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var camera: Camera2D = $Camera2D
+@onready var hit_audio: AudioStreamPlayer2D = $HitAudio
 signal died
 
 const SPEED = 300.0
@@ -59,8 +60,9 @@ func _input(event: InputEvent) -> void:
 		get_node("Gun").shoot()
 		
 func take_damage(amount: float):
-	print_stack()
 	animated_sprite_2d.play("DamageTaken")
+	hit_audio.stream = preload("uid://uxk2w6hhptc2")
+	hit_audio.play()
 	current_health -= amount
 	GlobalData.barrel_hud.update_health(current_health, max_health)
 	shake()
@@ -68,11 +70,12 @@ func take_damage(amount: float):
 		die()
 
 func die():
-	# Disable physics so the player stops moving/colliding while dying
 	set_physics_process(false)
 	set_process_input(false)
 	animated_sprite_2d.play("Die")
-	await get_tree().create_timer(0.5).timeout
+	hit_audio.stream = preload("uid://rburi1ot2d10")
+	hit_audio.play()
+	await get_tree().create_timer(hit_audio.stream.get_length()).timeout  # wait exact duration
 	died.emit()
 	queue_free()
 

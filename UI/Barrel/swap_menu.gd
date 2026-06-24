@@ -37,17 +37,40 @@ func show_for_bullet(bullet_type) -> void:
 	var icon_map = GlobalData.barrel_hud.bullet_icon_map
 	var name_map = GlobalData.barrel_hud.bullet_name_map
 	
-	# Show found bullet
 	found_icon.texture = icon_map.get(bullet_type)
 	found_name.text = name_map.get(bullet_type, "???")
 	
-	# Update slot button icons to show current loadout
 	for i in 6:
 		slot_buttons[i].texture_normal = icon_map.get(GlobalData.bullet_loadout[i])
 	
-	# Swap panel visibility
 	hud_content.hide()
 	show()
+	_pulse_slot_buttons()  # ← start pulsing after showing
+
+func _pulse_slot_buttons() -> void:
+	await get_tree().process_frame
+	for btn in slot_buttons:
+		btn.pivot_offset = btn.size / 2
+		var tween = btn.create_tween().set_loops()  # ← tween owned by btn, which is ALWAYS
+		tween.tween_property(btn, "scale", Vector2(1.12, 1.12), 0.4)\
+			.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		tween.tween_property(btn, "scale", Vector2(1.0, 1.0), 0.4)\
+			.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		btn.set_meta("pulse_tween", tween)
+
+func _stop_pulse() -> void:
+	for btn in slot_buttons:
+		if btn.has_meta("pulse_tween"):
+			btn.get_meta("pulse_tween").kill()
+			btn.remove_meta("pulse_tween")
+		btn.scale = Vector2.ONE
+
+func _close() -> void:
+	_stop_pulse()  # ← kill tweens before hiding
+	pending_bullet = null
+	hud_content.show()
+	hide()
+	get_tree().paused = false
 
 func _on_slot_chosen(index: int) -> void:
 	GlobalData.bullet_loadout[index] = pending_bullet
@@ -66,9 +89,3 @@ func _on_slot_chosen(index: int) -> void:
 func _on_discard() -> void:
 	discard_sound.play()
 	_close()
-
-func _close() -> void:
-	pending_bullet = null
-	hud_content.show()
-	hide()
-	get_tree().paused = false
