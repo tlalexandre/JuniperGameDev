@@ -10,7 +10,8 @@ var player
 @export var max_health := 5
 var current_health := max_health
 @onready var health_bar: ProgressBar = $Control/HBoxContainer/HealthBar
-@onready var weakness_icon: TextureRect = $Control/HBoxContainer/WeaknessIcon
+
+@onready var weakness_icon: TextureRect = $Control/HBoxContainer/TextureRect/WeaknessIcon
 
 
 @onready var attack_cooldown = 1.5
@@ -20,7 +21,7 @@ var current_health := max_health
 
 @export var attack_anim_duration := 0.5 
 var can_attack = true
-@export var dmg_enemy = 1
+@export var dmg_enemy: float = 1
 enum Status { NONE, KNOCKBACK, STUN, SLIDE, DMG_ON_TICK}
 var current_status = Status.NONE
 var status_timer = 0.0
@@ -255,7 +256,12 @@ func take_damage(amount: float):
 		die()
 	else:
 		is_taking_damage = true
-		is_attacking = false 
+		is_attacking = false
+		
+		# Flash white then back to normal
+		var tween = create_tween()
+		tween.tween_property(sprite, "modulate", Color.WHITE * 3.0, 0.05)
+		tween.tween_property(sprite, "modulate", Color.WHITE, 0.1)
 		
 		await get_tree().create_timer(0.3).timeout
 		is_taking_damage = false
