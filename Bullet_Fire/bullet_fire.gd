@@ -6,6 +6,11 @@ const EXPLOSION = preload("uid://djok2etes861s")
 @export var explosion_damage: int = 2
 var _show_debug_circle := false
 
+func _ready() -> void:
+	bullet_color = Color(1.0, 0.35, 0.0)
+	super._ready()
+
+
 func _on_detection_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemies"):
 		_explode()

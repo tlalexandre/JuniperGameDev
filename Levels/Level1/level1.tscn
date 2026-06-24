@@ -8,8 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://d2y4owx1e1l75" path="res://batEnemy/batEnemy.tscn" id="6_4t2ji"]
 [ext_resource type="PackedScene" uid="uid://0ekmc8ljxrc3" path="res://CandleEnemy/candle_enemy.tscn" id="8_txw61"]
 [ext_resource type="PackedScene" uid="uid://cycttnu1t0rrj" path="res://Portal/portal.tscn" id="10_mys2f"]
-[ext_resource type="AudioStream" uid="uid://bd7rjcf17ah1k" path="res://Assets/sounds/music.wav" id="11_txw61"]
+[ext_resource type="PackedScene" uid="uid://cee3f73cfq4d1" path="res://ratEnemy/rat_enemy.tscn" id="11_txw61"]
 [ext_resource type="PackedScene" uid="uid://dew5s5ifotbo7" path="res://EnemyArea/enemy_area.tscn" id="12_1oh2x"]
+[ext_resource type="PackedScene" uid="uid://cr8ylbre3y4fe" path="res://FishEnemy/fish_enemy.tscn" id="12_m4mlb"]
+[ext_resource type="PackedScene" uid="uid://cnrsf67dlksxa" path="res://bookEnemy/book_enemy.tscn" id="13_bp360"]
 [ext_resource type="PackedScene" uid="uid://cpb0yk42rv3l0" path="res://Door/door.tscn" id="13_m4mlb"]
 
 [node name="World" type="Node2D" unique_id=1973156659]
@@ -27,12 +29,6 @@ position = Vector2(193, 361)
 
 [node name="portal" parent="." unique_id=1335019111 instance=ExtResource("10_mys2f")]
 position = Vector2(83, 1385)
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1610019906]
-process_mode = 3
-stream = ExtResource("11_txw61")
-volume_db = -5.0
-autoplay = true
 
 [node name="EnemyAreas" type="Node" parent="." unique_id=1145004146]
 
@@ -78,3 +74,42 @@ position = Vector2(1168, 688)
 position = Vector2(1200, 688)
 rotation = 3.1415927
 scale = Vector2(0.8, -0.8)
+
+[node name="Enemy3" parent="." unique_id=1079959918 instance=ExtResource("11_txw61")]
+position = Vector2(586, 214)
+
+[node name="Enemy4" parent="." unique_id=1522551066 instance=ExtResource("12_m4mlb")]
+position = Vector2(989, 533)
+scale = Vector2(0.0625, 0.0625)
+
+[node name="Enemy5" parent="." unique_id=298113171 instance=ExtResource("13_bp360")]
+position = Vector2(1168, 568)
+scale = Vector2(0.015625, 0.015625)
+
+[node name="Chest" parent="." unique_id=223102950 instance=ExtResource("5_bpcbn")]
+position = Vector2(75, 338)
+scale = Vector2(0.79999995, 0.79999995)
+
+[node name="Chest2" parent="." unique_id=1978118159 instance=ExtResource("5_bpcbn")]
+position = Vector2(109, 319)
+scale = Vector2(0.79999995, 0.79999995)
+
+[node name="Chest3" parent="." unique_id=97892065 instance=ExtResource("5_bpcbn")]
+position = Vector2(72.00001, 379)
+scale = Vector2(0.79999995, 0.79999995)
+
+[node name="Chest4" parent="." unique_id=1873454920 instance=ExtResource("5_bpcbn")]
+position = Vector2(106, 401)
+scale = Vector2(0.79999995, 0.79999995)
+
+[node name="Chest5" parent="." unique_id=1408340914 instance=ExtResource("5_bpcbn")]
+position = Vector2(143, 398.00003)
+scale = Vector2(0.79999995, 0.79999995)
+
+[node name="Chest6" parent="." unique_id=533760500 instance=ExtResource("5_bpcbn")]
+position = Vector2(177, 397.00003)
+scale = Vector2(0.79999995, 0.79999995)
+
+[node name="Chest7" parent="." unique_id=839217481 instance=ExtResource("5_bpcbn")]
+position = Vector2(226, 401.00003)
+scale = Vector2(0.79999995, 0.79999995)

@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://cee3f73cfq4d1"]
 
 [ext_resource type="PackedScene" uid="uid://doh21id30beig" path="res://Enemy/enemy.tscn" id="1_vsc63"]
-[ext_resource type="Texture2D" uid="uid://n3b5tkdvnp1o" path="res://icon.svg" id="2_wyc1x"]
 [ext_resource type="Texture2D" uid="uid://d4nqhhryonkj2" path="res://Assets/RAT/rata-Sheet.png" id="3_oy2t3"]
 
 [sub_resource type="GDScript" id="GDScript_cgrvg"]
@@ -114,15 +113,12 @@ animations = [{
 }]
 
 [node name="Enemy" unique_id=1839370902 groups=["rat"] instance=ExtResource("1_vsc63")]
-collision_mask = 31
 script = SubResource("GDScript_cgrvg")
 speed = 300
+attack_anim_duration = 1.0
 
-[node name="Enemy_Sprite" parent="." index="1" unique_id=300805649]
-visible = false
-texture = ExtResource("2_wyc1x")
-
-[node name="Sprite" parent="." index="7" unique_id=1409618153]
+[node name="Sprite" parent="." index="6" unique_id=1409618153]
 position = Vector2(3.8146973e-06, 2.000002)
 scale = Vector2(4.01, 4.01)
 sprite_frames = SubResource("SpriteFrames_f0tgm")
+animation = &"Attack"
