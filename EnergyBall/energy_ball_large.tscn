@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://qgrr45wqquv3"]
+
+[ext_resource type="Script" uid="uid://jcr5lnrhdf80" path="res://EnergyBall/energy_ball_large.gd" id="1_3aqco"]
+[ext_resource type="PackedScene" uid="uid://bwoqapqeury16" path="res://EnergyBall/energy_ball_small.tscn" id="2_323ey"]
+[ext_resource type="Texture2D" uid="uid://b0lmbjglye3xn" path="res://Assets/temporarySprites/EnergyBall.png" id="3_csk0e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bakys"]
+atlas = ExtResource("3_csk0e")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1k78"]
+atlas = ExtResource("3_csk0e")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cgrvg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bakys")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m1k78")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cgrvg"]
+radius = 11.045361
+
+[node name="Area2D" type="Area2D" unique_id=868373961]
+collision_layer = 0
+collision_mask = 25
+script = ExtResource("1_3aqco")
+small_ball_scene = ExtResource("2_323ey")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1286625385]
+position = Vector2(2.3841858e-07, 0)
+scale = Vector2(0.675, 0.675)
+sprite_frames = SubResource("SpriteFrames_cgrvg")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=672877121]
+shape = SubResource("CircleShape2D_cgrvg")

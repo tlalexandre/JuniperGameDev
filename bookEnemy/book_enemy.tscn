@@ -2,31 +2,48 @@
 
 [ext_resource type="PackedScene" uid="uid://doh21id30beig" path="res://Enemy/enemy.tscn" id="1_8yqiw"]
 [ext_resource type="Script" uid="uid://08ysknid4w2u" path="res://bookEnemy/book_enemy.gd" id="2_e8yg8"]
-[ext_resource type="Texture2D" uid="uid://h6a7gh5knsex" path="res://Assets/temporarySprites/Book.png" id="3_6jugu"]
+[ext_resource type="PackedScene" uid="uid://qgrr45wqquv3" path="res://EnergyBall/energy_ball_large.tscn" id="3_y7g7k"]
+[ext_resource type="Texture2D" uid="uid://das2jgbfi5iwx" path="res://Assets/Book/BookEnemy-Sheet.png" id="5_ljpss"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y7g7k"]
-atlas = ExtResource("3_6jugu")
-region = Rect2(0, 0, 32, 32)
+atlas = ExtResource("5_ljpss")
+region = Rect2(0, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ljpss"]
-atlas = ExtResource("3_6jugu")
-region = Rect2(0, 0, 32, 32)
+atlas = ExtResource("5_ljpss")
+region = Rect2(0, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_axhmy"]
-atlas = ExtResource("3_6jugu")
-region = Rect2(0, 0, 32, 32)
+atlas = ExtResource("5_ljpss")
+region = Rect2(32, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tqkhy"]
-atlas = ExtResource("3_6jugu")
-region = Rect2(0, 0, 32, 32)
+atlas = ExtResource("5_ljpss")
+region = Rect2(64, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g7mgb"]
-atlas = ExtResource("3_6jugu")
+atlas = ExtResource("5_ljpss")
+region = Rect2(0, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r2ld0"]
+atlas = ExtResource("5_ljpss")
+region = Rect2(0, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_abf13"]
+atlas = ExtResource("5_ljpss")
 region = Rect2(0, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_wumsh"]
+atlas = ExtResource("5_ljpss")
+region = Rect2(32, 0, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_kc6p3"]
-atlas = ExtResource("3_6jugu")
-region = Rect2(0, 0, 32, 32)
+atlas = ExtResource("5_ljpss")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0q04v"]
+atlas = ExtResource("5_ljpss")
+region = Rect2(32, 64, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_e8yg8"]
 animations = [{
@@ -41,6 +58,12 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ljpss")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axhmy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tqkhy")
 }],
 "loop": 1,
 "name": &"Attack",
@@ -48,7 +71,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_axhmy")
+"texture": SubResource("AtlasTexture_g7mgb")
 }],
 "loop": 1,
 "name": &"DamageTaken",
@@ -56,7 +79,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tqkhy")
+"texture": SubResource("AtlasTexture_r2ld0")
 }],
 "loop": 1,
 "name": &"Die",
@@ -64,7 +87,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_g7mgb")
+"texture": SubResource("AtlasTexture_abf13")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wumsh")
 }],
 "loop": 1,
 "name": &"Idle",
@@ -73,6 +99,9 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kc6p3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0q04v")
 }],
 "loop": 1,
 "name": &"Walk",
@@ -80,9 +109,22 @@ animations = [{
 }]
 
 [node name="Enemy" unique_id=1839370902 groups=["book"] instance=ExtResource("1_8yqiw")]
+scale = Vector2(0.3, 0.3)
 script = ExtResource("2_e8yg8")
+large_ball_scene = ExtResource("3_y7g7k")
+ideal_distance = 250.0
+distance_tolerance = 50.0
+book_cooldown = 2.0
+speed = 250
+max_health = 5
+attack_anim_duration = 0.5
+dmg_enemy = 1.0
+points = 100
+
+[node name="Detection_Area" parent="." index="1" unique_id=442240972]
+scale = Vector2(2, 2)
 
 [node name="Sprite" parent="." index="6" unique_id=1409618153]
-scale = Vector2(2, 2)
+scale = Vector2(3.81, 3.81)
 sprite_frames = SubResource("SpriteFrames_e8yg8")
 animation = &"Walk"
