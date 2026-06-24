@@ -57,6 +57,7 @@ func complete_challenge() -> void:
 	if chest_scene != null:
 		var chest_instance = chest_scene.instantiate()
 		get_parent().add_child(chest_instance) 
+		 
 		chest_instance.global_position = self.global_position
 		
 	# 3. Safely delete this area zone so it doesn't trigger again

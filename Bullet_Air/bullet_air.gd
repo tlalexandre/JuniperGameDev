@@ -1,11 +1,11 @@
 extends Bullet
 
-var double_dmg = bullet_dmg * 2
+var double_dmg
 var knockback_force = 500
 func _ready() -> void:
 	bullet_color = Color(0.7, 0.95, 1.0) 
 	super._ready()
-
+	double_dmg = bullet_dmg * 2
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemies"):	

@@ -9,8 +9,10 @@ var player
 
 @export var max_health := 5
 var current_health := max_health
+@onready var health_bar: ProgressBar = $Control/HBoxContainer/HealthBar
+@onready var weakness_icon: TextureRect = $Control/HBoxContainer/WeaknessIcon
 
-@onready var health_bar: ProgressBar = $HealthBar
+
 @onready var attack_cooldown = 1.5
 @onready var line_of_sight: RayCast2D = $RayCast2D
 # Reference to your AnimatedSprite2D node
@@ -45,9 +47,24 @@ var poison_tick_timer := 0.0
 var poison_dmg = 1
 var is_on_cooldown = false
 
+const WEAKNESS_ICONS = {
+	"rat":    preload("res://Assets/Bullet_Icons/bullet_poison.png"),
+	"fish":   preload("res://Assets/Bullet_Icons/bullet_electric.png"),
+	"ghost":  preload("res://Assets/Bullet_Icons/bullet_air.png"),
+	"candle": preload("res://Assets/Bullet_Icons/bullet_ice.png"),
+	"book":   preload("res://Assets/Bullet_Icons/bullet_fire.png"),
+}
+
 func _ready() -> void:
 	player = GlobalData.player
 	health_bar.set_health(current_health, max_health)
+	_set_weakness_icon()
+
+func _set_weakness_icon() -> void:
+	for group in WEAKNESS_ICONS:
+		if is_in_group(group):
+			weakness_icon.texture = WEAKNESS_ICONS[group]
+			return
 
 func _physics_process(delta):
 	if is_dead:
