@@ -3,9 +3,8 @@ extends Bullet
 var double_dmg = bullet_dmg * 2
 
 func _ready() -> void:
-	rotation = target_position.angle() + deg_to_rad(90)
-	speed = 400
-	bullet_dmg = 1
+	bullet_color = Color(0.45, 1.0, 0.2)
+	super._ready()
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemies"):
