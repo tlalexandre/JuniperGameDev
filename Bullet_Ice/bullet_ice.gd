@@ -3,6 +3,10 @@ extends Bullet
 
 var bounces_remaining: int = 3
 
+func _ready() -> void:
+	bullet_color = Color(0.3, 0.75, 1.0)
+	super._ready()
+
 
 func _physics_process(delta: float) -> void:
 	var collision = move_and_collide(target_position * speed * delta)

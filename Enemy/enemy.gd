@@ -16,7 +16,7 @@ var current_health := max_health
 # Reference to your AnimatedSprite2D node
 @onready var sprite: AnimatedSprite2D = $Sprite 
 
-
+@export var attack_anim_duration := 0.5 
 var can_attack = true
 @export var dmg_enemy = 1
 enum Status { NONE, KNOCKBACK, STUN, SLIDE, DMG_ON_TICK}
@@ -144,12 +144,12 @@ func _update_animations() -> void:
 		return
 		
 	# 3. If the enemy is on cooldown right after an attack, freeze it on the first frame of Attack
-	if is_on_cooldown and can_attack:
-		if sprite.animation != "Attack":
-			sprite.animation = "Attack"
-		sprite.frame = 0
-		sprite.stop()
-		return
+	#if is_on_cooldown and can_attack:
+		#if sprite.animation != "Attack":
+			#sprite.animation = "Attack"
+		#sprite.frame = 0
+		#sprite.stop()
+		#return
 		
 	# 4. Movement and Idle priority (Aquí entra automáticamente la búsqueda porque velocity > 0)
 	if velocity.length() > 0:
@@ -268,19 +268,19 @@ func _on_attack_area_body_exited(body: Node2D) -> void:
 func attack() -> void:
 	if not can_attack or is_on_cooldown or is_attacking or is_dead or is_taking_damage:
 		return
-		
+
 	is_attacking = true
-	
+
 	if player and is_instance_valid(player):
 		player.take_damage(dmg_enemy)
-		
-	await get_tree().create_timer(0.3, false, false, true).timeout  # pause_mode = true
-	
+
+	await get_tree().create_timer(attack_anim_duration, false, false, true).timeout
+
 	is_attacking = false
 	is_on_cooldown = true
-	
-	await get_tree().create_timer(attack_cooldown, false, false, true).timeout  # pause_mode = true
+
+	await get_tree().create_timer(attack_cooldown, false, false, true).timeout
 	is_on_cooldown = false
-	
+
 	if can_attack:
 		attack()
