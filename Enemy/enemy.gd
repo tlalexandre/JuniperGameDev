@@ -274,12 +274,12 @@ func attack() -> void:
 	if player and is_instance_valid(player):
 		player.take_damage(dmg_enemy)
 		
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(0.3, false, false, true).timeout  # pause_mode = true
 	
 	is_attacking = false
 	is_on_cooldown = true
 	
-	await get_tree().create_timer(attack_cooldown).timeout
+	await get_tree().create_timer(attack_cooldown, false, false, true).timeout  # pause_mode = true
 	is_on_cooldown = false
 	
 	if can_attack:

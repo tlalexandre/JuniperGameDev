@@ -6,11 +6,23 @@ const END_SCREEN = preload("uid://d3f2e6mi28i8q")
 var on_pause
 
 var end_screen_instance
+var music_player: AudioStreamPlayer
+var is_muted := false
 
 func _ready() -> void:
+	# Music setup
+	music_player = AudioStreamPlayer.new()
+	add_child(music_player)
+	music_player.stream = preload("uid://bd7rjcf17ah1k")
+	music_player.play()
+	
+	# Existing code
 	end_screen_instance = END_SCREEN.instantiate()
 	add_child(end_screen_instance)
-	# Removed setup_level from here to let World manage the timing
+
+func toggle_mute() -> void:
+	is_muted = !is_muted
+	music_player.volume_db = -80.0 if is_muted else 0.0
 
 func setup_level() -> void:
 	# Connect death signal to the freshly updated player reference
