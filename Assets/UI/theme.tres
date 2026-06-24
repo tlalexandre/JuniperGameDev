@@ -1,7 +1,9 @@
 [gd_resource type="Theme" format=3 uid="uid://bvl2oh3bc6g4u"]
 
 [ext_resource type="FontFile" uid="uid://bnjowuychsd81" path="res://Assets/Fonts/Jacquard24-Regular.ttf" id="1_0qw6d"]
+[ext_resource type="StyleBox" uid="uid://chai3egvtvtci" path="res://UI/WizardTheme.tres" id="1_sk3jv"]
 
 [resource]
 default_font = ExtResource("1_0qw6d")
 default_font_size = 24
+Button/styles/WizardTheme = ExtResource("1_sk3jv")
