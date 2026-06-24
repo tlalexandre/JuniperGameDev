@@ -159,3 +159,7 @@ scale = Vector2(1.1666667, 1.2083333)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1804441463]
 stream = ExtResource("5_a23tb")
+volume_db = 15.0
+
+[node name="HitAudio" type="AudioStreamPlayer2D" parent="." unique_id=291973032]
+stream = ExtResource("5_a23tb")

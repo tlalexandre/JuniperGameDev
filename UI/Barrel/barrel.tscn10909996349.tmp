@@ -52,6 +52,7 @@ theme_type_variation = &"variation_1"
 theme_override_styles/panel = SubResource("StyleBoxFlat_q4amw")
 
 [node name="HUDContent" type="VBoxContainer" parent="Barrel_UI/HUDPanel" unique_id=578759654]
+visible = false
 layout_mode = 2
 
 [node name="HealthRow" type="VBoxContainer" parent="Barrel_UI/HUDPanel/HUDContent" unique_id=2033716673]

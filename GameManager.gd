@@ -12,6 +12,7 @@ var is_muted := false
 func _ready() -> void:
 	# Music setup
 	music_player = AudioStreamPlayer.new()
+	music_player.volume_db = -5.0
 	add_child(music_player)
 	music_player.stream = preload("uid://bd7rjcf17ah1k")
 	music_player.play()
