@@ -9,6 +9,21 @@ radius = 47.24
 [sub_resource type="CircleShape2D" id="CircleShape2D_riqys"]
 radius = 1073.6777
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_px1sc"]
+bg_color = Color(0.79607844, 0.08235294, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.4509804, 0, 0, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+corner_detail = 20
+shadow_size = 3
+shadow_offset = Vector2(-3, 0)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_cgrvg"]
 radius = 76.105194
 
@@ -63,11 +78,39 @@ collision_layer = 2
 [node name="Collision_detection_area" type="CollisionShape2D" parent="Detection_Area" unique_id=210560214]
 shape = SubResource("CircleShape2D_riqys")
 
-[node name="HealthBar" parent="." unique_id=1609601232 instance=ExtResource("2_nuwos")]
-offset_left = -103.0
-offset_top = -92.0
-offset_right = 110.0
-offset_bottom = -65.0
+[node name="Control" type="Control" parent="." unique_id=1875158881]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control" unique_id=217052082]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -122.0
+offset_top = -200.0
+offset_right = 122.0
+offset_bottom = -160.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="WeaknessIcon" type="TextureRect" parent="Control/HBoxContainer" unique_id=761878401]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="HealthBar" parent="Control/HBoxContainer" unique_id=1609601232 instance=ExtResource("2_nuwos")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_px1sc")
 
 [node name="ProximityArea" type="Area2D" parent="." unique_id=2098740476]
 collision_layer = 2
