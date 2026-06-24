@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var audio: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var camera: Camera2D = $Camera2D
 signal died
 
 const SPEED = 300.0
@@ -9,6 +10,7 @@ const JUMP_VELOCITY = -400.0
 var last_direction = Vector2.DOWN
 var max_health := 20
 var current_health := 20
+
 
 func _ready():
 	GlobalData.barrel_hud.update_health(current_health,max_health)
@@ -61,6 +63,7 @@ func take_damage(amount: float):
 	animated_sprite_2d.play("DamageTaken")
 	current_health -= amount
 	GlobalData.barrel_hud.update_health(current_health, max_health)
+	shake()
 	if current_health <= 0:
 		die()
 
@@ -73,5 +76,11 @@ func die():
 	died.emit()
 	queue_free()
 
-
-	
+func shake(duration: float = 0.2, strength: float = 8.0) -> void:
+	var tween = create_tween()
+	var elapsed = 0.0
+	while elapsed < duration:
+		var offset = Vector2(randf_range(-strength, strength), randf_range(-strength, strength))
+		tween.tween_property(camera, "offset", offset, 0.05)
+		elapsed += 0.05
+	tween.tween_property(camera, "offset", Vector2.ZERO, 0.05)
