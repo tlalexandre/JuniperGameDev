@@ -45,14 +45,14 @@ func _physics_process(delta: float) -> void:
 	#Calculation of last direction to allow have a direction for the dodge
 	var input_dir := Vector2(horizontal_direction, vertical_direction)
 	
-	if input_dir != Vector2.ZERO:
-		last_direction = input_dir.normalized()
-	if Input.is_action_just_pressed("dodge"):
-		var dodge_dir := input_dir
-		if input_dir != Vector2.ZERO :
-			velocity += dodge_dir * 20 * SPEED
-		else :	
-			velocity += last_direction * 20 * SPEED
+	#if input_dir != Vector2.ZERO:
+		#last_direction = input_dir.normalized()
+	#if Input.is_action_just_pressed("dodge"):
+		#var dodge_dir := input_dir
+		#if input_dir != Vector2.ZERO :
+			#velocity += dodge_dir * 20 * SPEED
+		#else :	
+			#velocity += last_direction * 5 * SPEED
 	move_and_slide()
 	
 func _input(event: InputEvent) -> void:
