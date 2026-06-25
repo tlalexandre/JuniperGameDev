@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bhsu21g66ldum"]
+
+[ext_resource type="Texture2D" uid="uid://blxfnkhqcbh08" path="res://Assets/Clock/Clock.png" id="1_3sgw5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3sgw5"]
+size = Vector2(20, 63)
+
+[node name="Clock" type="Node2D" unique_id=1736365510]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=536779922]
+texture = ExtResource("1_3sgw5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=871697328]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_3sgw5")

@@ -108,8 +108,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Enemy" unique_id=1839370902 groups=["book"] instance=ExtResource("1_8yqiw")]
-scale = Vector2(0.3, 0.3)
+[node name="Book" unique_id=1839370902 groups=["book"] instance=ExtResource("1_8yqiw")]
+scale = Vector2(1, 1)
 script = ExtResource("2_e8yg8")
 large_ball_scene = ExtResource("3_y7g7k")
 ideal_distance = 250.0
@@ -119,7 +119,7 @@ speed = 250
 max_health = 5
 attack_anim_duration = 0.5
 dmg_enemy = 1.0
-points = 100
+points = 150
 
 [node name="Detection_Area" parent="." index="1" unique_id=442240972]
 scale = Vector2(2, 2)
