@@ -108,7 +108,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Enemy" unique_id=1839370902 groups=["candle"] instance=ExtResource("1_nv12n")]
+[node name="Candle" unique_id=1839370902 groups=["candle"] instance=ExtResource("1_nv12n")]
 scale = Vector2(0.2, 0.2)
 script = ExtResource("2_wfwsq")
 fireball_scene = ExtResource("3_sx8ar")
@@ -121,7 +121,7 @@ speed = 30
 max_health = 3
 attack_anim_duration = 0.5
 dmg_enemy = 1.0
-points = 100
+points = 300
 
 [node name="Detection_Area" parent="." index="1" unique_id=442240972]
 scale = Vector2(1.605, 1.605)

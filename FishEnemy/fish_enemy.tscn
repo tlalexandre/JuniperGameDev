@@ -114,14 +114,14 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Enemy" unique_id=1839370902 groups=["fish"] instance=ExtResource("1_xahv1")]
+[node name="Fish" unique_id=1839370902 groups=["fish"] instance=ExtResource("1_xahv1")]
 scale = Vector2(0.45, 0.45)
 script = ExtResource("2_nf1ls")
 speed = 250
 max_health = 5
 attack_anim_duration = 0.5
 dmg_enemy = 1.0
-points = 100
+points = 250
 
 [node name="Detection_Area" parent="." index="1" unique_id=442240972]
 scale = Vector2(1.655, 1.655)

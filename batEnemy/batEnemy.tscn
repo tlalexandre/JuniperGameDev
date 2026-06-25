@@ -142,7 +142,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Enemy" unique_id=1839370902 groups=["ghost"] instance=ExtResource("1_0dkcx")]
+[node name="Ghost" unique_id=1839370902 groups=["ghost"] instance=ExtResource("1_0dkcx")]
 collision_mask = 17
 platform_floor_layers = 4294967055
 script = ExtResource("2_yvmio")
@@ -150,19 +150,16 @@ speed = 100
 max_health = 4
 attack_anim_duration = 0.6
 dmg_enemy = 3
+points = 100
 
 [node name="Detection_Area" parent="." index="1" unique_id=442240972]
 scale = Vector2(3.03, 3.03)
-
-[node name="HealthBar" parent="." index="2" unique_id=1609601232]
-offset_top = -110.0
-offset_bottom = -83.0
 
 [node name="RayCast2D" parent="." index="4" unique_id=1326403427]
 collision_mask = 21
 
 [node name="Sprite" parent="." index="6" unique_id=1409618153]
 position = Vector2(-2, 9.536743e-07)
-scale = Vector2(5, 5)
+scale = Vector2(10, 10)
 sprite_frames = SubResource("SpriteFrames_xrmss")
 animation = &"Attack"

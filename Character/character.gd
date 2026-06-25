@@ -52,7 +52,7 @@ func _physics_process(delta: float) -> void:
 		if input_dir != Vector2.ZERO :
 			velocity += dodge_dir * 20 * SPEED
 		else :	
-			velocity += last_direction * 20 * SPEED
+			velocity += last_direction * 5 * SPEED
 	move_and_slide()
 	
 func _input(event: InputEvent) -> void:
