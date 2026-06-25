@@ -216,6 +216,7 @@ size_flags_stretch_ratio = 0.58
 theme_override_font_sizes/font_size = 20
 text = "CLICK TO SPIN A BULLET!
 ANOTHER CLICK TO SHOOT IT!"
+editable = false
 
 [node name="DisapearText" parent="TextEdit" unique_id=1285340392 instance=ExtResource("14_ngs4g")]
 position = Vector2(127.86896, 127.868835)
@@ -226,8 +227,9 @@ offset_left = 846.0
 offset_top = 348.0
 offset_right = 1106.0
 offset_bottom = 414.0
-text = "Ice bullets bounces at walls
+text = "Ice bullets bounce at walls
 and do extra damage to candles"
+editable = false
 
 [node name="DisapearText" parent="TextEdit5" unique_id=1149668457 instance=ExtResource("14_ngs4g")]
 position = Vector2(129, 110)
@@ -240,7 +242,9 @@ offset_right = 906.0
 offset_bottom = 1566.0
 text = "Fire and books dont get
 along too much...
-This bullets also EXPLODES!!"
+These bullets also EXPLODE!!"
+editable = false
+scroll_vertical = 0.22222222222222232
 
 [node name="DisapearText" parent="TextEdit6" unique_id=1489910875 instance=ExtResource("14_ngs4g")]
 position = Vector2(105, 127.99994)
@@ -252,7 +256,8 @@ offset_top = 1482.0
 offset_right = 1339.0
 offset_bottom = 1549.0
 text = "Wind bullets PUSH THEM AWAY
-Also Ghost are super weak to them!"
+Also Ghosts are super weak to them!"
+editable = false
 
 [node name="DisapearText" parent="TextEdit4" unique_id=1140012116 instance=ExtResource("14_ngs4g")]
 position = Vector2(127.86896, 127.868835)
@@ -265,8 +270,9 @@ offset_right = 637.0
 offset_bottom = 872.0
 text = "Poison bullets kill
 over time.
-Rats are VERY WEEK to
+Rats are VERY WEAK to
 poison!!"
+editable = false
 
 [node name="DisapearText" parent="TextEdit3" unique_id=497768878 instance=ExtResource("14_ngs4g")]
 position = Vector2(97, 131)
@@ -279,6 +285,7 @@ offset_right = 1543.0
 offset_bottom = 871.0
 text = "Electric bullets do extra 
 damage to Fish enemies!!!"
+editable = false
 
 [node name="DisapearText" parent="TextEdit2" unique_id=1783590014 instance=ExtResource("14_ngs4g")]
 position = Vector2(127.86896, 127.868835)
@@ -291,6 +298,7 @@ offset_right = 1080.0
 offset_bottom = 1022.0
 text = "Right click to discard the
 selected bullet"
+editable = false
 
 [node name="DisapearText" parent="TextEdit7" unique_id=1088933589 instance=ExtResource("14_ngs4g")]
 position = Vector2(93, -46.000076)
