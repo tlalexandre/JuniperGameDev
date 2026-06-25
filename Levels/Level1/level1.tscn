@@ -38,6 +38,7 @@ position = Vector2(83, 1385)
 [node name="Ghost" parent="Enemies" unique_id=1839370902 instance=ExtResource("6_mys2f")]
 position = Vector2(1801, 128)
 scale = Vector2(0.1125, 0.1125)
+dmg_enemy = 1.0
 
 [node name="Fish" parent="Enemies" unique_id=1637807768 instance=ExtResource("7_5ryn7")]
 position = Vector2(1821, 306)
@@ -47,9 +48,11 @@ position = Vector2(1187.0001, 177)
 
 [node name="Rat2" parent="Enemies" unique_id=969230188 instance=ExtResource("9_1oh2x")]
 position = Vector2(1011, 1152)
+dmg_enemy = 1.0
 
 [node name="Rat" parent="Enemies" unique_id=247554518 instance=ExtResource("9_1oh2x")]
 position = Vector2(1404, 1151)
+dmg_enemy = 1.0
 
 [node name="Candle2" parent="Enemies" unique_id=1447974619 instance=ExtResource("8_txw61")]
 position = Vector2(1800.0001, 1056)
@@ -57,6 +60,7 @@ scale = Vector2(0.19999999, 0.19999999)
 
 [node name="Rat3" parent="Enemies" unique_id=483786440 instance=ExtResource("9_1oh2x")]
 position = Vector2(1410, 1664)
+dmg_enemy = 1.0
 
 [node name="Book" parent="Enemies" unique_id=1151596721 instance=ExtResource("13_bp360")]
 position = Vector2(1629, 1635)
@@ -65,6 +69,7 @@ scale = Vector2(0.3, 0.3)
 [node name="Ghost2" parent="Enemies" unique_id=145035580 instance=ExtResource("6_mys2f")]
 position = Vector2(1873, 1723)
 scale = Vector2(0.1125, 0.1125)
+dmg_enemy = 1.0
 
 [node name="Book3" parent="Enemies" unique_id=1368859990 instance=ExtResource("13_bp360")]
 position = Vector2(981, 1436)
@@ -79,12 +84,15 @@ scale = Vector2(0.3, 0.3)
 
 [node name="Rat4" parent="Enemies" unique_id=1219474949 instance=ExtResource("9_1oh2x")]
 position = Vector2(126, 941)
+dmg_enemy = 1.0
 
 [node name="Rat5" parent="Enemies" unique_id=701428774 instance=ExtResource("9_1oh2x")]
 position = Vector2(232, 1108)
+dmg_enemy = 1.0
 
 [node name="Rat6" parent="Enemies" unique_id=1243489450 instance=ExtResource("9_1oh2x")]
 position = Vector2(397, 910)
+dmg_enemy = 1.0
 
 [node name="EnemyAreas" type="Node" parent="." unique_id=1145004146]
 
@@ -104,7 +112,7 @@ chest_scene = ExtResource("5_bpcbn")
 
 [node name="EnemyArea3" parent="EnemyAreas" unique_id=608894407 node_paths=PackedStringArray("doors_to_close", "room_enemies") instance=ExtResource("12_1oh2x")]
 position = Vector2(1188, 996)
-scale = Vector2(30, 30)
+scale = Vector2(30, 25)
 doors_to_close = [NodePath("../../Doors/door2_1"), NodePath("../../Doors/door2_2"), NodePath("../../Doors/door5"), NodePath("../../Doors/door6"), NodePath("../../Doors/door7"), NodePath("../../Doors/door8"), NodePath("../../Doors/door9"), NodePath("../../Doors/door10")]
 room_enemies = [NodePath("../../Enemies/Candle2"), NodePath("../../Enemies/Rat"), NodePath("../../Enemies/Rat2")]
 chest_scene = ExtResource("5_bpcbn")
@@ -127,7 +135,7 @@ chest_scene = ExtResource("5_bpcbn")
 position = Vector2(1857, 1648)
 scale = Vector2(10, 19)
 doors_to_close = [NodePath("../../Doors/door21"), NodePath("../../Doors/door22"), NodePath("../../Doors/door23"), NodePath("../../Doors/door24")]
-room_enemies = [NodePath("../../Enemies/Ghost")]
+room_enemies = [NodePath("../../Enemies/Ghost2")]
 chest_scene = ExtResource("5_bpcbn")
 
 [node name="EnemyArea7" parent="EnemyAreas" unique_id=1275011712 node_paths=PackedStringArray("doors_to_close", "room_enemies") instance=ExtResource("12_1oh2x")]
