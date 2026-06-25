@@ -1,15 +1,44 @@
 [gd_resource type="TileSet" format=3 uid="uid://bcftn5md3ij7g"]
 
-[ext_resource type="Texture2D" uid="uid://bstk80s0ndfud" path="res://Assets/temporaryBrick/temporaryBlock.png" id="1_kmavu"]
+[ext_resource type="Texture2D" uid="uid://d2qrsxgfbwioa" path="res://Assets/TileSet/WickedwizardTileSet-Sheet.png" id="1_kmavu"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gfbt5"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kmavu"]
 texture = ExtResource("1_kmavu")
 texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+5:3/0 = 0
+7:3/0 = 0
+8:3/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+0:8/0 = 0
+1:8/0 = 0
+2:8/0 = 0
+3:8/0 = 0
 
 [resource]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 0
 physics_layer_0/collision_mask = 0
-sources/1 = SubResource("TileSetAtlasSource_gfbt5")
+sources/1 = SubResource("TileSetAtlasSource_kmavu")

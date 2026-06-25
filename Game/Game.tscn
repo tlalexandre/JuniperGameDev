@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bfgnlkfctn1gn"]
 
 [ext_resource type="Script" uid="uid://m38y70ixv5bc" path="res://Game/game.gd" id="1_ei1so"]
+[ext_resource type="PackedScene" uid="uid://beilme8epy3pe" path="res://Tutorial/tutorial.tscn" id="2_ghvq8"]
 [ext_resource type="PackedScene" uid="uid://blwpicwarduoq" path="res://Levels/Level1/level1.tscn" id="2_hmm1m"]
 [ext_resource type="PackedScene" uid="uid://kw56l3a2mu7j" path="res://Levels/Level2/level2.tscn" id="3_jxerj"]
 [ext_resource type="PackedScene" uid="uid://d3f2e6mi28i8q" path="res://UI/EndScreen/end_screen.tscn" id="4_iqlej"]
@@ -8,7 +9,7 @@
 
 [node name="World" type="Node2D" unique_id=2130537159]
 script = ExtResource("1_ei1so")
-levels = Array[PackedScene]([ExtResource("2_hmm1m"), ExtResource("3_jxerj")])
+levels = Array[PackedScene]([ExtResource("2_ghvq8"), ExtResource("2_hmm1m"), ExtResource("3_jxerj")])
 
 [node name="EndScreen" parent="." unique_id=1664554452 instance=ExtResource("4_iqlej")]
 

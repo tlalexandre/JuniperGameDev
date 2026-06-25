@@ -112,7 +112,7 @@ func _process_chase(delta: float) -> void:
 				_start_searching_phase()
 			
 			# Si está en modo búsqueda, sigue caminando en la última dirección registrada
-			if is_searching:
+			if is_searching and is_instance_valid(last_seen_direction):
 				velocity = last_seen_direction * speed
 				if velocity.x != 0:
 					sprite.flip_h = velocity.x < 0
