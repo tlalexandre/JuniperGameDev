@@ -45,7 +45,7 @@ motion_mode = 1
 script = ExtResource("2_ei5o1")
 speed = 500
 despawn_time = 5
-bullet_dmg = 5
+bullet_dmg = 2
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=359234943]
 scale = Vector2(2, 2)
