@@ -13,12 +13,12 @@ var slot_buttons: Array = []
 
 
 const SLOT_POSITIONS_NORMALIZED = [
-	Vector2(0.79,  0.28),  # top
-	Vector2(1.05, 0.46),  # top-right
-	Vector2(1.05, 0.75),  # bottom-right
-	Vector2(0.79,  .9),  # bottom
-	Vector2(0.52, 0.75),  # bottom-left
-	Vector2(0.52, 0.46),  # top-left
+	Vector2(0.79,  0.20),  # top
+	Vector2(1.05, 0.38),  # top-right
+	Vector2(1.05, 0.68),  # bottom-right
+	Vector2(0.79,  .8),  # bottom
+	Vector2(0.52, 0.68),  # bottom-left
+	Vector2(0.52, 0.38),  # top-left
 ]
 
 func _ready() -> void:
