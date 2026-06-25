@@ -46,6 +46,10 @@ func _ready() -> void:
 
 func _position_slot_buttons() -> void:
 	var barrel_rect = $SwapBarrel/TextureRect
+	print("TextureRect size: ", barrel_rect.size)
+	print("SwapBarrel size: ", $SwapBarrel.size)
+	print("SlotButton_0 pos: ", slot_buttons[0].position)
+	print("SlotButton_0 size: ", slot_buttons[0].size)
 	var barrel_size = barrel_rect.size
 	
 	for i in 6:
