@@ -66,11 +66,11 @@ func shoot() -> void:
 		GlobalData.barrel_hud.update_ammo(BulletTypes.size(), loadout.size())
 		hud.reset()
 		play("basic")
-		_reload() # Fixed: Removed the argument passing
+		reload() # Fixed: Removed the argument passing
 
 
 
-func _reload():
+func reload():
 	if BulletTypes.is_empty():
 		_reloading = true
 		GlobalData.barrel_hud.play_reload()
@@ -102,7 +102,7 @@ func discard_bullet() -> void:
 	await get_tree().process_frame
 	
 	if BulletTypes.is_empty():
-		_reload()
+		reload()
 		return
 	
 	# The main audio player can now safely play the spin sound without interrupting the discard sound
