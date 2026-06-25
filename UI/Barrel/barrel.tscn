@@ -44,6 +44,7 @@ theme_type_variation = &"variation_1"
 theme_override_styles/panel = ExtResource("3_lknw2")
 
 [node name="HUDContent" type="VBoxContainer" parent="Barrel_UI/HUDPanel" unique_id=578759654]
+visible = false
 layout_mode = 2
 
 [node name="HealthRow" type="VBoxContainer" parent="Barrel_UI/HUDPanel/HUDContent" unique_id=2033716673]
@@ -279,7 +280,6 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="SwapContent" type="VBoxContainer" parent="Barrel_UI/HUDPanel" unique_id=1708867318 node_paths=PackedStringArray("click_sound", "validate_sound", "discard_sound")]
-visible = false
 layout_mode = 2
 theme_override_constants/separation = 6
 script = ExtResource("9_6w3jq")
