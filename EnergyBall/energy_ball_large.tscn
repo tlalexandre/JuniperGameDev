@@ -23,7 +23,7 @@ animations = [{
 radius = 11.045361
 
 [node name="Area2D" type="Area2D" unique_id=868373961]
-collision_layer = 0
+collision_layer = 2
 collision_mask = 25
 script = ExtResource("1_3aqco")
 small_ball_scene = ExtResource("2_323ey")
@@ -36,3 +36,5 @@ autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=672877121]
 shape = SubResource("CircleShape2D_cgrvg")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
