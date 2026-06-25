@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cno2i72imcpy5"]
+
+[ext_resource type="Script" uid="uid://dltu1ed0in0tc" path="res://disapear text/disapear_text.gd" id="1_1ckis"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cgrvg"]
+
+[node name="DisapearText" type="Area2D" unique_id=1285340392]
+script = ExtResource("1_1ckis")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=658343416]
+shape = SubResource("RectangleShape2D_cgrvg")
+
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

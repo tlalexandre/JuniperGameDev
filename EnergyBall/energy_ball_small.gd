@@ -18,5 +18,5 @@ func _on_body_entered(body: Node2D) -> void:
 		if body.has_method("take_damage"):
 			body.take_damage(damage)
 		queue_free()
-	elif body.is_in_group("walls") or body.get_collision_layer_value(4):
-		queue_free()
+	
+	queue_free()

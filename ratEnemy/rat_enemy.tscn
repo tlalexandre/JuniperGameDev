@@ -114,9 +114,10 @@ animations = [{
 
 [node name="Rat" unique_id=1839370902 groups=["rat"] instance=ExtResource("1_vsc63")]
 script = SubResource("GDScript_cgrvg")
-speed = 300
+speed = 250
 max_health = 4
 attack_anim_duration = 1.0
+dmg_enemy = 1.0
 points = 150
 
 [node name="Sprite" parent="." index="6" unique_id=1409618153]

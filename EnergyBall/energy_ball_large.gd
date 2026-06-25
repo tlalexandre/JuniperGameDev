@@ -24,9 +24,9 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player") or body == GlobalData.player:
 		if body.has_method("take_damage"):
 			body.take_damage(damage)
-		queue_free() # Destroyed on player hit before explosion
-	elif body.is_in_group("walls") or body.get_collision_layer_value(4):
-		explode() # Explode if it hits a wall
+		queue_free()
+	
+	queue_free()
 
 func explode() -> void:
 	if is_queued_for_deletion():
