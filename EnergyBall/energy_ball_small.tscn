@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://bwoqapqeury16"]
+
+[ext_resource type="Script" uid="uid://bu3ps1x0xhcf8" path="res://EnergyBall/energy_ball_small.gd" id="1_8s0nb"]
+[ext_resource type="Texture2D" uid="uid://3u0b430bhl5h" path="res://Assets/Book/TheBookProjectile-Sheet.png" id="2_y8rae"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_siqsp"]
+atlas = ExtResource("2_y8rae")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cgrvg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_siqsp")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cgrvg"]
+radius = 4.0
+
+[node name="Area2D" type="Area2D" unique_id=219718168]
+collision_layer = 2
+collision_mask = 25
+script = ExtResource("1_8s0nb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=160540091]
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_cgrvg")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1575931335]
+scale = Vector2(1.525, 1.525)
+shape = SubResource("CircleShape2D_cgrvg")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

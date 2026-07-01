@@ -11,6 +11,16 @@ extends VBoxContainer
 var pending_bullet = null
 var slot_buttons: Array = []
 
+
+const SLOT_POSITIONS_NORMALIZED = [
+	Vector2(0.79,  0.20),  # top
+	Vector2(1.05, 0.38),  # top-right
+	Vector2(1.05, 0.68),  # bottom-right
+	Vector2(0.79,  .8),  # bottom
+	Vector2(0.52, 0.68),  # bottom-left
+	Vector2(0.52, 0.38),  # top-left
+]
+
 func _ready() -> void:
 	hide()
 	slot_buttons = [
@@ -21,6 +31,8 @@ func _ready() -> void:
 		$SwapBarrel/SlotButton_4,
 		$SwapBarrel/SlotButton_5,
 	]
+	await get_tree().process_frame  # wait for layout
+	_position_slot_buttons()
 	for i in 6:
 		var idx = i
 		slot_buttons[i].pressed.connect(func(): 
@@ -31,6 +43,20 @@ func _ready() -> void:
 	
 	discard_button.process_mode = Node.PROCESS_MODE_ALWAYS  # ← and this
 	discard_button.pressed.connect(_on_discard)
+
+func _position_slot_buttons() -> void:
+	var barrel_rect = $SwapBarrel/TextureRect
+	print("TextureRect size: ", barrel_rect.size)
+	print("SwapBarrel size: ", $SwapBarrel.size)
+	print("SlotButton_0 pos: ", slot_buttons[0].position)
+	print("SlotButton_0 size: ", slot_buttons[0].size)
+	var barrel_size = barrel_rect.size
+	
+	for i in 6:
+		var btn = slot_buttons[i]
+		var normalized = SLOT_POSITIONS_NORMALIZED[i]
+		# Center the button on that position
+		btn.position = barrel_size * normalized - btn.size / 2
 
 func show_for_bullet(bullet_type) -> void:
 	pending_bullet = bullet_type

@@ -2,37 +2,54 @@
 
 [ext_resource type="PackedScene" uid="uid://doh21id30beig" path="res://Enemy/enemy.tscn" id="1_nv12n"]
 [ext_resource type="Script" uid="uid://rylylbg4q1oa" path="res://CandleEnemy/candle_enemy.gd" id="2_wfwsq"]
-[ext_resource type="Texture2D" uid="uid://c4mphlboysnk1" path="res://Assets/temporarySprites/candle.png" id="3_wxh7u"]
+[ext_resource type="PackedScene" uid="uid://dnmm8wqvv7n44" path="res://FireBall/fireball.tscn" id="3_sx8ar"]
+[ext_resource type="Texture2D" uid="uid://yq88buslagfj" path="res://Assets/Candle/CandleEnemy-Sheet.png" id="4_ri08t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g6fqf"]
+atlas = ExtResource("4_ri08t")
+region = Rect2(0, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sx8ar"]
-atlas = ExtResource("3_wxh7u")
-region = Rect2(0, 0, 32, 32)
+atlas = ExtResource("4_ri08t")
+region = Rect2(0, 160, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ri08t"]
-atlas = ExtResource("3_wxh7u")
-region = Rect2(0, 0, 32, 32)
+atlas = ExtResource("4_ri08t")
+region = Rect2(32, 160, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fdl4t"]
-atlas = ExtResource("3_wxh7u")
-region = Rect2(0, 0, 32, 32)
+atlas = ExtResource("4_ri08t")
+region = Rect2(64, 160, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ixiet"]
-atlas = ExtResource("3_wxh7u")
-region = Rect2(0, 0, 32, 32)
+atlas = ExtResource("4_ri08t")
+region = Rect2(0, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c304c"]
-atlas = ExtResource("3_wxh7u")
-region = Rect2(0, 0, 32, 32)
+atlas = ExtResource("4_ri08t")
+region = Rect2(0, 128, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q51gh"]
-atlas = ExtResource("3_wxh7u")
+atlas = ExtResource("4_ri08t")
 region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i4gi8"]
+atlas = ExtResource("4_ri08t")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2dyv0"]
+atlas = ExtResource("4_ri08t")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pdddh"]
+atlas = ExtResource("4_ri08t")
+region = Rect2(32, 32, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g6fqf"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_sx8ar")
+"texture": SubResource("AtlasTexture_g6fqf")
 }],
 "loop": 1,
 "name": &"Alert",
@@ -40,7 +57,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_sx8ar")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_ri08t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fdl4t")
 }],
 "loop": 1,
 "name": &"Attack",
@@ -48,7 +71,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fdl4t")
+"texture": SubResource("AtlasTexture_ixiet")
 }],
 "loop": 1,
 "name": &"DamageTaken",
@@ -56,7 +79,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ixiet")
+"texture": SubResource("AtlasTexture_c304c")
 }],
 "loop": 1,
 "name": &"Die",
@@ -64,7 +87,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_c304c")
+"texture": SubResource("AtlasTexture_q51gh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i4gi8")
 }],
 "loop": 1,
 "name": &"Idle",
@@ -72,19 +98,38 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_q51gh")
+"texture": SubResource("AtlasTexture_2dyv0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pdddh")
 }],
 "loop": 1,
 "name": &"Walk",
 "speed": 5.0
 }]
 
-[node name="Enemy" unique_id=1839370902 groups=["candle"] instance=ExtResource("1_nv12n")]
+[node name="Candle" unique_id=1839370902 groups=["candle"] instance=ExtResource("1_nv12n")]
+scale = Vector2(0.2, 0.2)
 script = ExtResource("2_wfwsq")
+fireball_scene = ExtResource("3_sx8ar")
+ideal_distance = 300.0
+distance_tolerance = 50.0
+burst_count = 5
+time_between_shots = 0.5
+burst_cooldown = 2.0
 speed = 30
 max_health = 3
+attack_anim_duration = 0.5
+dmg_enemy = 1.0
+points = 300
+
+[node name="Detection_Area" parent="." index="1" unique_id=442240972]
+scale = Vector2(1.605, 1.605)
+
+[node name="attack_area" parent="." index="5" unique_id=1105970298]
+scale = Vector2(236.855, 236.855)
 
 [node name="Sprite" parent="." index="6" unique_id=1409618153]
 scale = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_g6fqf")
-animation = &"Walk"
+animation = &"Attack"

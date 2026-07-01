@@ -2,31 +2,51 @@
 
 [ext_resource type="PackedScene" uid="uid://doh21id30beig" path="res://Enemy/enemy.tscn" id="1_xahv1"]
 [ext_resource type="Script" uid="uid://cc1pxxsnorm3t" path="res://FishEnemy/fish_enemy.gd" id="2_nf1ls"]
-[ext_resource type="Texture2D" uid="uid://csvopvn8ub310" path="res://Assets/temporarySprites/fish.png" id="3_g0v3h"]
+[ext_resource type="Texture2D" uid="uid://cvqqa5juuknfg" path="res://Assets/Fish/Fish-sheet.png" id="3_g0v3h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mjcqm"]
 atlas = ExtResource("3_g0v3h")
-region = Rect2(0, 0, 32, 32)
+region = Rect2(0, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8raas"]
 atlas = ExtResource("3_g0v3h")
-region = Rect2(0, 0, 32, 32)
+region = Rect2(0, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sa5f5"]
 atlas = ExtResource("3_g0v3h")
-region = Rect2(0, 0, 32, 32)
+region = Rect2(32, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c06a5"]
 atlas = ExtResource("3_g0v3h")
-region = Rect2(0, 0, 32, 32)
+region = Rect2(64, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pl7jm"]
 atlas = ExtResource("3_g0v3h")
-region = Rect2(0, 0, 32, 32)
+region = Rect2(96, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hfl4x"]
 atlas = ExtResource("3_g0v3h")
+region = Rect2(0, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q7e8k"]
+atlas = ExtResource("3_g0v3h")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ouip"]
+atlas = ExtResource("3_g0v3h")
 region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbyr2"]
+atlas = ExtResource("3_g0v3h")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oudwi"]
+atlas = ExtResource("3_g0v3h")
+region = Rect2(0, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08y3v"]
+atlas = ExtResource("3_g0v3h")
+region = Rect2(32, 160, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_q7e8k"]
 animations = [{
@@ -41,6 +61,15 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8raas")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sa5f5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c06a5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pl7jm")
 }],
 "loop": 1,
 "name": &"Attack",
@@ -48,7 +77,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_sa5f5")
+"texture": SubResource("AtlasTexture_hfl4x")
 }],
 "loop": 1,
 "name": &"DamageTaken",
@@ -56,7 +85,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_c06a5")
+"texture": SubResource("AtlasTexture_q7e8k")
 }],
 "loop": 1,
 "name": &"Die",
@@ -64,7 +93,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pl7jm")
+"texture": SubResource("AtlasTexture_3ouip")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kbyr2")
 }],
 "loop": 1,
 "name": &"Idle",
@@ -72,20 +104,31 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hfl4x")
+"texture": SubResource("AtlasTexture_oudwi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_08y3v")
 }],
 "loop": 1,
 "name": &"Walk",
 "speed": 5.0
 }]
 
-[node name="Enemy" unique_id=1839370902 groups=["fish"] instance=ExtResource("1_xahv1")]
+[node name="Fish" unique_id=1839370902 groups=["fish"] instance=ExtResource("1_xahv1")]
+scale = Vector2(0.45, 0.45)
 script = ExtResource("2_nf1ls")
-speed = 450
-max_health = 2
-dmg_enemy = 2
+speed = 250
+max_health = 5
+attack_anim_duration = 0.5
+dmg_enemy = 1.0
+points = 250
+
+[node name="Detection_Area" parent="." index="1" unique_id=442240972]
+scale = Vector2(1.655, 1.655)
 
 [node name="Sprite" parent="." index="6" unique_id=1409618153]
 scale = Vector2(4.085, 4.085)
 sprite_frames = SubResource("SpriteFrames_q7e8k")
-animation = &"Walk"
+animation = &"Attack"
+frame = 3
+frame_progress = 0.46501023
