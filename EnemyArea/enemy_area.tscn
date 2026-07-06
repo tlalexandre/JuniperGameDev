@@ -4,11 +4,17 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cgrvg"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s8843"]
+
 [node name="EnemyArea" type="Area2D" unique_id=998942918]
+scale = Vector2(30, 30)
 collision_layer = 16
 script = ExtResource("1_3nxka")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=80118040]
 shape = SubResource("RectangleShape2D_cgrvg")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=448111616]
+shape = SubResource("RectangleShape2D_s8843")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
