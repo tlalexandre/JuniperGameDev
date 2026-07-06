@@ -47,7 +47,7 @@ animation = &"close"
 autoplay = "close"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=540506042]
-scale = Vector2(3.85, 3.85)
+scale = Vector2(2.615, 2.615)
 shape = SubResource("RectangleShape2D_cgrvg")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=86824974]

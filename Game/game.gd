@@ -28,7 +28,7 @@ func load_level(index : int) -> void:
 	var level_scene = levels[index]
 	current_level_instance = level_scene.instantiate()
 	
-	add_child(current_level_instance)
+	add_child.call_deferred(current_level_instance)
 	print("Level loaded successfully: ", index)
 	
 	# --- THE INSTANT REGISTER FIX ---
