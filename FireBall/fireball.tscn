@@ -29,6 +29,8 @@ animations = [{
 }]
 
 [node name="fireball" type="Area2D" unique_id=1473435747]
+collision_layer = 4
+collision_mask = 25
 script = ExtResource("1_le0s6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1942786141]

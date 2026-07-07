@@ -13,6 +13,7 @@ var _reloading = false
 func _ready() -> void:
 	loadout = GlobalData.bullet_loadout.duplicate()
 	BulletTypes = loadout.duplicate()
+	
 
 
 func _process(delta: float) -> void:
@@ -34,7 +35,6 @@ func get_animation_for_bullet(bullet) -> String:
 func random_bullet():
 	selected_index = randi() % BulletTypes.size()
 	selected_bullet = BulletTypes[selected_index]
-
 
 func _on_spin_complete(bullet_type) -> void:
 	play(get_animation_for_bullet(selected_bullet))

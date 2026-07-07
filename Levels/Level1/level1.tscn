@@ -36,15 +36,15 @@ position = Vector2(83, 1385)
 [node name="Enemies" type="Node2D" parent="." unique_id=2051537098]
 
 [node name="Ghost" parent="Enemies" unique_id=1839370902 instance=ExtResource("6_mys2f")]
-position = Vector2(1801, 128)
+position = Vector2(1723, 146)
 scale = Vector2(0.1125, 0.1125)
 dmg_enemy = 1.0
 
 [node name="Fish" parent="Enemies" unique_id=1637807768 instance=ExtResource("7_5ryn7")]
-position = Vector2(1821, 306)
+position = Vector2(1841, 403.00003)
 
 [node name="Candle" parent="Enemies" unique_id=1848524245 instance=ExtResource("8_txw61")]
-position = Vector2(1187.0001, 177)
+position = Vector2(1234, 161.99994)
 
 [node name="Rat2" parent="Enemies" unique_id=969230188 instance=ExtResource("9_1oh2x")]
 position = Vector2(1011, 1152)
