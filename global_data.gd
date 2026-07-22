@@ -24,6 +24,6 @@ func _make_card(type: BulletCard.Type, scene: PackedScene) -> BulletCard:
 
 func _make_starter_loadout() -> Array[BulletCard]:
 	var loadout: Array[BulletCard] = []
-	for i in 6:
+	for i in 12:
 		loadout.append(_make_card(BulletCard.Type.BASIC, BULLET))
 	return loadout
