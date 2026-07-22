@@ -57,7 +57,7 @@ func _physics_process(delta: float) -> void:
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot"):
-		get_node("Gun").shoot()
+		get_node("ShotGun").shoot()
 		
 func take_damage(amount: float):
 	animated_sprite_2d.play("DamageTaken")

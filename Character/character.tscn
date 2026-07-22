@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://byqy8utofc5pt" path="res://Gun/gun.tscn" id="2_jgbxv"]
 [ext_resource type="Texture2D" uid="uid://bxp7qltlaeyud" path="res://Assets/Character/TheWickedWizard-Sheet.png" id="4_twwou"]
 [ext_resource type="AudioStream" uid="uid://jsoq2ve0ynip" path="res://Assets/sounds/walking.wav" id="5_a23tb"]
+[ext_resource type="PackedScene" uid="uid://tgo6s0jl3okc" path="res://Shotgun/shot_gun.tscn" id="5_uerqc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_twwou"]
 atlas = ExtResource("4_twwou")
@@ -163,3 +164,5 @@ volume_db = 10.0
 
 [node name="HitAudio" type="AudioStreamPlayer2D" parent="." unique_id=291973032]
 stream = ExtResource("5_a23tb")
+
+[node name="ShotGun" parent="." unique_id=1313576535 instance=ExtResource("5_uerqc")]

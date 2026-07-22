@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://tgo6s0jl3okc"]
+
+[ext_resource type="Texture2D" uid="uid://b4l62ravs8vn8" path="res://Assets/Gun/TheGunWand-Sheet.png" id="1_uflr8"]
+[ext_resource type="Script" uid="uid://q3eiuwwxlxsj" path="res://Shotgun/shot_gun.gd" id="2_ksycv"]
+[ext_resource type="Script" uid="uid://cny815jff80fx" path="res://Gun/bullet_barrel.gd" id="3_8okkr"]
+[ext_resource type="AudioStream" uid="uid://c2sx8yu45j3lp" path="res://Assets/sounds/shooting.wav" id="4_8okkr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8er2s"]
+atlas = ExtResource("1_uflr8")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ksycv"]
+atlas = ExtResource("1_uflr8")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_riqys"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8er2s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ksycv")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="ShotGun" type="AnimatedSprite2D" unique_id=1313576535]
+sprite_frames = SubResource("SpriteFrames_riqys")
+offset = Vector2(16, 3)
+script = ExtResource("2_ksycv")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=301484481]
+position = Vector2(18, 0)
+
+[node name="BulletBarrel" type="Node" parent="." unique_id=799242506]
+script = ExtResource("3_8okkr")
+barrel_capacity = 3
+reload_time = 3.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=638546547]
+stream = ExtResource("4_8okkr")

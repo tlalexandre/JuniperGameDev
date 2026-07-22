@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dpctuo0ixhoks"]
+
+[ext_resource type="Script" uid="uid://djjxt2juvmrj6" path="res://Tests/test_bullet_barrel.gd" id="1_1uuw2"]
+
+[node name="TestBulletBarrel" type="Node2D" unique_id=355854458]
+script = ExtResource("1_1uuw2")
