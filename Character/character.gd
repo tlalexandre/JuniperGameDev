@@ -14,7 +14,7 @@ var current_health := 20
 
 
 func _ready():
-	GlobalData.barrel_hud.update_health(current_health,max_health)
+	#GlobalData.barrel_hud.update_health(current_health,max_health)
 	GlobalData.player = self
 
 func _physics_process(delta: float) -> void:

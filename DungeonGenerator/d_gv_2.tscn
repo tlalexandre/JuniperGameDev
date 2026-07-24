@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://d0utadh4fr2vn"]
+
+[ext_resource type="Script" uid="uid://chmnx3xy32s6f" path="res://DungeonGenerator/d_gv_2.gd" id="1_woyrw"]
+[ext_resource type="PackedScene" uid="uid://daod7hdo5jdt" path="res://Character/character.tscn" id="3_7ldvk"]
+
+[node name="DGv2" type="Node2D" unique_id=176293429]
+script = ExtResource("1_woyrw")
+_spawnPoint = Vector2i(-1, -1)
+
+[node name="Player" parent="." unique_id=109988034 instance=ExtResource("3_7ldvk")]

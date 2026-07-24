@@ -46,7 +46,7 @@ sprite_frames = SubResource("SpriteFrames_cgrvg")
 animation = &"close"
 autoplay = "close"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=540506042]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=540506042 groups=["door"]]
 scale = Vector2(2.615, 2.615)
 shape = SubResource("RectangleShape2D_cgrvg")
 
