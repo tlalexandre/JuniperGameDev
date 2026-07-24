@@ -9,7 +9,11 @@ var dungeon : Array
 func _ready() -> void:
 	_init_dungeon()
 	_setSpawn()
+	_print_dungeon()
 	_generate_critical_path(_spawnPoint,lenght, "C")
+	_print_dungeon()
+	_generate_boss_room()
+	_print_dungeon()
 	_generate_shop()
 	_print_dungeon()
 	
@@ -80,7 +84,7 @@ func _generate_shop():
 	var connections:int = 0
 	for x in dungeon.size():
 		for y in dungeon[x].size():
-			if dungeon[x][y]:
+			if dungeon[x][y] and str(dungeon[x][y]).contains("C"):
 				connections = _check_neightbours(Vector2i(x,y))
 				if connections <= 2:
 					shop_candidates.append(Vector2i(x,y))
@@ -89,7 +93,8 @@ func _generate_shop():
 		dungeon[shop.x][shop.y] = "S"
 
 func _generate_boss_room():
-	pass
+	var boss = _check_far_away_from(_spawnPoint)
+	dungeon[boss.x][boss.y] = "B"
 
 func _check_neightbours(room:Vector2i) -> int:
 	
@@ -116,6 +121,27 @@ func is_valid_pos(pos:Vector2i) -> bool:
 
 func has_room_at(pos:Vector2i) -> bool:
 	if (is_valid_pos(pos)):
-		if dungeon[pos.x][pos.y] and str(dungeon[pos.x][pos.y]) == "C":
+		if (dungeon[pos.x][pos.y] 
+		and str(dungeon[pos.x][pos.y]).contains("C")):
 			return true
+			
 	return false
+
+func _check_far_away_from(pos:Vector2i) -> Vector2i:
+	
+	var far: Vector2i = Vector2i(0,0)
+	var max_distance_found : int = -1
+	
+	for x in dungeon.size():
+		for y in dungeon[x].size():
+			if str(dungeon[x][y]).contains("C"):
+				var actual_room = Vector2i(x,y)
+				var actual_distance = pos.distance_squared_to(actual_room)
+				
+				if (actual_distance > max_distance_found):
+					max_distance_found = actual_distance
+					far = actual_room
+				
+				
+	return far
+	
