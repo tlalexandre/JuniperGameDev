@@ -2,10 +2,7 @@ extends Control
 enum State { IDLE, SPINNING, LOADED }
 var state: State = State.IDLE
 
-#@onready var barrel_ring: Control = $BarrelRing
 @onready var barrel_ring: Control = $HUDPanel/HUDContent/BarrelRing
-
-
 @onready var bullet_name: Label = $HUDPanel/HUDContent/BulletRow/BulletName
 @onready var bullet_icon: TextureRect = $HUDPanel/HUDContent/BulletRow/BulletIcon
 @onready var health_bar: ProgressBar = $HUDPanel/HUDContent/HealthRow/HealthBar
@@ -20,44 +17,44 @@ var state: State = State.IDLE
 var pointer_angle: float = -PI / 2
 const ANGLE_STEP = TAU / 6.0
 
-var icon_nodes := []   # index → TextureRect node
-var icon_angles := {}  # node → angle
+var icon_nodes := []
+var icon_angles := {}
 var spin_tween: Tween
 signal spin_complete(bullet_type)
 signal reload_complete
-# Bullet type → icon texture
+
 var bullet_icon_map := {}
-var bullet_color_map
-var bullet_name_map
+var bullet_color_map := {}
+var bullet_name_map := {}
+
 func _ready() -> void:
-	
 	GlobalData.barrel_hud = self
-	
+
 	bullet_color_map = {
-		GlobalData.BULLET:      Color(0.85, 0.85, 0.85),  # grey
-		GlobalData.AIR:         Color(0.66, 0.90, 0.64),  # light green
-		GlobalData.POISON:      Color(0.49, 0.81, 0.35),  # green
-		GlobalData.ELECTRICITY: Color(0.96, 0.85, 0.38),  # yellow
-		GlobalData.FIRE:        Color(0.88, 0.33, 0.33),  # red
-		GlobalData.ICE:         Color(0.39, 0.70, 0.96),  # blue
+		BulletCard.Type.BASIC:       Color(0.85, 0.85, 0.85),
+		BulletCard.Type.AIR:         Color(0.66, 0.90, 0.64),
+		BulletCard.Type.POISON:      Color(0.49, 0.81, 0.35),
+		BulletCard.Type.ELECTRICITY: Color(0.96, 0.85, 0.38),
+		BulletCard.Type.FIRE:        Color(0.88, 0.33, 0.33),
+		BulletCard.Type.ICE:         Color(0.39, 0.70, 0.96),
 	}
 
 	bullet_name_map = {
-		GlobalData.BULLET:      "Basic",
-		GlobalData.AIR:         "Air",
-		GlobalData.POISON:      "Poison",
-		GlobalData.ELECTRICITY: "Electric",
-		GlobalData.FIRE:        "Fire",
-		GlobalData.ICE:         "Ice",
+		BulletCard.Type.BASIC:       "Basic",
+		BulletCard.Type.AIR:         "Air",
+		BulletCard.Type.POISON:      "Poison",
+		BulletCard.Type.ELECTRICITY: "Electric",
+		BulletCard.Type.FIRE:        "Fire",
+		BulletCard.Type.ICE:         "Ice",
 	}
-	
+
 	bullet_icon_map = {
-		GlobalData.BULLET:      preload("uid://dxi38lk2qotpp"),
-		GlobalData.AIR:         preload("uid://dk4ijlokb5at8"),
-		GlobalData.POISON:      preload("uid://dy06j721w36cc"),
-		GlobalData.ELECTRICITY: preload("uid://hituocfik6r2"),
-		GlobalData.FIRE:        preload("uid://bi6hppefpstc8"),
-		GlobalData.ICE:         preload("uid://plu5rc3iyxji"),
+		BulletCard.Type.BASIC:       preload("uid://dxi38lk2qotpp"),
+		BulletCard.Type.AIR:         preload("uid://dk4ijlokb5at8"),
+		BulletCard.Type.POISON:      preload("uid://dy06j721w36cc"),
+		BulletCard.Type.ELECTRICITY: preload("uid://hituocfik6r2"),
+		BulletCard.Type.FIRE:        preload("uid://bi6hppefpstc8"),
+		BulletCard.Type.ICE:         preload("uid://plu5rc3iyxji"),
 	}
 
 	icon_nodes = [
@@ -77,45 +74,39 @@ func _ready() -> void:
 		icon_nodes[4]: -PI/2 + 4 * ANGLE_STEP,
 		icon_nodes[5]: -PI/2 + 5 * ANGLE_STEP,
 	}
-	
-	print("bullet_loadout size: ", GlobalData.bullet_loadout.size())
-	print("first entry: ", GlobalData.bullet_loadout[0])
-	print("icon_map has bullet: ", bullet_icon_map.has(GlobalData.BULLET))
-	
-	update_icons(GlobalData.bullet_loadout)
+
+	update_icons_from_chamber([],0) # cleared until a gun's barrel_changed fires
 	update_health(20, 20)
 	update_score(GlobalData.score)
 	update_floor(GlobalData.floor_number)
-	update_ammo(GlobalData.bullet_loadout.size(), GlobalData.bullet_loadout.size())
+	update_ammo(0, 0) # will be set correctly once a gun reports in
 	await get_tree().process_frame
 	barrel_ring.pivot_offset = barrel_ring.size / 2.0
-
 
 func _process(delta: float) -> void:
 	pass
 
-func update_icons(loadout: Array) -> void:
-	for i in 6:
-		var tex = bullet_icon_map.get(loadout[i])
-		if tex:
-			icon_nodes[i].texture = tex
-
-func update_icons_from_chamber(chamber: Array) -> void:
+func update_icons_from_chamber(chamber: Array, capacity: int) -> void:
+	if capacity > 6:
+		barrel_ring.visible = false
+		return
+	barrel_ring.visible = true
 	for i in 6:
 		if i < chamber.size():
-			var tex = bullet_icon_map.get(chamber[i])
+			var card: BulletCard = chamber[i]
+			var tex = bullet_icon_map.get(card.type)
 			if tex:
 				icon_nodes[i].texture = tex
 		else:
-			icon_nodes[i].texture = null  # empty slot
-			
+			icon_nodes[i].texture = null
+
 func play_reload() -> void:
 	audio.stream = preload("uid://b748kn0weghqb")
 	audio.play()
 	await audio.finished
 	reload_complete.emit()
 
-func spin_to(slot_index: int, bullet_type) -> void:
+func spin_to(slot_index: int, bullet_card: BulletCard) -> void:
 	if state != State.IDLE:
 		return
 	state = State.SPINNING
@@ -133,28 +124,19 @@ func spin_to(slot_index: int, bullet_type) -> void:
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	spin_tween.tween_callback(func():
 		state = State.LOADED
-		# Replace selected_icon lines with:
-		var col = bullet_color_map.get(bullet_type, Color.WHITE)
-		var style = StyleBoxFlat.new()
-		style.bg_color = col
-		style.corner_radius_top_left = 6
-		style.corner_radius_top_right = 6
-		style.corner_radius_bottom_left = 6
-		style.corner_radius_bottom_right = 6
-		bullet_icon.texture = bullet_icon_map.get(bullet_type)
-		bullet_name.text = bullet_name_map.get(bullet_type, "???")
-		spin_complete.emit(bullet_type)
+		bullet_icon.texture = bullet_icon_map.get(bullet_card.type)
+		bullet_name.text = bullet_name_map.get(bullet_card.type, "???")
+		spin_complete.emit(bullet_card)
 	)
 
 func reset() -> void:
 	if spin_tween:
 		spin_tween.kill()
 	state = State.IDLE
-	bullet_name.text = ""  # clear the label, dot colour stays
+	bullet_name.text = ""
 
-func show_swap_menu(bullet_type) -> void:
-	swap_menu.show_for_bullet(bullet_type)
-
+func show_swap_menu(bullet_card: BulletCard) -> void:
+	swap_menu.show_for_bullet(bullet_card)
 
 func update_health(current: float, max_health: float) -> void:
 	health_bar.max_value = max_health

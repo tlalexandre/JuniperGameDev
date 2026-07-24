@@ -10,7 +10,7 @@ var state: State = State.IDLE
 
 func _ready() -> void:
 	bullet_barrel.barrel_changed.connect(_on_barrel_changed)
-	bullet_barrel.setup(GlobalData.bullet_loadout)
+	bullet_barrel.setup(GlobalData.bullet_deck)
 
 	windup_timer.wait_time = 0.5
 	windup_timer.one_shot = true
@@ -19,8 +19,9 @@ func _ready() -> void:
 	fire_timer.wait_time = 1.0 / 10.0 # 10 shots/sec
 	fire_timer.timeout.connect(_on_fire_tick)
 
-func _on_barrel_changed(barrel: Array) -> void:
-	GlobalData.barrel_hud.update_icons_from_chamber(barrel)
+func _on_barrel_changed(barrel: Array, capacity: int) -> void:
+	GlobalData.barrel_hud.update_icons_from_chamber(barrel, capacity)
+	GlobalData.barrel_hud.update_ammo(barrel.size(), capacity)
 
 func _process(delta: float) -> void:
 	look_at(get_global_mouse_position())
@@ -63,7 +64,7 @@ func _on_fire_tick() -> void:
 	GlobalData.world.add_child(new_bullet)
 
 	bullet_barrel.fire(card)
-	GlobalData.barrel_hud.update_ammo(bullet_barrel.barrel.size(), bullet_barrel.barrel_capacity)
+	
 
 func get_animation_for_bullet(card: BulletCard) -> String:
 	match card.type:

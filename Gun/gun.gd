@@ -8,10 +8,11 @@ var _spin_connected := false
 
 func _ready() -> void:
 	bullet_barrel.barrel_changed.connect(_on_barrel_changed)
-	bullet_barrel.setup(GlobalData.bullet_loadout)
+	bullet_barrel.setup(GlobalData.bullet_deck)
 
-func _on_barrel_changed(barrel: Array) -> void:
-	GlobalData.barrel_hud.update_icons_from_chamber(barrel)
+func _on_barrel_changed(barrel: Array, capacity: int) -> void:
+	GlobalData.barrel_hud.update_icons_from_chamber(barrel, capacity)
+	GlobalData.barrel_hud.update_ammo(barrel.size(), capacity)
 
 func _process(delta: float) -> void:
 	look_at(get_global_mouse_position())
@@ -50,7 +51,6 @@ func shoot() -> void:
 		new_bullet.target_position = (get_global_mouse_position() - marker_2d.global_position).normalized()
 		GlobalData.world.add_child(new_bullet)
 		bullet_barrel.fire(selected_bullet)
-		GlobalData.barrel_hud.update_ammo(bullet_barrel.barrel.size(), bullet_barrel.barrel_capacity)
 		hud.reset()
 		play("basic")
 

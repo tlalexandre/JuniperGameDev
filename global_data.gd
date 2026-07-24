@@ -2,7 +2,7 @@ extends Node
 @onready var world = $"../World"
 @onready var player = $"../World/Player"
 var barrel_hud
-var bullet_loadout : Array[BulletCard] = []
+var bullet_deck: BulletDeck
 var score: int = 0
 var floor_number: int = 1
 
@@ -14,7 +14,9 @@ const FIRE = preload("uid://dbcrp1dn42sqi")
 const ICE = preload("uid://34njt7lqxbsb")
 
 func _ready() -> void:
-	bullet_loadout = _make_starter_loadout()
+	bullet_deck = BulletDeck.new()
+	bullet_deck.draw_pile.append_array(_make_starter_pool())
+	bullet_deck.draw_pile.shuffle()
 
 func _make_card(type: BulletCard.Type, scene: PackedScene) -> BulletCard:
 	var c = BulletCard.new()
@@ -22,8 +24,8 @@ func _make_card(type: BulletCard.Type, scene: PackedScene) -> BulletCard:
 	c.scene = scene
 	return c
 
-func _make_starter_loadout() -> Array[BulletCard]:
-	var loadout: Array[BulletCard] = []
-	for i in 12:
-		loadout.append(_make_card(BulletCard.Type.BASIC, BULLET))
-	return loadout
+func _make_starter_pool() -> Array[BulletCard]:
+	var pool: Array[BulletCard] = []
+	for i in 50:
+		pool.append(_make_card(BulletCard.Type.BASIC, BULLET))
+	return pool
