@@ -154,24 +154,24 @@ tile_set = SubResource("TileSet_0j76y")
 
 [node name="North" type="Node2D" parent="DoorPositions" unique_id=636860608]
 
-[node name="NorthMarker1" type="Marker2D" parent="DoorPositions/North" unique_id=394794448]
+[node name="NorthMarker" type="Marker2D" parent="DoorPositions/North" unique_id=394794448]
 z_index = 1
 position = Vector2(0, -170)
 
 [node name="South" type="Node2D" parent="DoorPositions" unique_id=1882754425]
 
-[node name="SouthMarker1" type="Marker2D" parent="DoorPositions/South" unique_id=600201562]
+[node name="SouthMarker" type="Marker2D" parent="DoorPositions/South" unique_id=600201562]
 z_index = 1
 position = Vector2(0, 170)
 
 [node name="East" type="Node2D" parent="DoorPositions" unique_id=1428789543]
 
-[node name="EastMarker1" type="Marker2D" parent="DoorPositions/East" unique_id=1547498540]
+[node name="EastMarker" type="Marker2D" parent="DoorPositions/East" unique_id=1547498540]
 z_index = 1
 position = Vector2(170, 0)
 
 [node name="West" type="Node2D" parent="DoorPositions" unique_id=2059814277]
 
-[node name="WestMarker1" type="Marker2D" parent="DoorPositions/West" unique_id=1699316812]
+[node name="WestMarker" type="Marker2D" parent="DoorPositions/West" unique_id=1699316812]
 z_index = 1
 position = Vector2(-170, 0)
