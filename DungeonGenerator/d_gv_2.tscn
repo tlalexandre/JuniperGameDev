@@ -6,5 +6,6 @@
 [node name="DGv2" type="Node2D" unique_id=176293429]
 script = ExtResource("1_woyrw")
 _spawnPoint = Vector2i(-1, -1)
+lenght = 12
 
 [node name="Player" parent="." unique_id=109988034 instance=ExtResource("3_7ldvk")]
