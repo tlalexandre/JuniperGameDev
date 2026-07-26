@@ -3,6 +3,11 @@ extends Node2D
 @export var _dimensions : Vector2i = Vector2i(9,7)
 @export var _spawnPoint : Vector2i = Vector2i(3,0)
 @export var lenght : int = 15
+@export var normal_rooms:Array[PackedScene]
+@export var large_rooms:Array[PackedScene]
+@export var spawn_rooms:Array[PackedScene]
+@export var long_rooms:Array[PackedScene]
+@export var shop_rooms:Array[PackedScene]
 
 var dungeon : Array
 
@@ -16,6 +21,8 @@ func _ready() -> void:
 	_print_dungeon()
 	_generate_shop()
 	_print_dungeon()
+
+	
 	
 
 func _init_dungeon() -> void:
@@ -65,7 +72,7 @@ func _generate_critical_path(from:Vector2i, lenght: int, marker : String) -> boo
 			not dungeon[current.x + direction.x][current.y+direction.y]):
 				
 			current += direction
-			print(direction)
+			#print(direction)
 			dungeon[current.x][current.y] = marker
 			#if lenght > 1:
 			#	_branch_candidates.append(current)
@@ -144,4 +151,9 @@ func _check_far_away_from(pos:Vector2i) -> Vector2i:
 				
 				
 	return far
+	
+
+	
+	
+	
 	
