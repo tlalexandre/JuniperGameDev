@@ -4,6 +4,7 @@ extends Node2D
 
 var current_level_index : int = 0
 var current_level_instance : Node = null
+var ability_hud: AbilityHud
 
 func _enter_tree() -> void:
 	# 1. Assign the world reference immediately

@@ -1,15 +1,21 @@
 [gd_scene format=3 uid="uid://bfgnlkfctn1gn"]
 
 [ext_resource type="Script" uid="uid://m38y70ixv5bc" path="res://Game/game.gd" id="1_ei1so"]
-[ext_resource type="PackedScene" uid="uid://c3aja4787bl57" path="res://DungeonGenerator/dungeon_generator.tscn" id="2_37esa"]
 [ext_resource type="PackedScene" uid="uid://beilme8epy3pe" path="res://Tutorial/tutorial.tscn" id="2_ghvq8"]
 [ext_resource type="PackedScene" uid="uid://d3f2e6mi28i8q" path="res://UI/EndScreen/end_screen.tscn" id="4_iqlej"]
+[ext_resource type="PackedScene" uid="uid://dd4cexvatnrh2" path="res://AbilityHUD/AbilityHUD.tscn" id="5_jxerj"]
+[ext_resource type="Script" uid="uid://dx8j3rgk5n1pb" path="res://Debug/deck_debug_overlay.gd" id="6_ghvq8"]
 [ext_resource type="PackedScene" uid="uid://bljmmcb6uieso" path="res://UI/Barrel/barrel.tscn" id="7_fuqhk"]
 
 [node name="World" type="Node2D" unique_id=2130537159]
 script = ExtResource("1_ei1so")
-levels = Array[PackedScene]([ExtResource("2_ghvq8"), ExtResource("2_37esa")])
+levels = Array[PackedScene]([ExtResource("2_ghvq8")])
 
 [node name="EndScreen" parent="." unique_id=1664554452 instance=ExtResource("4_iqlej")]
 
 [node name="Barrel" parent="." unique_id=1992844454 instance=ExtResource("7_fuqhk")]
+
+[node name="AbilityHud" parent="." unique_id=96550082 instance=ExtResource("5_jxerj")]
+
+[node name="DeckDebugHUD" type="CanvasLayer" parent="." unique_id=661789887]
+script = ExtResource("6_ghvq8")

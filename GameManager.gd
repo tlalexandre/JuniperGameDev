@@ -31,6 +31,9 @@ func setup_level() -> void:
 		if GlobalData.player.died.is_connected(_on_player_died):
 			GlobalData.player.died.disconnect(_on_player_died)
 		GlobalData.player.died.connect(_on_player_died)
+		
+		if is_instance_valid(GlobalData.ability_hud):
+			GlobalData.ability_hud.bind(GlobalData.player.ability_slots)
 
 func _on_player_died() -> void:
 	end_screen_instance.show_overlay(EndScreen.OverlayState.LOST)
