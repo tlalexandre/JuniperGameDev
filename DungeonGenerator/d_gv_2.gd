@@ -8,6 +8,7 @@ extends Node2D
 @export var spawn_rooms:Array[PackedScene]
 @export var long_rooms:Array[PackedScene]
 @export var shop_rooms:Array[PackedScene]
+@export var max_large_rooms:int = 1
 
 var dungeon : Array
 
@@ -15,13 +16,14 @@ func _ready() -> void:
 	_init_dungeon()
 	_setSpawn()
 	_print_dungeon()
-	_generate_critical_path(_spawnPoint,lenght, "C")
+	_generate_critical_path(_spawnPoint,lenght, "R")
 	_print_dungeon()
 	_generate_boss_room()
 	_print_dungeon()
 	_generate_shop()
 	_print_dungeon()
-
+	_generate_large_room()
+	_print_dungeon()
 	
 	
 
@@ -77,7 +79,7 @@ func _generate_critical_path(from:Vector2i, lenght: int, marker : String) -> boo
 			#if lenght > 1:
 			#	_branch_candidates.append(current)
 
-			if _generate_critical_path(current, lenght -1, "C"):
+			if _generate_critical_path(current, lenght -1, "R"):
 				return true
 			else:
 			#	_branch_candidates.erase(current)
@@ -91,7 +93,7 @@ func _generate_shop():
 	var connections:int = 0
 	for x in dungeon.size():
 		for y in dungeon[x].size():
-			if dungeon[x][y] and str(dungeon[x][y]).contains("C"):
+			if dungeon[x][y] and str(dungeon[x][y]).contains("R"):
 				connections = _check_neightbours(Vector2i(x,y))
 				if connections <= 2:
 					shop_candidates.append(Vector2i(x,y))
@@ -129,7 +131,7 @@ func is_valid_pos(pos:Vector2i) -> bool:
 func has_room_at(pos:Vector2i) -> bool:
 	if (is_valid_pos(pos)):
 		if (dungeon[pos.x][pos.y] 
-		and str(dungeon[pos.x][pos.y]).contains("C")):
+		and str(dungeon[pos.x][pos.y]).contains("R")):
 			return true
 			
 	return false
@@ -141,7 +143,7 @@ func _check_far_away_from(pos:Vector2i) -> Vector2i:
 	
 	for x in dungeon.size():
 		for y in dungeon[x].size():
-			if str(dungeon[x][y]).contains("C"):
+			if str(dungeon[x][y]).contains("R"):
 				var actual_room = Vector2i(x,y)
 				var actual_distance = pos.distance_squared_to(actual_room)
 				
@@ -152,8 +154,56 @@ func _check_far_away_from(pos:Vector2i) -> Vector2i:
 				
 	return far
 	
-
+func _generate_large_room():
+	var large_room_candidates = _check_large_room_avaliability_in_dungeon()
+	if(large_room_candidates):
+		large_room_candidates.shuffle()
+		var large_room = large_room_candidates[randi_range(0,large_room_candidates.size()-1)]
+		for room in large_room:
+			dungeon[room.x][room.y] = "L"
+	else: print("cant do a large room master, apologies")
 	
-	
-	
+func _check_large_room_avaliability_in_dungeon()-> Array:
+	var room_candidates : Array = []
+	for x in dungeon.size():
+		for y in dungeon[x].size():
+			#validating the actual room, just in case u know
+			if(is_valid_pos(Vector2i(x,y)) and has_room_at(Vector2i(x,y))):
+				#We check every posible direction for a 2x2 room
+				if(is_valid_pos(Vector2i(x+1,y)) and has_room_at(Vector2i(x+1,y))
+				and is_valid_pos(Vector2i(x,y+1)) and has_room_at(Vector2i(x,y+1))
+				and is_valid_pos(Vector2i(x+1,y+1)) and has_room_at(Vector2i(x+1,y+1))
+				):
+					room_candidates.append([Vector2i(x,y),Vector2i(x+1,y),Vector2i(x,y+1),Vector2i(x+1,y+1)])
+				
+				elif(is_valid_pos(Vector2i(x+1,y)) and has_room_at(Vector2i(x+1,y))
+				and is_valid_pos(Vector2i(x,y-1)) and has_room_at(Vector2i(x,y-1))
+				and is_valid_pos(Vector2i(x+1,y-1)) and has_room_at(Vector2i(x+1,y-1))
+				):
+					room_candidates.append([Vector2i(x,y),Vector2i(x+1,y),Vector2i(x,y-1),Vector2i(x+1,y-1)])
+				
+				elif(is_valid_pos(Vector2i(x,y-1)) and has_room_at(Vector2i(x,y-1))
+				and is_valid_pos(Vector2i(x-1,y)) and has_room_at(Vector2i(x-1,y))
+				and is_valid_pos(Vector2i(x-1,y-1)) and has_room_at(Vector2i(x-1,y-1))
+				):
+					room_candidates.append([Vector2i(x,y),Vector2i(x,y-1),Vector2i(x-1,y),Vector2i(x-1,y-1)])
+				
+				elif(is_valid_pos(Vector2i(x,y+1)) and has_room_at(Vector2i(x,y+1))
+				and is_valid_pos(Vector2i(x-1,y)) and has_room_at(Vector2i(x-1,y))
+				and is_valid_pos(Vector2i(x-1,y+1)) and has_room_at(Vector2i(x-1,y+1))
+				):
+					room_candidates.append([Vector2i(x,y),Vector2i(x,y+1),Vector2i(x-1,y),Vector2i(x-1,y+1)])
+				
+			
+			
+	return room_candidates
+			
+			
+			
+			
+			
+			
+			
+			
+			
 	

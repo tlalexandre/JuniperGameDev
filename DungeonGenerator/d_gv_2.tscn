@@ -8,7 +8,7 @@
 [node name="DGv2" type="Node2D" unique_id=176293429]
 script = ExtResource("1_woyrw")
 _spawnPoint = Vector2i(-1, -1)
-lenght = 12
+lenght = 16
 normal_rooms = Array[PackedScene]([ExtResource("2_xximo")])
 spawn_rooms = Array[PackedScene]([ExtResource("3_jjeby")])
 
