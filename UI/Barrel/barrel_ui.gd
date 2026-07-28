@@ -135,8 +135,8 @@ func reset() -> void:
 	state = State.IDLE
 	bullet_name.text = ""
 
-func show_swap_menu(bullet_card: BulletCard) -> void:
-	swap_menu.show_for_bullet(bullet_card)
+#func show_swap_menu(bullet_card: BulletCard) -> void:
+	#swap_menu.show_for_bullet(bullet_card)
 
 func update_health(current: float, max_health: float) -> void:
 	health_bar.max_value = max_health

@@ -47,6 +47,6 @@ func _make_card(type: BulletCard.Type, scene: PackedScene) -> BulletCard:
 
 func _make_starter_pool() -> Array[BulletCard]:
 	var pool: Array[BulletCard] = []
-	for i in 50:
+	for i in 12:
 		pool.append(_make_card(BulletCard.Type.BASIC, BULLET))
 	return pool

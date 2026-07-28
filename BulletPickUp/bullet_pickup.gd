@@ -48,6 +48,17 @@ func _get_key_for_type(type) -> String:
 
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("player"):
-		get_tree().paused = true
-		GlobalData.barrel_hud.show_swap_menu(bullet_type)
+		var card := BulletCard.new()
+		card.type = _type_to_bullet_card_type(bullet_type)
+		card.scene = bullet_type
+		GlobalData.bullet_deck.draw_pile.append(card)
+		GlobalData.bullet_deck.draw_pile.shuffle()
 		queue_free()
+
+func _type_to_bullet_card_type(scene: PackedScene) -> BulletCard.Type:
+	if scene == GlobalData.AIR: return BulletCard.Type.AIR
+	if scene == GlobalData.POISON: return BulletCard.Type.POISON
+	if scene == GlobalData.ELECTRICITY: return BulletCard.Type.ELECTRICITY
+	if scene == GlobalData.FIRE: return BulletCard.Type.FIRE
+	if scene == GlobalData.ICE: return BulletCard.Type.ICE
+	return BulletCard.Type.BASIC
