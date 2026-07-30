@@ -9,37 +9,40 @@ extends Node2D
 @export var long_rooms:Array[PackedScene]
 @export var shop_rooms:Array[PackedScene]
 @export var max_large_rooms:int = 1
-
+var _max_large_count = 0
+var all_mighty_list = []
 var dungeon : Array
 
 func _ready() -> void:
+	create()
+	
+func create():
 	_init_dungeon()
 	_setSpawn()
-	_print_dungeon()
+	#_print_dungeon()
 	_generate_critical_path(_spawnPoint,lenght, "R")
-	_print_dungeon()
+	#_print_dungeon()
 	_generate_boss_room()
-	_print_dungeon()
+	#_print_dungeon()
 	_generate_shop()
-	_print_dungeon()
+	#_print_dungeon()
 	_generate_large_room()
-	_print_dungeon()
+	_print_dungeon(dungeon)
 	
-	
-
 func _init_dungeon() -> void:
+	dungeon.clear()
 	for x in _dimensions.x:
 		dungeon.append([])
 		for y in _dimensions.y:
 			dungeon[x].append(0)
 			
-func _print_dungeon() -> void:
+func _print_dungeon(dun:Array) -> void:
 	
 	var dungeon_as_string:String = ""
 	for y in range(_dimensions.y -1, -1, -1):
 		for x in _dimensions.x:
-			if dungeon[x][y]:
-				dungeon_as_string +="[" + str(dungeon[x][y])+"]"
+			if dun[x][y]:
+				dungeon_as_string +="[" + str(dun[x][y])+"]"
 			else:
 				dungeon_as_string+="   "
 			
@@ -102,7 +105,7 @@ func _generate_shop():
 		dungeon[shop.x][shop.y] = "S"
 
 func _generate_boss_room():
-	var boss = _check_far_away_from(_spawnPoint)
+	var boss = _check_far_away_from(_spawnPoint,dungeon)
 	dungeon[boss.x][boss.y] = "B"
 
 func _check_neightbours(room:Vector2i) -> int:
@@ -114,36 +117,36 @@ func _check_neightbours(room:Vector2i) -> int:
 	var east_pos = room + Vector2i.RIGHT
 	var west_pos = room + Vector2i.LEFT
 	
-	if has_room_at(north_pos):
+	if has_room_at(north_pos,dungeon):
 		neightbour_count += 1
-	if has_room_at(south_pos):
+	if has_room_at(south_pos,dungeon):
 		neightbour_count += 1
-	if has_room_at(east_pos):
+	if has_room_at(east_pos,dungeon):
 		neightbour_count+=1
-	if has_room_at(west_pos):
+	if has_room_at(west_pos,dungeon):
 		neightbour_count+=1
 
 	return neightbour_count
 
-func is_valid_pos(pos:Vector2i) -> bool:
-	return pos.x>=0 and pos.x < dungeon.size() and pos.y >= 0 and pos.y < dungeon[pos.x].size()
+func is_valid_pos(pos:Vector2i,dun:Array) -> bool:
+	return pos.x>=0 and pos.x < dun.size() and pos.y >= 0 and pos.y < dun[pos.x].size()
 
-func has_room_at(pos:Vector2i) -> bool:
-	if (is_valid_pos(pos)):
-		if (dungeon[pos.x][pos.y] 
-		and str(dungeon[pos.x][pos.y]).contains("R")):
+func has_room_at(pos:Vector2i,dun:Array) -> bool:
+	if (is_valid_pos(pos,dun)):
+		if (dun[pos.x][pos.y] 
+		and str(dun[pos.x][pos.y]).contains("R")):
 			return true
-			
+		else: return false
 	return false
 
-func _check_far_away_from(pos:Vector2i) -> Vector2i:
+func _check_far_away_from(pos:Vector2i, dun : Array) -> Vector2i:
 	
 	var far: Vector2i = Vector2i(0,0)
 	var max_distance_found : int = -1
 	
-	for x in dungeon.size():
-		for y in dungeon[x].size():
-			if str(dungeon[x][y]).contains("R"):
+	for x in dun.size():
+		for y in dun[x].size():
+			if str(dun[x][y]).contains("R"):
 				var actual_room = Vector2i(x,y)
 				var actual_distance = pos.distance_squared_to(actual_room)
 				
@@ -155,55 +158,90 @@ func _check_far_away_from(pos:Vector2i) -> Vector2i:
 	return far
 	
 func _generate_large_room():
-	var large_room_candidates = _check_large_room_avaliability_in_dungeon()
-	if(large_room_candidates):
-		large_room_candidates.shuffle()
-		var large_room = large_room_candidates[randi_range(0,large_room_candidates.size()-1)]
-		for room in large_room:
-			dungeon[room.x][room.y] = "L"
-	else: print("cant do a large room master, apologies")
 	
-func _check_large_room_avaliability_in_dungeon()-> Array:
+	#Now i need to make the way to choose always the max amount (which will always
+	#be the one closest to the max amount of large rooms ofc
+	#supossed to at least haha
+	
+	all_mighty_list.clear()
+	var large_room_candidates = _check_large_room_avaliability_in_dungeon([])
+	large_room_candidates.sort()
+	for a in large_room_candidates:
+		a.sort()
+	
+	for i in large_room_candidates.size()-1:
+		var temp_dun = dungeon.duplicate(true)
+		
+		for k in large_room_candidates[i]:
+			temp_dun = _add_Large_room_to_dungeon(k,temp_dun)
+		
+		_print_dungeon(temp_dun)
+	
+	if not large_room_candidates.is_empty():
+		_add_Large_room_to_dungeon(large_room_candidates[0].pop_back(),dungeon)
+	
+#This return all the options for the dungeon
+func _check_large_room_avaliability_in_dungeon(map:Array)-> Array:
+	#Now we always check in the updated dungeon
+	var dun = dungeon.duplicate(true)
+	if not map.is_empty():
+		for large_room in map:
+			for section in large_room:
+				dun[section.x][section.y]= "L"
+				
 	var room_candidates : Array = []
-	for x in dungeon.size():
-		for y in dungeon[x].size():
+	var selected_rooms : Array= []
+	for x in dun.size():
+		for y in dun[x].size():
 			#validating the actual room, just in case u know
-			if(is_valid_pos(Vector2i(x,y)) and has_room_at(Vector2i(x,y))):
+			if(is_valid_pos(Vector2i(x,y),dun) and has_room_at(Vector2i(x,y),dun)):
 				#We check every posible direction for a 2x2 room
-				if(is_valid_pos(Vector2i(x+1,y)) and has_room_at(Vector2i(x+1,y))
-				and is_valid_pos(Vector2i(x,y+1)) and has_room_at(Vector2i(x,y+1))
-				and is_valid_pos(Vector2i(x+1,y+1)) and has_room_at(Vector2i(x+1,y+1))
+				if(is_valid_pos(Vector2i(x+1,y),dun) and has_room_at(Vector2i(x+1,y),dun)
+				and is_valid_pos(Vector2i(x,y+1),dun) and has_room_at(Vector2i(x,y+1),dun)
+				and is_valid_pos(Vector2i(x+1,y+1),dun) and has_room_at(Vector2i(x+1,y+1),dun)
 				):
 					room_candidates.append([Vector2i(x,y),Vector2i(x+1,y),Vector2i(x,y+1),Vector2i(x+1,y+1)])
 				
-				elif(is_valid_pos(Vector2i(x+1,y)) and has_room_at(Vector2i(x+1,y))
-				and is_valid_pos(Vector2i(x,y-1)) and has_room_at(Vector2i(x,y-1))
-				and is_valid_pos(Vector2i(x+1,y-1)) and has_room_at(Vector2i(x+1,y-1))
+				if(is_valid_pos(Vector2i(x+1,y),dun) and has_room_at(Vector2i(x+1,y),dun)
+				and is_valid_pos(Vector2i(x,y-1),dun) and has_room_at(Vector2i(x,y-1),dun)
+				and is_valid_pos(Vector2i(x+1,y-1),dun) and has_room_at(Vector2i(x+1,y-1),dun)
 				):
 					room_candidates.append([Vector2i(x,y),Vector2i(x+1,y),Vector2i(x,y-1),Vector2i(x+1,y-1)])
 				
-				elif(is_valid_pos(Vector2i(x,y-1)) and has_room_at(Vector2i(x,y-1))
-				and is_valid_pos(Vector2i(x-1,y)) and has_room_at(Vector2i(x-1,y))
-				and is_valid_pos(Vector2i(x-1,y-1)) and has_room_at(Vector2i(x-1,y-1))
+				if(is_valid_pos(Vector2i(x,y-1),dun) and has_room_at(Vector2i(x,y-1),dun)
+				and is_valid_pos(Vector2i(x-1,y),dun) and has_room_at(Vector2i(x-1,y),dun)
+				and is_valid_pos(Vector2i(x-1,y-1),dun) and has_room_at(Vector2i(x-1,y-1),dun)
 				):
 					room_candidates.append([Vector2i(x,y),Vector2i(x,y-1),Vector2i(x-1,y),Vector2i(x-1,y-1)])
 				
-				elif(is_valid_pos(Vector2i(x,y+1)) and has_room_at(Vector2i(x,y+1))
-				and is_valid_pos(Vector2i(x-1,y)) and has_room_at(Vector2i(x-1,y))
-				and is_valid_pos(Vector2i(x-1,y+1)) and has_room_at(Vector2i(x-1,y+1))
+				if(is_valid_pos(Vector2i(x,y+1),dun) and has_room_at(Vector2i(x,y+1),dun)
+				and is_valid_pos(Vector2i(x-1,y),dun) and has_room_at(Vector2i(x-1,y),dun)
+				and is_valid_pos(Vector2i(x-1,y+1),dun) and has_room_at(Vector2i(x-1,y+1),dun)
 				):
 					room_candidates.append([Vector2i(x,y),Vector2i(x,y+1),Vector2i(x-1,y),Vector2i(x-1,y+1)])
-				
-			
-			
-	return room_candidates
-			
-			
-			
-			
-			
-			
-			
-			
-			
+		
+	if not room_candidates.is_empty():
+		for rooms in room_candidates:
+			rooms.sort()
+			if not selected_rooms.has(rooms):
+				selected_rooms.append(rooms)
+		
+		for room in selected_rooms:
+			var map_updated = map.duplicate(true)
+			_max_large_count = map_updated.size()
+			if max_large_rooms >= _max_large_count:
+				map_updated.append(room)
+				all_mighty_list.append(map_updated)
+				_check_large_room_avaliability_in_dungeon(map_updated)
+		
+	return all_mighty_list
 	
+#This prints into the selected dungeon the large rooms
+func _add_Large_room_to_dungeon(large_room:Array, dun:Array) -> Array:
+	for pos in large_room:
+		dun[pos.x][pos.y] = "L"
+	return dun
+
+
+func get_dungeon() -> Array:
+	return dungeon

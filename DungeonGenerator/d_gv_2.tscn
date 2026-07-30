@@ -4,12 +4,18 @@
 [ext_resource type="PackedScene" uid="uid://c3c0c0xsihjny" path="res://Room/Room_templates/Enemy_Rooms/Temporal_enemy_room_A.tscn" id="2_xximo"]
 [ext_resource type="PackedScene" uid="uid://daod7hdo5jdt" path="res://Character/character.tscn" id="3_7ldvk"]
 [ext_resource type="PackedScene" uid="uid://c6t834ajqui7n" path="res://Room/Room_templates/Spawn/Spawn.tscn" id="3_jjeby"]
+[ext_resource type="Script" uid="uid://bqpjlrqv22y1r" path="res://DungeonGenerator/map_visualizer.gd" id="5_jjeby"]
 
 [node name="DGv2" type="Node2D" unique_id=176293429]
 script = ExtResource("1_woyrw")
+_dimensions = Vector2i(5, 4)
 _spawnPoint = Vector2i(-1, -1)
 lenght = 16
 normal_rooms = Array[PackedScene]([ExtResource("2_xximo")])
 spawn_rooms = Array[PackedScene]([ExtResource("3_jjeby")])
+max_large_rooms = 3
 
 [node name="Player" parent="." unique_id=109988034 instance=ExtResource("3_7ldvk")]
+
+[node name="MapVisualizer" type="Node2D" parent="." unique_id=1259919862]
+script = ExtResource("5_jjeby")
