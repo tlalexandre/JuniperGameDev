@@ -10,12 +10,13 @@
 script = ExtResource("1_woyrw")
 _dimensions = Vector2i(5, 4)
 _spawnPoint = Vector2i(-1, -1)
-lenght = 16
+lenght = 18
 normal_rooms = Array[PackedScene]([ExtResource("2_xximo")])
 spawn_rooms = Array[PackedScene]([ExtResource("3_jjeby")])
-max_large_rooms = 3
 
 [node name="Player" parent="." unique_id=109988034 instance=ExtResource("3_7ldvk")]
 
 [node name="MapVisualizer" type="Node2D" parent="." unique_id=1259919862]
 script = ExtResource("5_jjeby")
+
+[connection signal="map_ready" from="." to="MapVisualizer" method="_on_d_gv_2_map_ready"]

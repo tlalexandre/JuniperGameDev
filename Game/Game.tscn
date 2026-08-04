@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bfgnlkfctn1gn"]
 
 [ext_resource type="Script" uid="uid://m38y70ixv5bc" path="res://Game/game.gd" id="1_ei1so"]
-[ext_resource type="PackedScene" uid="uid://blwpicwarduoq" path="res://Levels/Level1/level1.tscn" id="2_37esa"]
+[ext_resource type="PackedScene" uid="uid://d0utadh4fr2vn" path="res://DungeonGenerator/d_gv_2.tscn" id="2_37esa"]
 [ext_resource type="PackedScene" uid="uid://d3f2e6mi28i8q" path="res://UI/EndScreen/end_screen.tscn" id="4_iqlej"]
 [ext_resource type="PackedScene" uid="uid://bljmmcb6uieso" path="res://UI/Barrel/barrel.tscn" id="7_fuqhk"]
 

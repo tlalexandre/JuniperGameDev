@@ -12,22 +12,26 @@ extends Node2D
 var _max_large_count = 0
 var all_mighty_list = []
 var dungeon : Array
+signal map_ready
 
+#SORRY FOR NOT TYPING COMMENTS, I FORGOT AND NOW ONLY GOD KNOWS WHAT I DID
+#(and me sometimes, but not frequent)
 func _ready() -> void:
 	create()
 	
 func create():
+	dungeon = []
 	_init_dungeon()
 	_setSpawn()
-	#_print_dungeon()
 	_generate_critical_path(_spawnPoint,lenght, "R")
-	#_print_dungeon()
 	_generate_boss_room()
-	#_print_dungeon()
 	_generate_shop()
-	#_print_dungeon()
 	_generate_large_room()
 	_print_dungeon(dungeon)
+	
+	
+	
+	map_ready.emit()
 	
 func _init_dungeon() -> void:
 	dungeon.clear()
@@ -36,7 +40,7 @@ func _init_dungeon() -> void:
 		for y in _dimensions.y:
 			dungeon[x].append(0)
 			
-func _print_dungeon(dun:Array) -> void:
+func _print_dungeon_old(dun:Array) -> void:
 	
 	var dungeon_as_string:String = ""
 	for y in range(_dimensions.y -1, -1, -1):
@@ -49,13 +53,24 @@ func _print_dungeon(dun:Array) -> void:
 		dungeon_as_string += "\n"
 	print(dungeon_as_string)
 	
+func _print_dungeon(dun:Array) -> void:
+	var dungeon_as_string:String = ""
+	# Cambiamos el bucle para que vaya de 0 hacia adelante (de arriba a abajo)
+	for y in _dimensions.y:
+		for x in _dimensions.x:
+			if dun[x][y]:
+				dungeon_as_string += "[" + str(dun[x][y]) + "]"
+			else:
+				dungeon_as_string += "   "
+		dungeon_as_string += "\n"
+	print(dungeon_as_string)	
+	
 func _setSpawn() -> void:
 	if _spawnPoint.x < 0 or _spawnPoint.x >= _dimensions.x:
 		_spawnPoint.x = randi_range(0, _dimensions.x -1)
 	if _spawnPoint.y < 0 or _spawnPoint.y >= _dimensions.y:
 		_spawnPoint.y = randi_range(0, _dimensions.y -1)
 	dungeon[_spawnPoint.x][_spawnPoint.y] = "X"
-	
 	
 func _generate_critical_path(from:Vector2i, lenght: int, marker : String) -> bool:
 	if lenght == 0:
@@ -159,17 +174,13 @@ func _check_far_away_from(pos:Vector2i, dun : Array) -> Vector2i:
 	
 func _generate_large_room():
 	
-	#Now i need to make the way to choose always the max amount (which will always
-	#be the one closest to the max amount of large rooms ofc
-	#supossed to at least haha
-	
 	all_mighty_list.clear()
 	var large_room_candidates = _check_large_room_avaliability_in_dungeon([])
 	large_room_candidates.sort()
 	for a in large_room_candidates:
 		a.sort()
 	
-	for i in large_room_candidates.size()-1:
+	for i in large_room_candidates.size():
 		var temp_dun = dungeon.duplicate(true)
 		
 		for k in large_room_candidates[i]:
@@ -178,7 +189,16 @@ func _generate_large_room():
 		_print_dungeon(temp_dun)
 	
 	if not large_room_candidates.is_empty():
-		_add_Large_room_to_dungeon(large_room_candidates[0].pop_back(),dungeon)
+		var list = _give_max_amount_of_large_options(large_room_candidates,max_large_rooms)
+		if list.is_empty():
+			print("Sorry, couldnt fit a large room this time")
+		else:
+			for x in list:
+				print()
+			list.shuffle()
+			var op = list[0]
+			for largeRoom in op:
+				_add_Large_room_to_dungeon(largeRoom,dungeon)
 	
 #This return all the options for the dungeon
 func _check_large_room_avaliability_in_dungeon(map:Array)-> Array:
@@ -238,10 +258,21 @@ func _check_large_room_avaliability_in_dungeon(map:Array)-> Array:
 	
 #This prints into the selected dungeon the large rooms
 func _add_Large_room_to_dungeon(large_room:Array, dun:Array) -> Array:
-	for pos in large_room:
-		dun[pos.x][pos.y] = "L"
+	for room in large_room:
+		dun[room.x][room.y] = "L"
 	return dun
 
+func _give_max_amount_of_large_options(LR_Candidates : Array,max_amount:int) -> Array:
+	var list :Array= []
+	#print(max_amount)
+	for x in LR_Candidates:
+		if(x.size()==max_amount):
+			#print(x.size())
+			list.append(x)
+			print(x.size())
+	if list.is_empty() and max_amount > 0:
+		return _give_max_amount_of_large_options(LR_Candidates,max_amount-1)
+	return list
 
 func get_dungeon() -> Array:
 	return dungeon
