@@ -11,11 +11,11 @@ var is_muted := false
 
 func _ready() -> void:
 	# Music setup
-	music_player = AudioStreamPlayer.new()
-	music_player.volume_db = -5.0
-	add_child(music_player)
-	music_player.stream = preload("uid://bd7rjcf17ah1k")
-	music_player.play()
+	#music_player = AudioStreamPlayer.new()
+	#music_player.volume_db = -5.0
+	#add_child(music_player)
+	#music_player.stream = preload("uid://bd7rjcf17ah1k")
+	#music_player.play()
 	
 	# Existing code
 	end_screen_instance = END_SCREEN.instantiate()
@@ -34,7 +34,10 @@ func setup_level() -> void:
 		
 		if is_instance_valid(GlobalData.ability_hud):
 			GlobalData.ability_hud.bind(GlobalData.player.ability_slots)
-
+		
+		if is_instance_valid(GlobalData.mana_bar):
+			GlobalData.mana_bar.bind(GlobalData.player_mana)
+			
 func _on_player_died() -> void:
 	end_screen_instance.show_overlay(EndScreen.OverlayState.LOST)
 

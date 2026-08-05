@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dd4cexvatnrh2" path="res://AbilityHUD/AbilityHUD.tscn" id="5_jxerj"]
 [ext_resource type="Script" uid="uid://dx8j3rgk5n1pb" path="res://Debug/deck_debug_overlay.gd" id="6_ghvq8"]
 [ext_resource type="PackedScene" uid="uid://bljmmcb6uieso" path="res://UI/Barrel/barrel.tscn" id="7_fuqhk"]
+[ext_resource type="PackedScene" uid="uid://dlwc0188c01sk" path="res://player_mana/ManaBar.tscn" id="7_oscxy"]
 
 [node name="World" type="Node2D" unique_id=2130537159]
 script = ExtResource("1_ei1so")
@@ -19,3 +20,5 @@ levels = Array[PackedScene]([ExtResource("2_ghvq8")])
 
 [node name="DeckDebugHUD" type="CanvasLayer" parent="." unique_id=661789887]
 script = ExtResource("6_ghvq8")
+
+[node name="ManaBar" parent="." unique_id=1985719491 instance=ExtResource("7_oscxy")]

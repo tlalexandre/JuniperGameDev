@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dlwc0188c01sk"]
+
+[ext_resource type="Script" uid="uid://8lxwu408tk23" path="res://player_mana/mana_bar.gd" id="1_xmn15"]
+
+[node name="ManaBar" type="CanvasLayer" unique_id=1971020308]
+script = ExtResource("1_xmn15")

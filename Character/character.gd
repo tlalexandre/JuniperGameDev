@@ -17,7 +17,7 @@ var current_health := 20
 func _ready():
 	#GlobalData.barrel_hud.update_health(current_health,max_health)
 	GlobalData.player = self
-	ability_slots.setup(GlobalData.card_deck)
+	ability_slots.setup(GlobalData.card_deck, GlobalData.player_mana)
 
 func _physics_process(delta: float) -> void:
 
@@ -59,12 +59,11 @@ func _physics_process(delta: float) -> void:
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot"):
-		get_node("Gun").shoot()
+		#get_node("Gun").shoot()
 		#get_node("MachineGun").shoot()
 	#if event.is_action_released("shoot"):
 		#get_node("MachineGun").stop_shooting()
-		#get_node("ShotGun").shoot()
-		
+		get_node("ShotGun").shoot()
 	
 	if event.is_action_pressed("ability_0"):
 		get_node("AbilitySlots").use(0)

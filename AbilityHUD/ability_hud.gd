@@ -82,11 +82,11 @@ func _on_slots_changed(slots: Array, capacity: int) -> void:
 			slot_icons[i].texture = card.icon
 			slot_name_labels[i].text = card.display_name
 
-func _process(_delta: float) -> void:
-	if ability_slots == null:
-		return
-	for i in ability_slots.slot_count:
-		var frac = ability_slots.cooldown_fraction(i)
-		var h = slot_panels[i].size.y * frac
-		slot_cooldown_overlays[i].size = Vector2(slot_panels[i].size.x, h)
-		slot_cooldown_overlays[i].position.y = slot_panels[i].size.y - h
+#func _process(_delta: float) -> void:
+	#if ability_slots == null:
+		#return
+	#for i in ability_slots.slot_count:
+		#var frac = ability_slots.cooldown_fraction(i)
+		#var h = slot_panels[i].size.y * frac
+		#slot_cooldown_overlays[i].size = Vector2(slot_panels[i].size.x, h)
+		#slot_cooldown_overlays[i].position.y = slot_panels[i].size.y - h
