@@ -29,11 +29,12 @@ func _ready() -> void:
 	player_mana = PlayerMana.new()
 	add_child(player_mana)
 
-func _make_ability_card(type: AbilityCard.Type, name: String, mana_cost: float) -> AbilityCard:
+func _make_ability_card(type: AbilityCard.Type, name: String, cost: float) -> AbilityCard:
 	var c = AbilityCard.new()
 	c.type = type
 	c.display_name = name
-	c.mana_cost = mana_cost
+	c.mana_cost = cost
+	c.description = "Effect not yet designed."
 	return c
 
 func _make_starter_ability_pool() -> Array[AbilityCard]:

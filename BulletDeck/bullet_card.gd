@@ -1,4 +1,4 @@
-extends Resource
+extends CardResource
 class_name BulletCard
 
 enum Type {BASIC, FIRE, ICE, AIR, ELECTRICITY, POISON }

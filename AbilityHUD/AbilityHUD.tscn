@@ -1,6 +1,169 @@
 [gd_scene format=3 uid="uid://dd4cexvatnrh2"]
 
 [ext_resource type="Script" uid="uid://d1qc02bj1wa2p" path="res://AbilityHUD/ability_hud.gd" id="1_w0mwp"]
+[ext_resource type="PackedScene" uid="uid://dmbqsvkvostcs" path="res://CardView/card_view.tscn" id="2_pw1oi"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bhunq"]
 
 [node name="AbilityHud" type="CanvasLayer" unique_id=1403845479]
 script = ExtResource("1_w0mwp")
+
+[node name="Root" type="Control" parent="." unique_id=1766685226]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -225.0
+offset_top = -250.0
+offset_right = 225.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Root" unique_id=1084414783]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Ability1" type="VBoxContainer" parent="Root/HBoxContainer" unique_id=1019653366]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+
+[node name="CardView" parent="Root/HBoxContainer/Ability1" unique_id=897574601 instance=ExtResource("2_pw1oi")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="KeySlot" type="Panel" parent="Root/HBoxContainer/Ability1" unique_id=1689880555]
+custom_minimum_size = Vector2(30, 0)
+custom_maximum_size = Vector2(-1, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="Root/HBoxContainer/Ability1/KeySlot" unique_id=798919233]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Root/HBoxContainer/Ability1/KeySlot" unique_id=2082188711]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Q"
+label_settings = SubResource("LabelSettings_bhunq")
+horizontal_alignment = 1
+
+[node name="Ability2" type="VBoxContainer" parent="Root/HBoxContainer" unique_id=1466469464]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+
+[node name="CardView" parent="Root/HBoxContainer/Ability2" unique_id=1173908174 instance=ExtResource("2_pw1oi")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="KeySlot" type="Panel" parent="Root/HBoxContainer/Ability2" unique_id=1646157035]
+custom_minimum_size = Vector2(30, 0)
+custom_maximum_size = Vector2(-1, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="Root/HBoxContainer/Ability2/KeySlot" unique_id=732674146]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Root/HBoxContainer/Ability2/KeySlot" unique_id=28168168]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "E"
+label_settings = SubResource("LabelSettings_bhunq")
+horizontal_alignment = 1
+
+[node name="Ability3" type="VBoxContainer" parent="Root/HBoxContainer" unique_id=554419286]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+
+[node name="CardView" parent="Root/HBoxContainer/Ability3" unique_id=122937296 instance=ExtResource("2_pw1oi")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="KeySlot" type="Panel" parent="Root/HBoxContainer/Ability3" unique_id=1617787767]
+custom_minimum_size = Vector2(30, 0)
+custom_maximum_size = Vector2(-1, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="Root/HBoxContainer/Ability3/KeySlot" unique_id=1795476224]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Root/HBoxContainer/Ability3/KeySlot" unique_id=1578207303]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "C"
+label_settings = SubResource("LabelSettings_bhunq")
+horizontal_alignment = 1
+
+[node name="Ability4" type="VBoxContainer" parent="Root/HBoxContainer" unique_id=190206752]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+
+[node name="CardView" parent="Root/HBoxContainer/Ability4" unique_id=680993390 instance=ExtResource("2_pw1oi")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="KeySlot" type="Panel" parent="Root/HBoxContainer/Ability4" unique_id=874091363]
+custom_minimum_size = Vector2(30, 0)
+custom_maximum_size = Vector2(-1, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="Root/HBoxContainer/Ability4/KeySlot" unique_id=1032631741]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Root/HBoxContainer/Ability4/KeySlot" unique_id=1981324721]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "V"
+label_settings = SubResource("LabelSettings_bhunq")
+horizontal_alignment = 1
