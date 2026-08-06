@@ -244,7 +244,6 @@ text = "Fire and books dont get
 along too much...
 These bullets also EXPLODE!!"
 editable = false
-scroll_vertical = 0.22222222222222232
 
 [node name="DisapearText" parent="TextEdit6" unique_id=1489910875 instance=ExtResource("14_ngs4g")]
 position = Vector2(105, 127.99994)
@@ -311,5 +310,14 @@ offset_right = 1071.0
 offset_bottom = 1804.0
 text = "Seek for portals
 to progress!!!!!!!"
+
+[node name="Chest6" parent="." unique_id=1485602552 instance=ExtResource("12_w8ew0")]
+position = Vector2(1165, 731)
+
+[node name="Chest7" parent="." unique_id=1477492819 instance=ExtResource("12_w8ew0")]
+position = Vector2(886, 731)
+
+[node name="Chest8" parent="." unique_id=1729342853 instance=ExtResource("12_w8ew0")]
+position = Vector2(1026, 665)
 
 [editable path="Enemy4"]

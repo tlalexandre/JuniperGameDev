@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AbilityCard" format=3 uid="uid://ca0jlbobbqna3"]
+
+[ext_resource type="Script" uid="uid://x02rqy0xanty" path="res://AbilityCard/Ability_Card.gd" id="1_euiey"]
+
+[resource]
+script = ExtResource("1_euiey")
+mana_cost = 3.0
+display_name = "Overcharge"
+description = "Big burst damage, card exhausts"
+metadata/_custom_type_script = "uid://x02rqy0xanty"

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AbilityCard" format=3 uid="uid://cl34718wg4qwc"]
+
+[ext_resource type="Script" uid="uid://x02rqy0xanty" path="res://AbilityCard/Ability_Card.gd" id="1_kc0fl"]
+
+[resource]
+script = ExtResource("1_kc0fl")
+is_starter = true
+display_name = "Purge Round"
+description = "Discard 1 bullet from barrel, draw replacement"
+metadata/_custom_type_script = "uid://x02rqy0xanty"

@@ -47,7 +47,7 @@ func _process(_delta: float) -> void:
 		card_label.text = "CardDeck  draw:%d  discard:%d\n%s" % [
 			GlobalData.card_deck.draw_pile.size(),
 			GlobalData.card_deck.discard_pile.size(),
-			_count_by_type(GlobalData.card_deck.draw_pile, AbilityCard.Type)
+			_count_by_name(GlobalData.card_deck.draw_pile)
 		]
 
 func _count_by_type(pile: Array, type_enum) -> String:
@@ -57,4 +57,13 @@ func _count_by_type(pile: Array, type_enum) -> String:
 	var lines := []
 	for key in counts:
 		lines.append("  %s: %d" % [type_enum.keys()[key], counts[key]])
+	return "\n".join(lines)
+
+func _count_by_name(pile: Array) -> String:
+	var counts := {}
+	for card in pile:
+		counts[card.display_name] = counts.get(card.display_name, 0) + 1
+	var lines := []
+	for key in counts:
+		lines.append("  %s: %d" % [key, counts[key]])
 	return "\n".join(lines)

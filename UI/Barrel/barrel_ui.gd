@@ -39,23 +39,6 @@ func _ready() -> void:
 		BulletCard.Type.ICE:         Color(0.39, 0.70, 0.96),
 	}
 
-	bullet_name_map = {
-		BulletCard.Type.BASIC:       "Basic",
-		BulletCard.Type.AIR:         "Air",
-		BulletCard.Type.POISON:      "Poison",
-		BulletCard.Type.ELECTRICITY: "Electric",
-		BulletCard.Type.FIRE:        "Fire",
-		BulletCard.Type.ICE:         "Ice",
-	}
-
-	bullet_icon_map = {
-		BulletCard.Type.BASIC:       preload("uid://dxi38lk2qotpp"),
-		BulletCard.Type.AIR:         preload("uid://dk4ijlokb5at8"),
-		BulletCard.Type.POISON:      preload("uid://dy06j721w36cc"),
-		BulletCard.Type.ELECTRICITY: preload("uid://hituocfik6r2"),
-		BulletCard.Type.FIRE:        preload("uid://bi6hppefpstc8"),
-		BulletCard.Type.ICE:         preload("uid://plu5rc3iyxji"),
-	}
 
 	icon_nodes = [
 		$HUDPanel/HUDContent/BarrelRing/Icon_0,
@@ -94,9 +77,7 @@ func update_icons_from_chamber(chamber: Array, capacity: int) -> void:
 	for i in 6:
 		if i < chamber.size():
 			var card: BulletCard = chamber[i]
-			var tex = bullet_icon_map.get(card.type)
-			if tex:
-				icon_nodes[i].texture = tex
+			icon_nodes[i].texture = card.icon
 		else:
 			icon_nodes[i].texture = null
 
@@ -124,8 +105,8 @@ func spin_to(slot_index: int, bullet_card: BulletCard) -> void:
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	spin_tween.tween_callback(func():
 		state = State.LOADED
-		bullet_icon.texture = bullet_icon_map.get(bullet_card.type)
-		bullet_name.text = bullet_name_map.get(bullet_card.type, "???")
+		bullet_icon.texture = bullet_card.icon
+		bullet_name.text = bullet_card.display_name
 		spin_complete.emit(bullet_card)
 	)
 

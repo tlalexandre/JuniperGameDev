@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AbilityCard" format=3 uid="uid://7d4hg8lomhms"]
+
+[ext_resource type="Script" uid="uid://x02rqy0xanty" path="res://AbilityCard/Ability_Card.gd" id="1_buvl0"]
+
+[resource]
+script = ExtResource("1_buvl0")
+mana_cost = 2.0
+display_name = "Ward"
+description = "Absorb fixed damage for a few seconds"
+metadata/_custom_type_script = "uid://x02rqy0xanty"

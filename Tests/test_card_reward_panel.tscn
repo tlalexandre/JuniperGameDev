@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bc4ofvi0n6r4d"]
+
+[ext_resource type="Script" uid="uid://bj2drdjky1qhe" path="res://Tests/test_card_reward_panel.gd" id="1_oinxs"]
+
+[node name="TestCardRewardPanel" type="Node2D" unique_id=531272543]
+script = ExtResource("1_oinxs")
