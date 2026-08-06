@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="BulletCard" format=3 uid="uid://bcecgc2o1l5a2"]
+
+[ext_resource type="Script" uid="uid://dr86ifp28g1bu" path="res://BulletDeck/bullet_card.gd" id="1_lnf5t"]
+
+[resource]
+script = ExtResource("1_lnf5t")
+metadata/_custom_type_script = "uid://dr86ifp28g1bu"

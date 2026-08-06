@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://mipf7cfkrc4e"]
+
+[ext_resource type="Script" uid="uid://c0xfcc7nj14f2" path="res://Tests/test_ability_hud.gd" id="1_bqys1"]
+
+[node name="TestAbilityHud" type="Node2D" unique_id=1862810680]
+script = ExtResource("1_bqys1")

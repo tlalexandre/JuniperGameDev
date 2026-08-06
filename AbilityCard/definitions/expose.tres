@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AbilityCard" format=3 uid="uid://cgjkmqmip4047"]
+
+[ext_resource type="Script" uid="uid://x02rqy0xanty" path="res://AbilityCard/Ability_Card.gd" id="1_thkol"]
+
+[resource]
+script = ExtResource("1_thkol")
+mana_cost = 2.0
+display_name = "Expose"
+description = "AoE Vulnerable, 5s"
+metadata/_custom_type_script = "uid://x02rqy0xanty"

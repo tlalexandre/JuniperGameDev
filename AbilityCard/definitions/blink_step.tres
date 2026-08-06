@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AbilityCard" format=3 uid="uid://b40und4ibynfo"]
+
+[ext_resource type="Script" uid="uid://x02rqy0xanty" path="res://AbilityCard/Ability_Card.gd" id="1_rtyl2"]
+
+[resource]
+script = ExtResource("1_rtyl2")
+mana_cost = 2.0
+is_starter = true
+display_name = "Blink Step"
+description = "Short teleport + brief i-frames"
+metadata/_custom_type_script = "uid://x02rqy0xanty"

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AbilityCard" format=3 uid="uid://ddko2ud1d2ywe"]
+
+[ext_resource type="Script" uid="uid://x02rqy0xanty" path="res://AbilityCard/Ability_Card.gd" id="1_60knw"]
+
+[resource]
+script = ExtResource("1_60knw")
+display_name = "Spark Bolt"
+description = "Direct-target damage, no status"
+metadata/_custom_type_script = "uid://x02rqy0xanty"

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b3mw0hlr77v8v"]
+
+[ext_resource type="Script" uid="uid://ck5eeogsj4wto" path="res://Tests/test_card_view.gd" id="1_5l4i7"]
+
+[node name="TestCardView" type="CanvasLayer" unique_id=308395804]
+script = ExtResource("1_5l4i7")

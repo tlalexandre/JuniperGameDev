@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bo64hmwwjqeir"]
+
+[ext_resource type="Script" uid="uid://bnx6x3m855vw" path="res://Tests/test_reload.gd" id="1_ecovd"]
+
+[node name="TestReload" type="Node2D" unique_id=1199770403]
+script = ExtResource("1_ecovd")

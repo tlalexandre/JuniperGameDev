@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://cyd8l04ekbrvf"]
+
+[ext_resource type="Texture2D" uid="uid://b4l62ravs8vn8" path="res://Assets/Gun/TheGunWand-Sheet.png" id="1_7hbic"]
+[ext_resource type="Script" uid="uid://ds2qiasgfnbdj" path="res://machine_gun/machine_gun.gd" id="2_1o4p5"]
+[ext_resource type="Script" uid="uid://cny815jff80fx" path="res://Gun/bullet_barrel.gd" id="3_1qdvv"]
+[ext_resource type="AudioStream" uid="uid://c2sx8yu45j3lp" path="res://Assets/sounds/shooting.wav" id="4_ygbxx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1o4p5"]
+atlas = ExtResource("1_7hbic")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tm4f7"]
+atlas = ExtResource("1_7hbic")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bhunq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1o4p5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tm4f7")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="MachineGun" type="AnimatedSprite2D" unique_id=1862749605]
+sprite_frames = SubResource("SpriteFrames_bhunq")
+offset = Vector2(16, 3)
+script = ExtResource("2_1o4p5")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1239858610]
+position = Vector2(18, 0)
+
+[node name="BulletBarrel" type="Node" parent="." unique_id=2113633740]
+script = ExtResource("3_1qdvv")
+barrel_capacity = 30
+reload_time = 1.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=296037717]
+stream = ExtResource("4_ygbxx")
+
+[node name="WindupTimer" type="Timer" parent="." unique_id=221790164]
+
+[node name="FireTimer" type="Timer" parent="." unique_id=583313329]

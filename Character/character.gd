@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var audio: AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var camera: Camera2D = $Camera2D
 @onready var hit_audio: AudioStreamPlayer2D = $HitAudio
+@onready var ability_slots: AbilitySlots = $AbilitySlots
 signal died
 
 const SPEED = 300.0
@@ -16,6 +17,7 @@ var current_health := 20
 func _ready():
 	#GlobalData.barrel_hud.update_health(current_health,max_health)
 	GlobalData.player = self
+	ability_slots.setup(GlobalData.card_deck, GlobalData.player_mana)
 
 func _physics_process(delta: float) -> void:
 
@@ -57,7 +59,20 @@ func _physics_process(delta: float) -> void:
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot"):
-		get_node("Gun").shoot()
+		#get_node("Gun").shoot()
+		#get_node("MachineGun").shoot()
+	#if event.is_action_released("shoot"):
+		#get_node("MachineGun").stop_shooting()
+		get_node("ShotGun").shoot()
+	
+	if event.is_action_pressed("ability_0"):
+		get_node("AbilitySlots").use(0)
+	elif event.is_action_pressed("ability_1"):
+		get_node("AbilitySlots").use(1)
+	elif event.is_action_pressed("ability_2"):
+		get_node("AbilitySlots").use(2)
+	elif event.is_action_pressed("ability_3"):
+		get_node("AbilitySlots").use(3)
 		
 func take_damage(amount: float):
 	animated_sprite_2d.play("DamageTaken")

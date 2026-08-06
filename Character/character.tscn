@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://daod7hdo5jdt"]
 
 [ext_resource type="Script" uid="uid://cjl7yytvq17u1" path="res://Character/character.gd" id="1_foqyv"]
-[ext_resource type="PackedScene" uid="uid://byqy8utofc5pt" path="res://Gun/gun.tscn" id="2_jgbxv"]
 [ext_resource type="Texture2D" uid="uid://bxp7qltlaeyud" path="res://Assets/Character/TheWickedWizard-Sheet.png" id="4_twwou"]
+[ext_resource type="PackedScene" uid="uid://tgo6s0jl3okc" path="res://Shotgun/shot_gun.tscn" id="5_1l6l2"]
 [ext_resource type="AudioStream" uid="uid://jsoq2ve0ynip" path="res://Assets/sounds/walking.wav" id="5_a23tb"]
+[ext_resource type="Script" uid="uid://ghtrluwwb7vg" path="res://AbilitySlots/ability_slots.gd" id="5_uerqc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_twwou"]
 atlas = ExtResource("4_twwou")
@@ -152,14 +153,14 @@ texture = SubResource("GradientTexture1D_bhunq")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=923918863]
 zoom = Vector2(1.735, 1.735)
 
-[node name="Gun" parent="." unique_id=36834398 instance=ExtResource("2_jgbxv")]
-position = Vector2(4, -0.9999962)
-rotation = -1.288053
-scale = Vector2(1.1666667, 1.2083333)
-
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1804441463]
 stream = ExtResource("5_a23tb")
 volume_db = 10.0
 
 [node name="HitAudio" type="AudioStreamPlayer2D" parent="." unique_id=291973032]
 stream = ExtResource("5_a23tb")
+
+[node name="AbilitySlots" type="Node" parent="." unique_id=1672151782]
+script = ExtResource("5_uerqc")
+
+[node name="ShotGun" parent="." unique_id=1313576535 instance=ExtResource("5_1l6l2")]
