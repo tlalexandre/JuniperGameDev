@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bfgnlkfctn1gn"]
 
 [ext_resource type="Script" uid="uid://m38y70ixv5bc" path="res://Game/game.gd" id="1_ei1so"]
+[ext_resource type="PackedScene" uid="uid://d0utadh4fr2vn" path="res://DungeonGenerator/d_gv_2.tscn" id="2_37esa"]
 [ext_resource type="PackedScene" uid="uid://beilme8epy3pe" path="res://Tutorial/tutorial.tscn" id="2_ghvq8"]
 [ext_resource type="PackedScene" uid="uid://d3f2e6mi28i8q" path="res://UI/EndScreen/end_screen.tscn" id="4_iqlej"]
 [ext_resource type="PackedScene" uid="uid://dd4cexvatnrh2" path="res://AbilityHUD/AbilityHUD.tscn" id="5_jxerj"]
@@ -10,6 +11,7 @@
 
 [node name="World" type="Node2D" unique_id=2130537159]
 script = ExtResource("1_ei1so")
+levels = Array[PackedScene]([ExtResource("2_37esa")])
 levels = Array[PackedScene]([ExtResource("2_ghvq8")])
 
 [node name="EndScreen" parent="." unique_id=1664554452 instance=ExtResource("4_iqlej")]
