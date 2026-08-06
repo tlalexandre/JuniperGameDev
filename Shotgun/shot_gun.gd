@@ -10,7 +10,9 @@ func _ready() -> void:
 	bullet_barrel.setup(GlobalData.bullet_deck)
 
 func _on_barrel_changed(barrel: Array, capacity: int) -> void:
-	GlobalData.barrel_hud.update_icons_from_chamber(barrel, capacity)
+	if not GlobalData.barrel_hud:
+		return
+	GlobalData.barrel_hud.update_icons_from_chamber(barrel)
 	GlobalData.barrel_hud.update_ammo(barrel.size(), capacity)
 
 func _process(delta: float) -> void:
