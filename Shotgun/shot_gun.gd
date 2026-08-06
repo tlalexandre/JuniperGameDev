@@ -12,7 +12,7 @@ func _ready() -> void:
 func _on_barrel_changed(barrel: Array, capacity: int) -> void:
 	if not GlobalData.barrel_hud:
 		return
-	GlobalData.barrel_hud.update_icons_from_chamber(barrel)
+	GlobalData.barrel_hud.update_icons_from_chamber(barrel,capacity)
 	GlobalData.barrel_hud.update_ammo(barrel.size(), capacity)
 
 func _process(delta: float) -> void:
