@@ -2,6 +2,7 @@ extends Node
 @onready var world = $"../World"
 @onready var player = $"../World/Player"
 var barrel_hud
+var active_barrel: BulletBarrel
 var bullet_deck: BulletDeck
 var card_deck: CardDeck
 var score: int = 0
@@ -9,6 +10,8 @@ var floor_number: int = 1
 var ability_hud: AbilityHud
 var mana_bar: ManaBar
 var player_mana: PlayerMana
+
+var pending_shot_modifiers: Array[Callable] = []
 
 const BULLET = preload("uid://dd4n6m088eqd5")
 const AIR = preload("uid://go2mccs08y7b")
@@ -95,3 +98,13 @@ func _ready() -> void:
 
 	player_mana = PlayerMana.new()
 	add_child(player_mana)
+
+func queue_shot_modifier(modifier: Callable) -> void:
+	pending_shot_modifiers.append(modifier)
+
+func apply_shot_modifiers(bullet: Node) -> void:
+	for modifier in pending_shot_modifiers:
+		modifier.call(bullet)
+
+func consume_shot_modifiers() -> void:
+	pending_shot_modifiers.clear()

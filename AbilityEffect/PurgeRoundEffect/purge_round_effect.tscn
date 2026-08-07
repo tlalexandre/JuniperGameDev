@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://44xmu4msivnu"]
+
+[ext_resource type="Script" uid="uid://nqb2t8vxivnm" path="res://AbilityEffect/PurgeRoundEffect/purge_round_effect.gd" id="1_8avfh"]
+
+[node name="PurgeRoundEffect" type="Node2D" unique_id=1548510935]
+script = ExtResource("1_8avfh")

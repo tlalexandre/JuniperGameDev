@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://jws5yt56gk85"]
+
+[ext_resource type="Script" uid="uid://dpd8u60iqy6vs" path="res://AbilityEffect/BlinkStepEffect/blink_step_effect.gd" id="1_me1m3"]
+
+[node name="BlinkStepEffect" type="Node2D" unique_id=1450505317]
+script = ExtResource("1_me1m3")

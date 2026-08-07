@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Character
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var audio: AudioStreamPlayer2D = $AudioStreamPlayer2D
@@ -12,14 +13,20 @@ const JUMP_VELOCITY = -400.0
 var last_direction = Vector2.DOWN
 var max_health := 20
 var current_health := 20
-
+var is_invulnerable := false
+var is_dashing := false
+var dash_velocity := Vector2.ZERO
 
 func _ready():
 	#GlobalData.barrel_hud.update_health(current_health,max_health)
 	GlobalData.player = self
-	ability_slots.setup(GlobalData.card_deck, GlobalData.player_mana)
+	ability_slots.setup(GlobalData.card_deck, GlobalData.player_mana, self)
 
 func _physics_process(delta: float) -> void:
+	if is_dashing:
+		velocity = dash_velocity
+		move_and_slide()
+		return
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -59,11 +66,11 @@ func _physics_process(delta: float) -> void:
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot"):
-		#get_node("Gun").shoot()
+		get_node("Gun").shoot()
 		#get_node("MachineGun").shoot()
 	#if event.is_action_released("shoot"):
 		#get_node("MachineGun").stop_shooting()
-		get_node("ShotGun").shoot()
+		#get_node("ShotGun").shoot()
 	
 	if event.is_action_pressed("ability_0"):
 		get_node("AbilitySlots").use(0)
@@ -75,6 +82,8 @@ func _input(event: InputEvent) -> void:
 		get_node("AbilitySlots").use(3)
 		
 func take_damage(amount: float):
+	if is_invulnerable:
+		return
 	animated_sprite_2d.play("DamageTaken")
 	hit_audio.stream = preload("uid://uxk2w6hhptc2")
 	hit_audio.play()

@@ -61,10 +61,11 @@ func _on_fire_tick() -> void:
 	var new_bullet = card.scene.instantiate()
 	new_bullet.position = marker_2d.global_position
 	new_bullet.target_position = dir
+	GlobalData.apply_shot_modifiers(new_bullet)
 	GlobalData.world.add_child(new_bullet)
 
 	bullet_barrel.fire(card)
-	
+	GlobalData.consume_shot_modifiers()
 
 func get_animation_for_bullet(card: BulletCard) -> String:
 	match card.type:
