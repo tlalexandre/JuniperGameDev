@@ -3,6 +3,7 @@ class_name Deck
 
 var draw_pile: Array = []
 var discard_pile: Array = []
+var exhaust_pile: Array = []
 
 func draw(n: int) -> Array:
 	var drawn: Array = []
@@ -16,6 +17,9 @@ func draw(n: int) -> Array:
 
 func discard(cards: Array) -> void:
 	discard_pile.append_array(cards)
+
+func exhaust(cards: Array) -> void:
+	exhaust_pile.append_array(cards)
 
 func _reshuffle() -> void:
 	draw_pile.append_array(discard_pile)

@@ -1,10 +1,14 @@
 [gd_resource type="Resource" script_class="AbilityCard" format=3 uid="uid://ca0jlbobbqna3"]
 
 [ext_resource type="Script" uid="uid://x02rqy0xanty" path="res://AbilityCard/Ability_Card.gd" id="1_euiey"]
+[ext_resource type="PackedScene" uid="uid://2mg436hygbbf" path="res://AbilityEffect/OverchargeEffect/overcharge_effect.tscn" id="1_uuv04"]
 
 [resource]
 script = ExtResource("1_euiey")
 mana_cost = 3.0
+is_starter = true
+exhausts = true
+scene = ExtResource("1_uuv04")
 display_name = "Overcharge"
-description = "Big burst damage, card exhausts"
+description = "Big burst damage, uses all your remaining bullets card exhausts"
 metadata/_custom_type_script = "uid://x02rqy0xanty"

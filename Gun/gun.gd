@@ -9,7 +9,8 @@ var _spin_connected := false
 func _ready() -> void:
 	bullet_barrel.barrel_changed.connect(_on_barrel_changed)
 	bullet_barrel.setup(GlobalData.bullet_deck)
-
+	GlobalData.active_barrel = bullet_barrel
+	
 func _on_barrel_changed(barrel: Array, capacity: int) -> void:
 	GlobalData.barrel_hud.update_icons_from_chamber(barrel, capacity)
 	GlobalData.barrel_hud.update_ammo(barrel.size(), capacity)
@@ -49,8 +50,10 @@ func shoot() -> void:
 		var new_bullet = selected_bullet.scene.instantiate()
 		new_bullet.position = marker_2d.global_position
 		new_bullet.target_position = (get_global_mouse_position() - marker_2d.global_position).normalized()
+		GlobalData.apply_shot_modifiers(new_bullet)
 		GlobalData.world.add_child(new_bullet)
 		bullet_barrel.fire(selected_bullet)
+		GlobalData.consume_shot_modifiers()
 		hud.reset()
 		play("basic")
 

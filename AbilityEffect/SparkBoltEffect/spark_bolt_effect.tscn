@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://rtmfufr4aimi"]
+
+[ext_resource type="Script" uid="uid://i50bfurlmv1s" path="res://AbilityEffect/SparkBoltEffect/spark_bolt_effect.gd" id="1_j6364"]
+
+[node name="SparkBoltEffect" type="Node2D" unique_id=1963533265]
+script = ExtResource("1_j6364")

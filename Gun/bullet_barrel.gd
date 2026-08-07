@@ -39,6 +39,16 @@ func discard_from_barrel(card: BulletCard) -> void:
 	if barrel.is_empty():
 		reload()
 
+func discard_and_redraw_from_barrel(card: BulletCard) -> void:
+	barrel.erase(card)
+	deck.discard([card])
+	var drawn = deck.draw(1)
+	if not drawn.is_empty():
+		barrel.append(drawn[0])
+	barrel_changed.emit(barrel, barrel_capacity)
+	if barrel.is_empty():
+		reload()
+
 func reload() -> void:
 	if reloading:
 		return
@@ -52,7 +62,7 @@ func reload() -> void:
 	barrel_changed.emit(barrel, barrel_capacity)
 	reload_finished.emit()
 	reloading = false
-	
+
 func fire(card: BulletCard) -> void:
 	deck.discard([card])
 	if barrel.is_empty():

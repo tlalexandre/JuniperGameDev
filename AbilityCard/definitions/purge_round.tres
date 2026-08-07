@@ -1,10 +1,12 @@
 [gd_resource type="Resource" script_class="AbilityCard" format=3 uid="uid://cl34718wg4qwc"]
 
+[ext_resource type="PackedScene" uid="uid://44xmu4msivnu" path="res://AbilityEffect/PurgeRoundEffect/purge_round_effect.tscn" id="1_1qdpg"]
 [ext_resource type="Script" uid="uid://x02rqy0xanty" path="res://AbilityCard/Ability_Card.gd" id="1_kc0fl"]
 
 [resource]
 script = ExtResource("1_kc0fl")
 is_starter = true
+scene = ExtResource("1_1qdpg")
 display_name = "Purge Round"
 description = "Discard 1 bullet from barrel, draw replacement"
 metadata/_custom_type_script = "uid://x02rqy0xanty"
